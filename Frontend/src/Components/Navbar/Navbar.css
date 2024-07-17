@@ -1,0 +1,33 @@
+.navbar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 4% ;
+    background-color: #D1EEEE;
+    box-shadow: 0px 2px 10px #008080;
+}
+
+.navbar-left{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 20px;
+}
+
+.logo {
+    width:180px;
+    padding: 10px;
+}
+
+.navbar-left .seperator{
+    height: 60px;
+    width: 2px;
+    border: 1px solid #008080;
+    background-color: #008080;
+}
+
+.navbar-left p{
+    font-size: 30px;
+    font-weight: 600;
+}
