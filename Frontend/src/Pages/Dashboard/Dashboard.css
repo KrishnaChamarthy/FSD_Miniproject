@@ -1,0 +1,33 @@
+.dashboard{
+    width: 98%;
+    padding-left: 10%;
+    background-color: #D1EEEE;
+}
+
+.dashboard-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 4%;
+}
+
+.dashboard-title p{
+    font-size: 25px;
+    color: rgba(0, 0, 0, .7);
+}
+
+.search-icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #21BABA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.search-icon img{
+    width: 15px;
+}
