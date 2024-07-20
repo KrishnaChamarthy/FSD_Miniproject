@@ -1,6 +1,6 @@
 .dashboard{
     width: 98%;
-    padding-left: 10%;
+    padding-left: 11%;
     background-color: #D1EEEE;
 }
 
@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 4%;
+    padding: 20px 4%;
 }
 
 .dashboard-title p{
@@ -30,4 +30,59 @@
 
 .search-icon img{
     width: 15px;
+}
+
+.dashboard-headers{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 30px 4%;
+    gap: 50px;
+}
+
+.dashboard-header{
+    flex: 1;
+    border-radius: 10px;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: linear-gradient(to right , #008080, #21BABA);
+    gap: 5px;
+    color: white;
+
+}
+
+.header-title{
+    font-size: 20px;
+}
+
+.header-amount{
+    font-size: 35px;
+}
+
+.header-progressbar{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.progressbar-container{
+    background-color: rgb(50, 50, 50);
+    width: 80%;
+    border-radius: 15px;
+}
+
+.skill{
+    background: linear-gradient(to right, rgb(50, 50,50), white);
+    padding: 5px;
+    border-radius: 15px;
+    width: 80%;
+}
+
+.progressbar-amount{
+    font-size: 15px;
+    margin-left: 20px;
+    text-align: center;
 }
