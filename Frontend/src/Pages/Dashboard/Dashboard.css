@@ -51,7 +51,7 @@
     background: linear-gradient(to right , #008080, #21BABA);
     gap: 5px;
     color: white;
-
+    height: 130px;
 }
 
 .header-title{

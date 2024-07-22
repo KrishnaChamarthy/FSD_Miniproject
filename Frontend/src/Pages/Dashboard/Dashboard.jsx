@@ -13,28 +13,18 @@ const Dashboard = () => {
       </div>
       <div className="dashboard-headers">
         <div className="dashboard-header ">
-          <div className="header-title">Number of Classes Today</div>
+          <div className="header-title">Semister</div>
           <div className="header-amount">5</div>
-          <div className="header-progressbar">
-            <div className="progressbar-container">
-              <div className="skill"></div>
-            </div>
-            <div className="progressbar-amount">80%</div>
-          </div>
+          
         </div>
         <div className="dashboard-header">
-          <div className="header-title">Test</div>
-          <div className="header-amount">12344</div>
-          <div className="header-progressbar">
-            <div className="progressbar-container">
-              <div className="skill"></div>
-            </div>
-            <div className="progressbar-amount">80%</div>
-          </div>
+          <div className="header-title">Courses Enrolled</div>
+          <div className="header-amount">12</div>
+    
         </div>
         <div className="dashboard-header">
-          <div className="header-title">Test</div>
-          <div className="header-amount">12344</div>
+          <div className="header-title">Assignemnts Submitted</div>
+          <div className="header-amount">4</div>
           <div className="header-progressbar">
             <div className="progressbar-container">
               <div className="skill"></div>
