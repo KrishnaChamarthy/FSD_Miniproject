@@ -58,18 +58,18 @@
 }
 .dashboard-header img{
     position: absolute;
-    top: 1vw;
-    right: 1vw;
-    width: 5vw;
+    top: 10px;
+    right: 10px;
+    width: 80px;
 }
 
 .header-title{
-    font-size: 1.3vw;
+    font-size: 20px;
     z-index: 1;
 }
 
 .header-amount{
-    font-size: 2.6vw;
+    font-size: 40px;
 }
 
 .header-progressbar{
