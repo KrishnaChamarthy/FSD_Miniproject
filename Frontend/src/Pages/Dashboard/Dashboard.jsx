@@ -19,7 +19,7 @@ const Dashboard = () => {
         <div className="dashboard-header ">
           <div className="header-title">Semister</div>
           <div className="header-amount">5</div>
-          <img src={Semister_iconx} alt="" />
+          <img src={Semister_icon} alt="" />
 
         </div>
         <div className="dashboard-header">
