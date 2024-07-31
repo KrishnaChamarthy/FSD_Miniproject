@@ -52,6 +52,12 @@ const Dashboard = () => {
 
         </div>
       </div>
+      <div className="grid-container">
+        <div className="row-2"></div>
+        <div className="row-col-2"></div>
+        <div className="row-1"></div>
+        <div className="row-1"></div>
+      </div>
     </div>
   );
 };
