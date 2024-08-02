@@ -5,6 +5,7 @@ import Course_icon from "../../assets/course.png"
 import Assignment_icon from "../../assets/assignment.png"
 import Attendance_icon from "../../assets/attendance.png"
 import Semister_icon from "../../assets/semister.png"
+import Profile_icon from '../../assets/boy.png'
 
 const Dashboard = () => {
   return (
@@ -53,7 +54,24 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="grid-container">
-        <div className="row-2"></div>
+        <div className="student-info">
+          <div className="student-info-left">
+            <div className="profile-pic-container">
+              <img src={Profile_icon} alt="" />
+            </div>
+          </div>
+          <div className="student-info-right">
+            <div className="student-info-name">
+              Krishna Srimanth Chamarthy
+            </div>
+            <div className="student-info-prn">
+              <span>PRN: </span>1032221617
+            </div>
+            <div className="student-info-course">
+              B. Tech Computer Science and Engineering
+            </div>
+          </div>
+        </div>
         <div className="row-col-2"></div>
         <div className="row-1"></div>
         <div className="row-1"></div>

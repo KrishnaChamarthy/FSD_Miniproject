@@ -106,13 +106,60 @@
     column-gap: 50px;
 }
 
-.row-2{
+.student-info{
     grid-column: span 2;
     background-color: white;
     height: 300px;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
 }
 
+.student-info-left{
+    height: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+}
+
+.profile-pic-container img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+
+.student-info-right{
+    height: 100%;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.student-info-name{
+    font-size: 30px;
+    font-weight: 600;
+    color: #008080;
+}
+
+.student-info-prn{
+    font-size: 20px;
+    padding: 20px;
+}
+
+.student-info-prn span{
+    font-weight: 600;
+    color: #008080;
+}
+
+.student-info-course{
+    font-size: 23px;
+}
 
 .row-1{
     grid-column: span 1;
