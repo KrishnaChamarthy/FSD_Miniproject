@@ -89,7 +89,7 @@ header .image-text .header-text{
     transform: translateY(-50%)  rotate(180deg);
     height: 25px;
     width: 25px;
-    background: var(--primary-color);
+    background: var(--primary-color-gradient);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,7 +142,7 @@ header .image-text .header-text{
 }
 
 .sidebar li a:hover{
-    background: var(--primary-color);
+    background: var(--primary-color-gradient);
 }
 
 .sidebar li a:hover .icon, .sidebar li a:hover .text{

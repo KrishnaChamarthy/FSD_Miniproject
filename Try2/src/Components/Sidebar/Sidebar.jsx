@@ -36,55 +36,55 @@ const Sidebar = ({theme, setTheme}) => {
       <div className="menu-bar">
         <div className="menu">
           <li  className="search-box">
-            <i class="bx bx-search icon"></i>
+            <i className="bx bx-search icon"></i>
             <input type="text" placeholder="Search..." />
           </li>
           <ul className="menu-links">
             <li className="nav-link">
               <Link to="/" >
-                <i class="bx bx-home-alt icon"></i>
+                <i className="bx bx-home-alt icon"></i>
                 <span className="text nav-text">Dashboard</span>
               </Link>
             </li>
             <li className="nav-link">
               <Link to="/profile">
-              <i class='bx bx-user icon'></i>
+              <i className='bx bx-user icon'></i>
                 <span className="text nav-text">Profile</span>
               </Link>
             </li>
             <li className="nav-link">
               <Link to="/attendance">
-              <i class='bx bx-bar-chart-square icon'></i>
+              <i className='bx bx-bar-chart-square icon'></i>
                 <span className="text nav-text">Attendance</span>
               </Link>
             </li>
             <li className="nav-link">
               <Link to="/time-table">
-              <i class='bx bx-calendar icon' ></i>
+              <i className='bx bx-calendar icon' ></i>
                 <span className="text nav-text">Time Table</span>
               </Link>
             </li>
             <li className="nav-link">
               <Link to="/circulars">
-                <i class="bx bx-bell icon"></i>
+                <i className="bx bx-bell icon"></i>
                 <span className="text nav-text">Circulars</span>
               </Link>
             </li>
             <li className="nav-link">
               <Link to="/result">
-                <i class="bx bx-chart icon"></i>
+                <i className="bx bx-chart icon"></i>
                 <span className="text nav-text">Result</span>
               </Link>
             </li>
             <li className="nav-link">
               <Link to="/lms">
-                <i class="bx bx-book-open icon"></i>
+                <i className="bx bx-book-open icon"></i>
                 <span className="text nav-text">LMS</span>
               </Link>
             </li>
             <li className="nav-link">
               <Link to="/fees" >
-                <i class="bx bx-wallet icon"></i>
+                <i className="bx bx-wallet icon"></i>
                 <span className="text nav-text">Fees</span>
               </Link>
             </li>
@@ -93,13 +93,13 @@ const Sidebar = ({theme, setTheme}) => {
         <div className="bottom-content">
           <li className="">
             <a href="">
-              <i class="bx bx-log-out icon"></i>
+              <i className="bx bx-log-out icon"></i>
               <span className="text nav-text">Logout</span>
             </a>
           </li>
           <li className="mode">
             <div className="moon-sun">
-            <i class={theme===""?"bx bx-moon icon moon" : "bx bx-sun icon sun"}></i>
+            <i className={theme===""?"bx bx-moon icon moon" : "bx bx-sun icon sun"}></i>
 
             </div>
             <span className="mode-text text">{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>

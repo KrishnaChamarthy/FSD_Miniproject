@@ -1,5 +1,5 @@
 .dashboard-leftbar{
-    width: 20%;
+    width: 25%;
     background-color: var(--body-color);
     height: 100%;
     transition: var(--tran-05);
@@ -29,4 +29,190 @@
 .dashboard-leftbar .profile img{
     width: 150px;
     margin-bottom: 10px;
+}
+
+.schedule{
+    width: 90%;
+    margin-left: 5%;
+}
+
+.schedule header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 30px 10px;
+    margin-bottom: 10px;
+}
+
+header .schedule-title{
+    font-size: 1.45rem;
+    font-weight: 500;
+    transition: var(--tran-05);
+    color: var(--title-color);
+}
+
+header .see-all{
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+header .see-all:hover{
+    text-decoration: underline;
+}
+
+.dark header .see-all{
+    color: var(--text-color);
+}
+
+.schedule-item{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: var(--primary-color-gradient);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: var(--tran-05);
+}
+
+.schedule-date{
+    width: 15%;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--primary-color-light);
+    font-weight: 500;
+    margin-right: 20px;
+}
+
+.dark .schedule-date{
+    color: var(--title-color);
+}
+
+.schedule-divider{
+    width: 3px;
+    background: var(--title-color);
+    height: 50px;
+    transition: var(--tran-05);
+
+}
+
+.dark .schedule-divider{
+    background: var(--body-color);
+
+}
+
+.schedule-info{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.info-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+
+.info-header .title{
+    font-size: 20px;
+    text-wrap: wrap;
+    color: var(--primary-color-light);
+    font-weight: 500;
+    transition: var(--tran-04);
+}
+
+.dark .info-header .title{
+    color: var(--title-color);
+   
+}
+
+.info-header .time{
+    text-wrap: nowrap;
+    color: var(--title-color) ;
+    font-size: 18px;
+    transition: var(--tran-04);
+
+}
+
+.dark .time{
+    color: var(--body-color);
+}
+
+.info-content{
+    font-size: 14px;
+    color: var(--title-color);
+    transition: var(--tran-04);
+
+}
+
+.dark .info-content{
+    color: var(--body-color);
+}
+
+.later{
+    background: linear-gradient(to bottom, rgb(220, 220, 220), rgb(250, 250, 250));
+    transition: var(--tran-05);
+
+}
+
+.later .schedule-date{
+    color: var(--title-color);
+    transition: var(--tran-04);
+
+}
+
+.later .schedule-divider{
+    background: var(--primary-color);
+    transition: var(--tran-05);
+
+}
+
+.later .info-header .title{
+    color: var(--title-color);
+    transition: var(--tran-04);
+
+}
+
+.later .info-header .time{
+    color: var(--primary-color);
+    transition: var(--tran-04);
+
+}
+
+.later .info-content{
+    color: var(--primary-color);
+    transition: var(--tran-04);
+
+}
+
+.dark .later{
+    background: linear-gradient(to bottom, rgb(150, 150, 150), rgb(170, 170, 170));;
+}
+
+.dark .later .schedule-date{
+    color: var(--primary-color-light);
+}
+
+.dark .later .info-header .title{
+    color: var(--primary-color-light);
+}
+
+.dark .later .schedule-divider{
+    background: var(--title-color);
+}
+
+.dark .later .info-content{
+    color: var(--title-color);
+}
+
+.dark .later .info-header .time{
+    color: var(--title-color);
+
 }
