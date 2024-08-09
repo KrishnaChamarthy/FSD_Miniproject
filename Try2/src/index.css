@@ -15,7 +15,7 @@ a{
 
 
 .app{
-  background-color: var(--body-color);
+  background-color: var(--primary-color-light);
   height: 100vh;
   transition: var(--tran-05);
 }
@@ -28,6 +28,7 @@ a{
   --toggle-color: #DDD;
   --primary-color-light: #F6F5FF;
   --text-color: #707070;
+  --title-color: #3C3C3C;
 
   --tran-02: all 0.2s ease ;
   --tran-03: all 0.3s ease ;
@@ -43,4 +44,5 @@ a{
   --toggle-color: #FFF;
   --primary-color-light: #3A3B3C;
   --text-color: #CCC;
+  --title-color: #E6E6E6;
 }
