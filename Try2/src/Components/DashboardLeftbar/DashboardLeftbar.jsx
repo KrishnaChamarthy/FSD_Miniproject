@@ -38,7 +38,7 @@ const DashboardLeftbar = () => {
           <div className="schedule-divider"></div>
           <div className="schedule-info">
             <div className="info-header">
-              <p className="title">Full Stack Development</p>
+              <p className="title">Data Engineering</p>
               <p className="time">8:30 - 9:30</p>
             </div>
             <p className="info-content">Unit 3 out of 5</p>
