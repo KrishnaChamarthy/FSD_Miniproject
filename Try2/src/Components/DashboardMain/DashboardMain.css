@@ -1,4 +1,169 @@
 .dashboard-container{
     width: 75%;
     height: 100%;
+    padding: 40px 80px;
+}
+
+.dashboard-container header{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.dashboard-container .header-text{
+    font-size: 32px;
+    line-height: 30px;
+    flex: 4;
+    font-weight: 600;
+    color: var(--title-color);
+}
+
+
+.dashboard-container .header-text span{
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.dashboard-container .header-search{
+    display: flex;
+    flex: 2;
+    align-items: center;
+    justify-content: center;
+    background: var(--body-color);
+    height: 50px;
+    border-radius: 6px;
+    padding: 10px 20px;
+    gap: 10px;
+    color: var(--text-color);
+    transition: var(--tran-05);
+}
+
+
+.header-search i{
+    font-size: 25px;
+}
+
+.header-search input{
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    background-color: transparent;
+    color: var(--text-color);
+
+}
+
+.dashboard-container .header-bell{
+    flex: 1;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-bell i{
+    font-size: 25px;
+    background: var(--body-color);
+    padding: 10px;
+    border-radius: 50%;
+    transition: var(--tran-05);
+
+}
+
+.dashboard-body{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
+}
+
+.dashboard-body header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-body header p{
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--title-color);
+    transition: var(--tran-04);
+}
+
+.semester-dropdown{
+    min-width: 15em;
+    position: relative;
+    margin: 2em;
+}
+
+.semester-dropdown .select{
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid var(--body-color);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: var(--tran-03);
+    user-select: none;
+
+}
+
+.select:hover{
+    background: var(--body-color);
+}
+
+.caret{
+    height: 0;
+    width: 0;
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid transparent;
+    border-left: 6px solid var(--text-color);
+    transition: var(--tran-03);
+}
+
+.caret-rotate{
+    transform: rotate(90deg);
+}
+
+.semester-dropdown .menu{
+    list-style: none;
+    padding: 0px;
+    background: var(--body-color);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    color: var(--text-color);
+    position: absolute;
+    top: 3em;
+    left: 0;
+    width: 100%;
+    height: 0;
+    transition: 300ms cubic-bezier(0.77, 0, 0.18, 1);
+    z-index: 1;
+    overflow-y: scroll;
+    user-select: none;
+
+}
+
+.semester-dropdown .menu-open{
+    height: 180px;
+}
+
+.semester-dropdown .menu li{
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.semester-dropdown .menu li:hover{
+    background: var(--primary-color-light);
+}
+
+.text-fade-in{
+    animation: textFade 300ms ease-out;
 }

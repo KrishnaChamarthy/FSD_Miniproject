@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Sidebar = ({theme, setTheme}) => {
 
 
-  const [close, setClose] = useState("");
+  const [close, setClose] = useState("close");
 
   const handleTheme = () => {
     theme === "dark" ? setTheme("") : setTheme("dark");

@@ -48,3 +48,14 @@ a{
   --text-color: #CCC;
   --title-color: #E6E6E6;
 }
+
+@keyframes textFade {
+  0% {
+    transform: translateX(-1em);
+    opacity: 0;
+  }
+  100%{
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
