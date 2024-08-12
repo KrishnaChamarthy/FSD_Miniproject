@@ -24,8 +24,8 @@ a{
 :root{
   --body-color: #E4E9F7;
   --sidebar-color: #FFF;
-  --primary-color: #695CFE;
-  --primary-color-gradient: linear-gradient(to bottom right,#695CFE, #a49cff);
+  --primary-color: #3071d8;
+  --primary-color-gradient: linear-gradient(to bottom ,#3071d8, #6a96ec);
   --toggle-color: #DDD;
   --primary-color-light: #F6F5FF;
   --text-color: #707070;
@@ -42,7 +42,7 @@ a{
   --body-color: #18191A;
   --sidebar-color: #242526;
   --primary-color: #3A3B3C;
-  --primary-color-gradient: linear-gradient(to bottom right,#3A3B3C, #4a4b4d);
+  --primary-color-gradient: linear-gradient(to bottom ,#3A3B3C, #4a4b4d);
   --toggle-color: #FFF;
   --primary-color-light: #3A3B3C;
   --text-color: #CCC;

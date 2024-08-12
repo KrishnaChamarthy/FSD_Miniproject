@@ -167,3 +167,83 @@
 .text-fade-in{
     animation: textFade 300ms ease-out;
 }
+
+.summary-content{
+    width: 100%;
+    padding: 50px 0px;
+    display: flex;
+    align-items: center;
+    background: var(--primary-color-gradient);
+    border-radius: 10px;
+
+}
+
+.content-part{
+    width: 33%;
+    display: flex;
+    align-items: center;    
+}
+
+.content-part .content-image{
+    width: 80px;
+    padding: 5px;
+    background: var(--body-color);
+    border-radius: 50%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:0px 30px;
+}
+.content-image img{
+    width: 40px;
+}
+
+.content-body{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 20px;
+
+}
+
+.content-body p{
+    font-size: 18px;
+    margin: 7px 0px;
+    color: rgb(230, 230, 230);
+}
+
+.content-body .title{
+    font-size: 20px;
+    color: white;
+    font-weight: 500;
+}
+
+.content-body span{
+    font-size: 32px;
+    color: white;
+    font-weight: 600;
+}
+
+.summary-divider{
+    width: 0.2%;
+    
+    height: 100px;
+    transition: var(--tran-05);
+    background-color: var(--body-color);
+}
+
+.content-body .percentage{
+    position: absolute;
+    top: 25%;
+    right: 55%;
+    background: white;
+    color: green;
+    padding: 5px 7px;
+    border-radius: 30px;
+    font-size: 14px;
+}
+
+.content-body .amount{
+    position: relative;
+}
