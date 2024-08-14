@@ -78,7 +78,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 80px;
+    margin-top: 20px;
 }
 
 .dashboard-body header{
@@ -235,15 +235,111 @@
 
 .content-body .percentage{
     position: absolute;
-    top: 25%;
-    right: 55%;
+    top: -10px;
+    right: -50px;
     background: white;
     color: green;
     padding: 5px 7px;
     border-radius: 30px;
     font-size: 14px;
+    z-index: 1;
 }
 
 .content-body .amount{
     position: relative;
 }
+
+.dashboard-content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-top: 40px;
+    flex: auto;
+}
+
+.circular-container{
+    flex: 6.5;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--primary-color-light);
+    height: 400px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: var(--tran-05);
+}
+
+.circular-container header{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--title-color);
+    transition: var(--tran-04);
+}
+
+.circular-container ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.circular-container ul li{
+    padding: 20px;
+    border-bottom: 1px solid var(--body-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.circular-container .circular-title{
+    font-size: 20px;
+    color: var(--title-color);
+}
+
+.circular-container .circular-date{
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.gpa-container{
+    flex: 3.5;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    background: var(--primary-color-gradient);
+    border-radius: 10px;
+    position: relative;
+}
+
+.gpa-container p{
+    color: rgba(255, 255, 255, 0.7)
+}
+
+.gpa-container header p{
+    font-size: 32px;
+    line-height: 30px;
+    color: white;
+}
+
+.gpa-container header p span{
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.gpa{
+    font-size: 70px;
+    margin-top: 8%;
+    color: white;
+}
+
+.gpa-container img{
+    width: 70%;
+    position: absolute;
+    bottom: 0;
+    right: 10%;
+    opacity: 0.4;
+}
+

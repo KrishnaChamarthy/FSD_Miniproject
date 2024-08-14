@@ -3,6 +3,7 @@ import "./DashboardMain.css";
 import Attendance_icon from "../../assets/Dashboard/attendance.png";
 import Subject_icon from "../../assets/Dashboard/subject.png";
 import Task_icon from "../../assets/Dashboard/task.png";
+import Cloud_img from "../../assets/Dashboard/cloud.png"
 
 const DashboardMain = () => {
   const [semester, setSemester] = useState("5th Semester");
@@ -91,12 +92,12 @@ const DashboardMain = () => {
             </div>
             <div className="content-body">
               <p className="title">Attendance</p>
-              <p>
+              <p className="amount">
                 <span>89</span> / 89
+                <div className="percentage">100%</div>
+
               </p>
               <p>Great, you always attend class, keep it up!</p>
-              <div className="percentage">100%</div>
-
             </div>
           </div>
           <div className="summary-divider"></div>
@@ -109,9 +110,10 @@ const DashboardMain = () => {
               <p className="title">Task</p>
               <p className="amount">
                 <span>134</span> / 140
+                <div className="percentage">80%</div>
               </p>
               <p>Don't forget to turn in your work</p>
-              <div className="percentage">80%</div>
+
 
             </div>
           </div>
@@ -122,12 +124,48 @@ const DashboardMain = () => {
             </div>
             <div className="content-body">
               <p className="title">Subject</p>
-              <p>
+              <p className="amount">
                 <span>12</span> / 15
+                <div className="percentage">75%</div>
+
               </p>
               <p>You have taken 12 subjects this semester</p>
             </div>
           </div>
+        </div>
+        <div className="dashboard-content">
+            <div className="circular-container">
+                <header>
+                  Circulars/Notices
+                </header>
+                <ul>
+                  <li>
+                    <div className="circular-title">
+                      Guidelines for Independence Day - 2024
+                    </div>
+                    <div className="circular-date">
+                      13-08-24
+                    </div>
+                  </li>
+                  <li>
+                    <div className="circular-title">
+                      Guidelines for Independence Day - 2024
+                    </div>
+                    <div className="circular-date">
+                      13-08-24
+                    </div>
+                  </li>
+                </ul>
+            </div> 
+            <div className="gpa-container">
+                <header>
+                  <p>GPA <br />
+                  <span>Grade Point Average</span></p> 
+                </header>
+                <div className="gpa">3.93</div>
+                <p>Top 10 students in campus</p>
+                <img src={Cloud_img} alt="" />
+            </div>
         </div>
       </div>
     </div>
