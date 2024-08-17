@@ -6,7 +6,7 @@
 }
 
 
-.dashboard-leftbar .profile{
+.dashboard-leftbar .dashboard-profile{
     width: 100%;
     padding-top: 50px;
     display: flex;
@@ -26,7 +26,7 @@
     transition: var(--tran-05);
 }
 
-.dashboard-leftbar .profile img{
+.dashboard-leftbar .dashboard-profile img{
     width: 150px;
     margin-bottom: 10px;
 }

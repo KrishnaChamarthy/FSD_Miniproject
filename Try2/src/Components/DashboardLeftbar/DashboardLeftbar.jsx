@@ -6,7 +6,7 @@ import Calendar from "../Calendar/Calendar"
 const DashboardLeftbar = () => {
   return (
     <div className="dashboard-leftbar">
-      <div className="profile">
+      <div className="dashboard-profile">
         <img src={Profile_icon} alt="" />
         <div className="name">Krishna Chamarthy</div>
         <div className="info">Computer Science | 5th Semister</div>
