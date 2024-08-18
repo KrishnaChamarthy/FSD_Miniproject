@@ -18,14 +18,14 @@ const App = () => {
       <Sidebar setTheme={setTheme} theme={theme}/>
       <Routes>
         <Route path='/' element={<Dashboard />}/>
-        <Route path='/profile' element={<Profile />}/>
-        <Route path='/attendance' element={<Attendance />}/>
-        <Route path='/timetable' element={<TimeTable />}/>
-        <Route path='/circulars' element={<Circulars />}/>
-        <Route path='/result' element={<Result />}/>
-        <Route path='/lms' element={<LMS />}/>
-        <Route path='/fees' element={<Fees />}/>
-        <Route path='/requests' element={<Requests />}/>
+        <Route path='/profile/*' element={<Profile />}/>
+        <Route path='/attendance/*' element={<Attendance />}/>
+        <Route path='/timetable/*' element={<TimeTable />}/>
+        <Route path='/circulars/*' element={<Circulars />}/>
+        <Route path='/result/*' element={<Result />}/>
+        <Route path='/lms/*' element={<LMS />}/>
+        <Route path='/fees/*' element={<Fees />}/>
+        <Route path='/requests/*' element={<Requests />}/>
       </Routes>
     </div>
   )

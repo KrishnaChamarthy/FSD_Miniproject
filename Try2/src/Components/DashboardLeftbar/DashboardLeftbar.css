@@ -1,7 +1,7 @@
 .dashboard-leftbar{
     width: 25%;
     background-color: var(--body-color);
-    height: 100%;
+    height: 100vh;
     transition: var(--tran-05);
 }
 

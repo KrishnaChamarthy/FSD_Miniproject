@@ -1,7 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./ProfileMain.css"
+import Profile_icon from "../../assets/Dashboard/boy.png";
+import PersonalProfile from '../PersonalProfile/PersonalProfile';
+import EducationalProfile from '../EducationalProfile/EducationalProfile';
+import DocumentsProfile from '../DocumentsProfile/DocumentsProfile';
 
 const ProfileMain = () => {
+
+  const [activeProfile, setActiveProfile] = useState("personal");
+
+  const handleProfileChange = (profile) => {
+    setActiveProfile(profile);
+  }
+
+  const handleProfileRender = () => {
+    if (activeProfile === 'personal'){
+      return <PersonalProfile />
+    }
+    else if (activeProfile === 'educational'){
+      return <EducationalProfile />
+    }
+    else{
+      return <DocumentsProfile />
+    }
+  }
+
   return (
     <div className='profile-container'>
         <header>
@@ -19,7 +42,19 @@ const ProfileMain = () => {
         </div>
       </header>
       <div className="profile-body">
-        
+        <div className="profile-info-main">
+          <img src={Profile_icon} alt="" />
+          <div className="name">Krishna Chamarthy</div>
+          <div className="prn">1032221617</div>
+        </div>
+        <div className="profile-info">
+          <div className="profile-options">
+            <button className={activeProfile === 'personal' ? 'profile-option profile-option-active' : 'profile-option'} onClick={() => {handleProfileChange('personal')}}>Personal Info</button>
+            <button className={activeProfile === 'educational' ? 'profile-option profile-option-active' : 'profile-option'} onClick={() => {handleProfileChange('educational')}}>Educational Info</button>
+            <button className={activeProfile === 'documents' ? 'profile-option profile-option-active' : 'profile-option'} onClick={() => {handleProfileChange('documents')}}>Documents</button>
+          </div>
+          {handleProfileRender()}
+        </div>
       </div>
     </div>
   )
