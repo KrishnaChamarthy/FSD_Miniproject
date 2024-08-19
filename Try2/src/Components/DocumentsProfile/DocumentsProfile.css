@@ -1,0 +1,45 @@
+.documents-profile{
+    margin-top: 40px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.documents-profile-element{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-color-light);
+    padding: 20px;
+    border-radius: 10px;
+    transition: var(--tran-05);
+    width: 100%;
+}
+
+.document-table{
+    margin: 20px;
+    border-collapse: collapse;
+    display: table;
+}
+
+.document-table tr{
+    transition: var(--tran-05);
+    border: 1px solid var(--body-color);
+}
+
+.document-table th{
+    font-size: 18px;
+    color: var(--title-color);
+    padding: 20px;
+    text-align: left;
+    transition: var(--tran-04);
+
+}
+
+.document-table td{
+    transition: var(--tran-04);
+    font-size: 18px;
+    color: var(--text-color);
+    padding:  20px;
+
+}

@@ -68,6 +68,7 @@
 
 .course-table tr{
     border: 1px solid var(--body-color);
+    transition: var(--tran-05);
 }
 
 .course-table th{
@@ -75,11 +76,14 @@
     color: var(--title-color);
     padding: 20px;
     text-align: left;
+    transition: var(--tran-04);
+
 }
 
 .course-table td{
     font-size: 18px;
     color: var(--text-color);
     padding:  20px;
+    transition: var(--tran-04);
 
 }
