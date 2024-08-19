@@ -5,3 +5,81 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
 }
+
+.educational-profile-element{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-color-light);
+    padding: 20px;
+    border-radius: 10px;
+    transition: var(--tran-05);
+}
+
+.academic-info{
+    grid-area: 1 / 1 / 1 / 3;
+}
+
+.performance-info{
+    grid-area: 1 / 3 / 1 / 3;
+}
+
+.course-info{
+    grid-area: 2 / 1 / 2 / 4;
+}
+
+.element-content{
+    margin-top: 20px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.element-content li{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    border-bottom: 1px solid var(--body-color);
+    padding: 15px;
+    transition: var(--tran-05);
+}
+
+.element-title-course{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 25px;
+    color: var(--title-color);
+    transition: var(--tran-04);
+}
+
+.element-title-course .semester-dropdown{
+    font-size: 16px;
+    color: var(--text-color);
+    
+}
+
+.course-table{
+    margin: 20px;
+    border-collapse: collapse;
+
+}
+
+.course-table tr{
+    border: 1px solid var(--body-color);
+}
+
+.course-table th{
+    font-size: 18px;
+    color: var(--title-color);
+    padding: 20px;
+    text-align: left;
+}
+
+.course-table td{
+    font-size: 18px;
+    color: var(--text-color);
+    padding:  20px;
+
+}

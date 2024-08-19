@@ -62,4 +62,5 @@
     transition: var(--tran-04);
     flex: 1;
     color: var(--text-color);
+    text-wrap: wrap;
 }
