@@ -93,13 +93,95 @@
 
 .attendance-chart {
   grid-area: 1 / 1 / 2 / 3;
+  display: flex;
+  flex-direction: column;
 }
 
 .attendance-summary {
   grid-area: 1 / 3 / 2 / 7;
 }
 
+
 .chart-container{
-    width: 300px;
-    height: 300px;
+  margin-top: 20px;
+  width: 100%;
+  height:200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.attendance-summary-content{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 20px;
+  height: 100%;
+}
+
+.attendance-summary-content li {
+  background-color: var(--body-color);
+  padding: 40px 50px 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.attendance-summary-content li i {
+  font-size: 30px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.attendance-label {
+  margin-top: 10px;
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+.attendance-amount {
+  margin-top: 5px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.present i {
+  color: #4a90e2;
+  background: #90caf94f;
+}
+
+.present .attendance-amount{
+  color: #4a90e2;
+
+}
+
+.absent i{
+  color: #ff6867;
+  background: #ff94945e;
+}
+
+.absent .attendance-amount{
+  color: #ff6867;
+}
+
+.leave i{
+  color: #34c75a;
+  background: #6dc9856b;
+}
+
+.leave .attendance-amount{
+  color: #34c75a;
+}
+
+.holiday i{
+  color: #9d9fa0;
+  background: #87898a3f;
+}
+
+.holiday .attendance-amount{
+  color: #9d9fa0;
+}
+
