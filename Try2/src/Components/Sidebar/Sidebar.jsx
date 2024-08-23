@@ -59,7 +59,7 @@ const Sidebar = ({theme, setTheme}) => {
               </Link>
             </li>
             <li className="nav-link">
-              <Link to="/time-table">
+              <Link to="/timetable">
               <i className='bx bx-calendar icon' ></i>
                 <span className="text nav-text">Time Table</span>
               </Link>

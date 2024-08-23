@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AttendanceMain.css";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 const AttendanceMain = () => {
+
+  const [semester, setSemester] = useState("5th Semester");
+  const [openSemesterDropdown, setOpenSemesterDropdown] = useState(false);
+
+  const handleOpenDropdown = () => {
+    setOpenSemesterDropdown(!openSemesterDropdown);
+  };
+
+  const handleClick = (sem) => {
+    setSemester(sem);
+    setOpenSemesterDropdown(!openSemesterDropdown);
+  };
+
   ChartJS.register(ArcElement, Tooltip, Legend);
 
   const centerTextPlugin = {
@@ -83,9 +96,9 @@ const AttendanceMain = () => {
     <div className="attendance-container">
       <header>
         <div className="header-text">
-          Student Profile
+          Attendance
           <br />
-          <span>View and Update Your Profile.</span>
+          <span>View Your Attendance.</span>
         </div>
         <div className="header-search">
           <i className="bx bx-search"></i>
@@ -135,6 +148,146 @@ const AttendanceMain = () => {
               <div className="attendance-amount">12</div>
             </li>
           </ul>
+        </div>
+        <div className="attendance-element sub-attendance-summary">
+        <div className="element-title-course">
+          Subject-Wise Attendance
+          <div className="semester-dropdown">
+            <div className="select" onClick={handleOpenDropdown}>
+              <span className="selected">{semester}</span>
+              <div
+                className={
+                  openSemesterDropdown ? "caret caret-rotate" : "caret"
+                }
+              ></div>
+            </div>
+            <ul className={openSemesterDropdown ? "menu menu-open" : "menu"}>
+              <li
+                onClick={() => {
+                  handleClick("1st Semester");
+                }}
+              >
+                1st Semester
+              </li>
+              <li
+                onClick={() => {
+                  handleClick("2nd Semester");
+                }}
+              >
+                2nd Semester
+              </li>
+              <li
+                onClick={() => {
+                  handleClick("3rd Semester");
+                }}
+              >
+                3rd Semester
+              </li>
+              <li
+                onClick={() => {
+                  handleClick("4th Semester");
+                }}
+              >
+                4th Semester
+              </li>
+              <li
+                onClick={() => {
+                  handleClick("5th Semester");
+                }}
+              >
+                5th Semester
+              </li>
+            </ul>
+          </div>
+        </div>
+        <table className='attendance-table'>
+            <tr>
+              <th>Course Code</th>
+              <th>Course Name</th>
+              <th>Subject Type</th>
+              <th>Present</th>
+              <th>Total</th>
+              <th>Percentage</th>
+            </tr>
+            <tr>
+              <td rowSpan={2}>CET2007B</td>
+              <td rowSpan={2}>Artificial Intelligence and Expert Systems</td>
+              <td>Theory</td>
+              <td>10</td>
+              <td>20</td>
+              <td>50%</td>
+            </tr>
+            <tr>
+              <td>Practical</td>
+              <td>5</td>
+              <td>10</td>
+              <td>50%</td>
+            </tr>
+            <tr>
+              <td rowSpan={2}>CET3005B</td>
+              <td rowSpan={2}>Data Engineering</td>
+              <td>Theory</td>
+              <td>10</td>
+              <td>20</td>
+              <td>50%</td>
+            </tr>
+            <tr>
+            <td>Practical</td>
+              <td>5</td>
+              <td>10</td>
+              <td>50%</td>
+            </tr>
+            <tr>
+              <td>CET3003B</td>
+              <td >Full Stack Development</td>
+              <td>Practical</td>
+              <td>10</td>
+              <td>20</td>
+              <td>50%</td>
+            </tr>
+            <tr>
+              <td rowSpan={2}>CET4003B</td>
+              <td rowSpan={2}>Computer Graphics and 3D Modelling</td>
+              <td>Theory</td>
+              <td>10</td>
+              <td>20</td>
+              <td>50%</td>
+            </tr>
+            <tr>
+            <td>Practical</td>
+              <td>5</td>
+              <td>10</td>
+              <td>50%</td>
+            </tr>
+            <tr>
+              <td rowSpan={2}>CET3004B</td>
+              <td rowSpan={2}>Information and Cyber Security</td>
+              <td>Theory</td>
+              <td>10</td>
+              <td>20</td>
+              <td>50%</td>
+            </tr>
+            <tr>
+            <td>Practical</td>
+              <td>5</td>
+              <td>10</td>
+              <td>50%</td>
+            </tr>
+            <tr>
+              <th rowSpan={2}></th>
+              <th rowSpan={2}>Total</th>
+              <th>Theory</th>
+              <th>20</th>
+              <th>40</th>
+              <th>50%</th>
+            </tr>
+            <tr>
+              <th>Practical</th>
+              <th>20</th>
+              <th>40</th>
+              <th>50%</th>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
