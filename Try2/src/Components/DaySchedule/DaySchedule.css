@@ -1,0 +1,37 @@
+.day-schedule {
+  width: 100%;
+  padding: 10px 40px;
+}
+
+.day-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.day-table th,
+.day-table td {
+  border: 1px solid var(--body-color);
+  font-size: 18px;
+  color: var(--text-color);
+  padding: 20px;
+  text-align: left;
+  height: 50px;
+}
+
+.schedule-element {
+  width: 100%;
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: var(--body-color);
+  border-radius: 10px;
+  height: 100%;
+}
+
+.schedule-element-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.schedule-element-time {
+  font-size: 16px;
+}

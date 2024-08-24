@@ -1,0 +1,63 @@
+.week-schedule{
+    width: 100%;
+    padding: 10px 40px;
+}
+
+.week-table{
+    margin: 20px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.week-table tr{
+    border: 1px solid var(--body-color);
+    transition: var(--tran-05);
+    height: 60px;
+}
+
+.table-element {
+    width: 100%; /* Ensure the header columns take up full width */
+    height: 100%;
+  }
+
+.week-table th{
+    font-size: 18px;
+    color: var(--title-color);
+    padding: 20px;
+    text-align: left;
+    transition: var(--tran-04);
+
+}
+
+.week-table td{
+    font-size: 18px;
+    color: var(--text-color);
+    padding:  20px;
+    transition: var(--tran-04);
+
+}
+
+.week-table th,
+.week-table td {
+  border-right: 1px solid var(--body-color);
+}
+
+
+.schedule-element-week{
+    width: 100%;
+    height: 100%; /* Make the element fill the entire cell */
+    margin: 0; /* Remove margin to prevent spacing within the cell */
+    padding: 10px 20px;
+    background-color: var(--body-color);
+    border-radius: 10px;
+    box-sizing: border-box; /* Ensure padding is included in the width and height */
+}
+
+.schedule-element-title{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.schedule-element-time{
+    font-size: 16px;
+}
