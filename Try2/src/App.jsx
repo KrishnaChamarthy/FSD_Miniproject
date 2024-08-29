@@ -10,6 +10,7 @@ import Result from './Pages/Result/Result'
 import LMS from './Pages/LMS/LMS'
 import Fees from './Pages/Fees/Fees'
 import Requests from './Pages/Requests/Requests'
+
 const App = () => {
   const [theme, setTheme] = useState("");
 
