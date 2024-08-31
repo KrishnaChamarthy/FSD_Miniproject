@@ -4,6 +4,7 @@ import { connectDB } from "./config/db.js";
 import studentRouter from "./routes/studentRoute.js";
 import "dotenv/config.js"
 import courseRouter from "./routes/courseRoute.js";
+import attendanceRouter from "./routes/attendanceRoute.js";
 
 
 const app = express();
@@ -16,6 +17,7 @@ connectDB();
 
 app.use("/api/student", studentRouter);
 app.use("/api/course", courseRouter);
+app.use("/api/attendance", attendanceRouter);
 
 app.get("/", (req, res) => {
     res.send("API Working");
