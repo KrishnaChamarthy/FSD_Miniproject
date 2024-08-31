@@ -23,3 +23,7 @@ const addAttendance = async (req, res) => {
         });
     }
 }
+
+const updateAttendance = async (req, res) => {
+    
+}
