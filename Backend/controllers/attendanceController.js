@@ -56,7 +56,7 @@ const updateAttendance = async (req, res) => {
 };
 
 const getAttendance = async (req, res) => {
-    const { student_PRN } = req.params;
+    const { student_PRN } = req.body;
 
     try {
         const attendanceRecords = await attendanceModel.find({ student_PRN });
