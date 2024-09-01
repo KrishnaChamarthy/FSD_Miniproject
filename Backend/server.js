@@ -5,7 +5,7 @@ import studentRouter from "./routes/studentRoute.js";
 import "dotenv/config.js"
 import courseRouter from "./routes/courseRoute.js";
 import attendanceRouter from "./routes/attendanceRoute.js";
-
+import marksRouter from "./routes/marksRoute.js"
 
 const app = express();
 const port = 4000;
@@ -18,6 +18,7 @@ connectDB();
 app.use("/api/student", studentRouter);
 app.use("/api/course", courseRouter);
 app.use("/api/attendance", attendanceRouter);
+app.use("/api/marks", marksRouter)
 
 app.get("/", (req, res) => {
     res.send("API Working");
