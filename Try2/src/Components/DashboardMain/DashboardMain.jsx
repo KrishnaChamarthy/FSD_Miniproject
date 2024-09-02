@@ -31,7 +31,7 @@ const DashboardMain = () => {
           <input type="text" placeholder="Search anything..." />
         </div>
         <div className="header-bell">
-          <i class="bx bx-bell"></i>
+          <i className="bx bx-bell"></i>
         </div>
       </header>
       <div className="dashboard-body">
