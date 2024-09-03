@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Sidebar.css";
 import Logo from "../../assets/Sidebar/logo2.png";
 import Toggle from "../../assets/Sidebar/bx-chevron-right.svg";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { StoreContext } from "../../context/StoreContext";
 
 const Sidebar = ({theme, setTheme}) => {
 
-
+  const {setToken} = useContext(StoreContext);
   const [close, setClose] = useState("close");
 
   const handleTheme = () => {
@@ -15,6 +16,12 @@ const Sidebar = ({theme, setTheme}) => {
 
   const handleClose = () => {
     close === "close" ? setClose("") : setClose("close");
+  }
+
+  const handleLogOut = () => {
+    setToken("");
+    localStorage.removeItem("token");
+    Navigate("/");
   }
 
   return (
@@ -92,9 +99,9 @@ const Sidebar = ({theme, setTheme}) => {
         </div>
         <div className="bottom-content">
           <li className="">
-            <a href="">
+            <a href="" onClick={handleLogOut}>
               <i className="bx bx-log-out icon"></i>
-              <span className="text nav-text">Logout</span>
+              <span className="text nav-text" >Logout</span>
             </a>
           </li>
           <li className="mode">
