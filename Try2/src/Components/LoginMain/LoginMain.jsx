@@ -45,7 +45,7 @@ const LoginMain = () => {
     if (response.data.success){
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
-      Navigate("/")
+      Navigate("/");
     }
     else{
       alert(response.data.message);
@@ -54,64 +54,64 @@ const LoginMain = () => {
   }
 
   return (
-    <div class={studentLogin ? "login-container" : "login-container sign-up-mode"}>
-      <div class="forms-container">
-        <div class="signin-signup">
-          <form onSubmit={onLogin} class="sign-in-form">
+    <div className={studentLogin ? "login-container" : "login-container sign-up-mode"}>
+      <div className="forms-container">
+        <div className="signin-signup">
+          <form onSubmit={onLogin} className="sign-in-form">
             <img src={Logo} alt="" />
-            <h2 class="title">Student Login</h2>
-            <div class="input-field">
-              <i class="fas fa-envelope"></i>
+            <h2 className="title">Student Login</h2>
+            <div className="input-field">
+              <i className="fas fa-envelope"></i>
               <input type="text" onChange={onChangeHandler} placeholder="Email" name='email'/>
             </div>
-            <div class="input-field">
-              <i class="fas fa-lock"></i>
+            <div className="input-field">
+              <i className="fas fa-lock"></i>
               <input type="password" onChange={onChangeHandler} placeholder="Password" name='password'/>
             </div>
-            <input type="submit" value="Login" class="btn solid" />
+            <input type="submit" value="Login" className="btn solid" />
           </form>
-          <form onSubmit={onLogin} class="sign-up-form">
+          <form onSubmit={onLogin} className="sign-up-form">
             <img src={Logo} alt="" />
-            <h2 class="title">Faculty Login</h2>
-            <div class="input-field">
-              <i class="fas fa-envelope"></i>
+            <h2 className="title">Faculty Login</h2>
+            <div className="input-field">
+              <i className="fas fa-envelope"></i>
               <input type="email" onChange={onChangeHandler} placeholder="Email" name='email'/>
             </div>
-            <div class="input-field">
-              <i class="fas fa-lock"></i>
+            <div className="input-field">
+              <i className="fas fa-lock"></i>
               <input type="password" onChange={onChangeHandler} placeholder="Password" name='password'/>
             </div>
-            <input type="submit" class="btn" value="Login" />
+            <input type="submit" className="btn" value="Login" />
           </form>
         </div>
       </div>
 
-      <div class="panels-container">
-        <div class="panel left-panel">
-          <div class="content">
+      <div className="panels-container">
+        <div className="panel left-panel">
+          <div className="content">
             <h3>Faculty ?</h3>
             <p>
               For Faculty and Admin Login, click here!
             </p>
-            <button class="btn transparent" onClick={() => {handleLoginChange()}}>
+            <button className="btn transparent" onClick={() => {handleLoginChange()}}>
               Faculty Login
             </button>
           </div>
-          <img src={StudentLoginIcon} class="image" alt="" />
+          <img src={StudentLoginIcon} className="image" alt="" />
         </div>
-        <div class="panel right-panel">
-          <div class="content">
+        <div className="panel right-panel">
+          <div className="content">
             <h3>Student ?</h3>
             <p>
               For MIT-WPU Student Login, click here!
             </p>
-            <button class="btn transparent" onClick={() => {
+            <button className="btn transparent" onClick={() => {
               handleLoginChange()
             }}>
               Student Login
             </button>
           </div>
-          <img src={TeacherLoginIcon} class="image" alt="" />
+          <img src={TeacherLoginIcon} className="image" alt="" />
         </div>
       </div>
     </div>

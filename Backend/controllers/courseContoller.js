@@ -27,10 +27,13 @@ const addCourse = async (req, res) => {
 const listCourses = async (req, res) =>{
     try {
         const courses = await courseModel.find({});
-        res.json({
-            success: true,
-            data: courses
-        })
+
+            res.json({
+                success: true,
+                data: courses
+            })
+
+    
     } catch (error) {
         console.log(error);
         res.json({
