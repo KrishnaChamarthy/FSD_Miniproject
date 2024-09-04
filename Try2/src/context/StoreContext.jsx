@@ -77,6 +77,8 @@ const StoreContextProvider = ({ children }) => {
         setToken,
         studentData,
         setStudentData,
+        studentCourses,
+        setStudentCourses
     };
 
     return (

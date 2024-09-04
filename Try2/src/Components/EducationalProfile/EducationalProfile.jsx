@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./EducationalProfile.css"
+import { StoreContext } from '../../context/StoreContext';
 
 const EducationalProfile = () => {
   const [semester, setSemester] = useState("5th Semester");
   const [openSemesterDropdown, setOpenSemesterDropdown] = useState(false);
+
+  const {studentData, studentCourses} = useContext(StoreContext);
 
   const handleOpenDropdown = () => {
     setOpenSemesterDropdown(!openSemesterDropdown);
@@ -24,13 +27,13 @@ const EducationalProfile = () => {
                         Program
                     </div>
                     <div className="element-value">
-                        B.Tech Computer Science and Engineering
+                        {studentData.program_enrolled || "-"}
                     </div>
                     <div className="element-field">
                         Major
                     </div>
                     <div className="element-value">
-                        N/A
+                      {studentData.major || "-"}
                     </div>
                 </li>
                 <li>
@@ -38,13 +41,13 @@ const EducationalProfile = () => {
                         Acedemic Year
                     </div>
                     <div className="element-value">
-                        2024/25
+                    {studentData.ac_year || "-"}
                     </div>
                     <div className="element-field">
                         Term
                     </div>
                     <div className="element-value">
-                        Semester 5
+                    {studentData.semester || "-"} 5
                     </div>
                 </li>
                 <li>
@@ -52,13 +55,13 @@ const EducationalProfile = () => {
                         Enrollment Date
                     </div>
                     <div className="element-value">
-                        29/08/2022
+                    {studentData.enroll_date || "-"}
                     </div>
                     <div className="element-field">
                         Expected Graduation Year
                     </div>
                     <div className="element-value">
-                        2026
+                    {studentData.grad_year || "-"}
                     </div>
                 </li>
           </ul>
@@ -152,7 +155,7 @@ const EducationalProfile = () => {
               <th>Faculty</th>
             </tr>
             <tr>
-              <td>CET2007B</td>
+              <td>{console.log(studentCourses) }</td>
               <td>Artificial Intelligence and Expert Systems</td>
               <td>4</td>
               <td>5</td>

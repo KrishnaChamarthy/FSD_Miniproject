@@ -1,7 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "./PersonalProfile.css"
+import { StoreContext } from '../../context/StoreContext'
 
 const PersonalProfile = () => {
+
+    const {studentData} = useContext(StoreContext);
+
+    const handleDate = () =>{
+        let dob = studentData.dob;
+
+        if (dob) {
+            if (!(dob instanceof Date)) {
+                dob = new Date(dob); // Convert string to Date object if it's not already
+            }
+            const day = dob.getDate().toString().padStart(2, '0');
+            const month = (dob.getMonth() + 1).toString().padStart(2, '0'); // Month is zero-indexed
+            const year = dob.getFullYear();
+        
+            const formattedDate = `${day}/${month}/${year}`; 
+            return formattedDate;
+        }else{
+            return "-";
+        }
+    }
+
   return (
     <div className='personal-profile'>
         <div className="personal-profile-element student-info">
@@ -12,13 +34,13 @@ const PersonalProfile = () => {
                         PRN
                     </div>
                     <div className="element-value">
-                        1032221617
+                        {studentData.student_PRN || "-"}
                     </div>
                     <div className="element-field">
                         First Name
                     </div>
                     <div className="element-value">
-                        Krishna
+                    {studentData.first_name || "-"}
                     </div>
                 </li>
                 <li>
@@ -26,13 +48,13 @@ const PersonalProfile = () => {
                         Middle Name
                     </div>
                     <div className="element-value">
-                        Srimanth
+                    {studentData.middle_name || "-"}
                     </div>
                     <div className="element-field">
                         Last Name
                     </div>
                     <div className="element-value">
-                        Chamarthy
+                    {studentData.last_name || "-"}
                     </div>
                 </li>
                 <li>
@@ -40,13 +62,13 @@ const PersonalProfile = () => {
                         DOB
                     </div>
                     <div className="element-value">
-                        20/09/2004
+                        {handleDate()}
                     </div>
                     <div className="element-field">
                         Gender
                     </div>
                     <div className="element-value">
-                        Male
+                        {studentData.gender || "-"}
                     </div>
                 </li>
                 <li>
@@ -54,13 +76,13 @@ const PersonalProfile = () => {
                         Blood Group
                     </div>
                     <div className="element-value">
-                        B+
+                        {studentData.bg || "-"}
                     </div>
                     <div className="element-field">
                         Nationality
                     </div>
                     <div className="element-value">
-                        Indian
+                        {studentData.nationality || "-"}
                     </div>
                 </li>
                 <li>
@@ -68,13 +90,13 @@ const PersonalProfile = () => {
                         Aadhar Number
                     </div>
                     <div className="element-value">
-                        ANo.
+                        {studentData.aadhar || "-"}
                     </div>
                     <div className="element-field">
                         Registration No.
                     </div>
                     <div className="element-value">
-                        1032221617
+                        {studentData.student_PRN || "-"}
                     </div>
                 </li>
                 <li>
@@ -82,13 +104,13 @@ const PersonalProfile = () => {
                         Admission No.
                     </div>
                     <div className="element-value">
-                        1032221617
+                        {studentData.student_PRN || "-"}  
                     </div>
                     <div className="element-field">
                         Admission Date
                     </div>
                     <div className="element-value">
-                        29/08/2022
+                        {studentData.ad_date || "-"}
                     </div>
                 </li>
             </ul>
@@ -101,7 +123,7 @@ const PersonalProfile = () => {
                         Email
                     </div>
                     <div className="element-value">
-                        1032221617@mitwpu.edu.in
+                        {studentData.email || "-"}
                     </div>
                 </li>
                 <li>
@@ -109,7 +131,7 @@ const PersonalProfile = () => {
                         Mobile No.
                     </div>
                     <div className="element-value">
-                        9766909863
+                        {studentData.phone || "-"}
                     </div>
                 </li>
                 <li>
@@ -117,7 +139,7 @@ const PersonalProfile = () => {
                         Current Address
                     </div>
                     <div className="element-value">
-                        Future Towers
+                        {studentData.address || "-"}
                     </div>
                 </li>
                 <li>
@@ -125,7 +147,7 @@ const PersonalProfile = () => {
                         Street
                     </div>
                     <div className="element-value">
-                        Amanora Park Town
+                        -
                     </div>
                 </li>
                 <li>
@@ -133,7 +155,7 @@ const PersonalProfile = () => {
                         Area
                     </div>
                     <div className="element-value">
-                        Hadapsar
+                        -
                     </div>
                 </li>
                 <li>
@@ -141,7 +163,7 @@ const PersonalProfile = () => {
                         City
                     </div>
                     <div className="element-value">
-                        Pune
+                        -
                     </div>
                 </li>
                 <li>
@@ -173,7 +195,7 @@ const PersonalProfile = () => {
                         Emergency Contact Name
                     </div>
                     <div className="element-value">
-                        Mom
+                        {studentData.e_name || "-"}
                     </div>
                 </li>
                 <li>
@@ -181,7 +203,7 @@ const PersonalProfile = () => {
                         Emergency Contact Number
                     </div>
                     <div className="element-value">
-                        9763677366
+                        {studentData.e_phone || "-"}
                     </div>
                 </li>
             </ul>
@@ -194,13 +216,13 @@ const PersonalProfile = () => {
                         Father's Full Name
                     </div>
                     <div className="element-value">
-                        Father
+                        {studentData.f_name || "-"}
                     </div>
                     <div className="element-field">
                         Mother's Full Name
                     </div>
                     <div className="element-value">
-                        Mother
+                        {studentData.m_name || "-"}
                     </div>
                 </li>
                 <li>
@@ -208,13 +230,13 @@ const PersonalProfile = () => {
                         Father's Email
                     </div>
                     <div className="element-value">
-                        Father@gmail.com
+                        {studentData.f_email || "-"}
                     </div>
                     <div className="element-field">
                         Mother's Email
                     </div>
                     <div className="element-value">
-                        Mother@gmail.com
+                    {studentData.m_email || "-"}
                     </div>
                 </li>
                 <li>
@@ -222,13 +244,13 @@ const PersonalProfile = () => {
                         Father's Mobile No.
                     </div>
                     <div className="element-value">
-                        FatherMobile
+                    {studentData.f_phone || "-"}
                     </div>
                     <div className="element-field">
                         Mother's Mobile No.
                     </div>
                     <div className="element-value">
-                        MotherMobile
+                    {studentData.m_phone || "-"}
                     </div>
                 </li>
             </ul>
