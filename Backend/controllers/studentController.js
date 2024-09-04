@@ -142,5 +142,29 @@ const getStudentInfo = async (req, res) => {
         });
     }
 }
+const updateStudent = async (req, res) => {
+    try {
+        const { student_PRN, ...updateFields } = req.body; 
 
-export {loginStudent, getStudentInfo, registerStudent};
+        if (Object.keys(updateFields).length === 0) {
+            return res.status(400).json({ success: false, message: "No fields provided for update" });
+        }
+
+        const updatedStudent = await studentModel.findOneAndUpdate(
+            { student_PRN },           
+            { $set: updateFields },    
+            { new: true }               
+        );
+
+        if (!updatedStudent) {
+            return res.status(404).json({ success: false, message: "Student not found" });
+        }
+
+        res.json({ success: true, message: "Student updated successfully", student: updatedStudent });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Error updating student" });
+    }
+};
+
+export {loginStudent, getStudentInfo, registerStudent, updateStudent};
