@@ -6,7 +6,7 @@ const addAttendance = async (req, res) => {
         course_code: req.body.course_code,
         date: req.body.date,
         status: req.body.status,
-        remaks: req.body.remarks
+        type: req.body.type
     });
 
     try {
@@ -25,12 +25,12 @@ const addAttendance = async (req, res) => {
 }
 
 const updateAttendance = async (req, res) => {
-    const { student_PRN, course_code, date, status, remarks } = req.body;
+    const { student_PRN, course_code, date, status, type } = req.body;
 
     try {
         const attendance = await attendanceModel.findOneAndUpdate(
             { student_PRN, course_code, date }, 
-            { status, remarks }, 
+            { status, type }, 
             { new: true } 
         );
 
@@ -56,7 +56,7 @@ const updateAttendance = async (req, res) => {
 };
 
 const getAttendance = async (req, res) => {
-    const { student_PRN } = req.body;
+    const { student_PRN } = req.query;
 
     try {
         const attendanceRecords = await attendanceModel.find({ student_PRN });

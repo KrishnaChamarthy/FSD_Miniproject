@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./DashboardMain.css";
 import Attendance_icon from "../../assets/Dashboard/attendance.png";
 import Subject_icon from "../../assets/Dashboard/subject.png";
 import Task_icon from "../../assets/Dashboard/task.png";
 import Cloud_img from "../../assets/Dashboard/cloud.png"
+import { StoreContext } from "../../context/StoreContext";
 
 const DashboardMain = () => {
   const [semester, setSemester] = useState("5th Semester");
   const [openSemesterDropdown, setOpenSemesterDropdown] = useState(false);
+
+  const {attendanceData = {}} = useContext(StoreContext);
 
   const handleOpenDropdown = () => {
     setOpenSemesterDropdown(!openSemesterDropdown);
@@ -93,8 +96,8 @@ const DashboardMain = () => {
             <div className="content-body">
               <p className="title">Attendance</p>
               <p className="amount">
-                <span>89</span> / 89
-                <div className="percentage">100%</div>
+                <span>{attendanceData.presentClasses || 0}</span> / {attendanceData.totalClasses || 0}
+                <span className="percentage">{attendanceData.percentage || 0}%</span>
 
               </p>
               <p>Great, you always attend class, keep it up!</p>
@@ -110,7 +113,7 @@ const DashboardMain = () => {
               <p className="title">Task</p>
               <p className="amount">
                 <span>134</span> / 140
-                <div className="percentage">80%</div>
+                <span className="percentage">80%</span>
               </p>
               <p>Don't forget to turn in your work</p>
 
@@ -126,7 +129,7 @@ const DashboardMain = () => {
               <p className="title">Subject</p>
               <p className="amount">
                 <span>12</span> / 15
-                <div className="percentage">75%</div>
+                <span className="percentage">75%</span>
 
               </p>
               <p>You have taken 12 subjects this semester</p>

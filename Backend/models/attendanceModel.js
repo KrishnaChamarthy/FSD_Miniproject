@@ -5,7 +5,7 @@ const attendanceSchema = new mongoose.Schema({
     course_code: {type:String, reqired:true},
     date: { type: Date, required: true },
   status: { type: String, enum: ['Present', 'Absent', 'Late'], required: true },
-  remarks: { type: String }
+  type: { type: String }
 }, {minimize:false});
 
 const attendanceModel = mongoose.model.attendance || mongoose.model("attendance", attendanceSchema);

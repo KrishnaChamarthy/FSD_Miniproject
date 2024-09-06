@@ -23,7 +23,7 @@ const StoreContextProvider = ({ children }) => {
     useEffect(() => {
         const loadData = async () => {
             if (token) {
-                await fetchStudentData();                
+                await fetchStudentData();  
             }
         };
         loadData();
@@ -32,15 +32,15 @@ const StoreContextProvider = ({ children }) => {
     useEffect(() => {
         if (Object.keys(studentData).length > 0) {
             fetchCoursesData();
+            fetchAttendanceData();
         }
-    }, [studentData]); // Fetch courses only after studentData is updated
+    }, [studentData]); 
 
     const fetchStudentData = async () => {
         try {
             const response = await axios.get(`${url}/api/student/info`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            console.log(response.data.data);
             setStudentData(response.data.data);
         } catch (error) {
             console.error("Error fetching student data:", error);
@@ -49,12 +49,23 @@ const StoreContextProvider = ({ children }) => {
 
     const fetchAttendanceData = async () => {
         try {
+            const student_PRN = studentData.student_PRN;
             const response = await axios.get(`${url}/api/attendance/info`, {
-                params: { student_PRN: studentData.student_PRN }, // Use `params` for query parameters
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            console.log(response.data.data);
-            setAttendanceData(response.data.data); // Save the attendance data if needed
+                params:{
+                    student_PRN: student_PRN
+                }
+            });    
+            
+            const totalClasses = response.data.data.length;
+            const presentClasses = response.data.data.filter(record => record.status === 'Present').length;
+            const percentage = (presentClasses/totalClasses) * 100;
+            const aData = {
+               "presentClasses": presentClasses,
+               "totalClasses": totalClasses,
+               "percentage": percentage.toFixed(0)
+            }
+            setAttendanceData(aData);
+            
         } catch (error) {
             console.log(error);
         }
