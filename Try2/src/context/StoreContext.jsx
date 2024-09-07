@@ -79,7 +79,6 @@ const StoreContextProvider = ({ children }) => {
           (record) => record.course_code === course
         );
 
-        // Separate records by type
         const theoryRecords = courseAttendanceRecords.filter(
           (record) => record.type === "T"
         );
@@ -87,7 +86,6 @@ const StoreContextProvider = ({ children }) => {
           (record) => record.type === "P"
         );
 
-        // Calculate attendance for Theory
         const totalTheoryClasses = theoryRecords.length;
         const presentTheoryClasses = theoryRecords.filter(
           (record) => record.status === "Present"
@@ -97,7 +95,6 @@ const StoreContextProvider = ({ children }) => {
             ? (presentTheoryClasses / totalTheoryClasses) * 100
             : 0;
 
-        // Calculate attendance for Practical
         const totalPracticalClasses = practicalRecords.length;
         const presentPracticalClasses = practicalRecords.filter(
           (record) => record.status === "Present"
@@ -106,7 +103,7 @@ const StoreContextProvider = ({ children }) => {
           totalPracticalClasses > 0
             ? (presentPracticalClasses / totalPracticalClasses) * 100
             : 0;
-
+        
         courseAttendance[course] = {
           totalClasses: courseAttendanceRecords.length,
           presentClasses: courseAttendanceRecords.filter(

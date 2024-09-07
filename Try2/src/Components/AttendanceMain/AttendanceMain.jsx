@@ -8,7 +8,7 @@ const AttendanceMain = () => {
   const [semester, setSemester] = useState("5th Semester");
   const [openSemesterDropdown, setOpenSemesterDropdown] = useState(false);
 
-  const { attendanceData } = useContext(StoreContext);
+  const { attendanceData, studentCourses } = useContext(StoreContext);
 
   const handleOpenDropdown = () => {
     setOpenSemesterDropdown(!openSemesterDropdown);
@@ -96,19 +96,20 @@ const AttendanceMain = () => {
 
   const renderCourseAttendanceRows = () => {
     const rows = [];
-
+    
     Object.entries(attendanceData["course-wise"]).forEach(
       ([courseCode, data]) => {
         const hasTheory = data.theory.totalClasses > 0;
         const hasPractical = data.practical.totalClasses > 0;
 
-        console.log(courseCode, data);
-
+        const course = studentCourses.find((course) => course.course_code === courseCode);
+      const courseName = course ? course.course_name : "Unknown Course";
+        
         if (hasTheory) {
           rows.push(
             <tr key={`${courseCode}-theory`}>
               <td rowSpan={hasPractical ? 2 : 1}>{courseCode}</td>
-              <td rowSpan={hasPractical ? 2 : 1}>{data.courseName}</td>
+              <td rowSpan={hasPractical ? 2 : 1}>{courseName}</td>
               <td>Theory</td>
               <td>{data.theory.presentClasses}</td>
               <td>{data.theory.totalClasses}</td>
@@ -123,7 +124,7 @@ const AttendanceMain = () => {
               {!hasTheory && (
                 <>
                   <td>{courseCode}</td>
-                  <td>{data.courseName}</td>
+                  <td>{courseName}</td>
                 </>
               )}
               <td>Practical</td>
@@ -170,27 +171,27 @@ const AttendanceMain = () => {
           <div className="element-title">Attendance</div>
           <ul className="attendance-summary-content">
             <li className="present">
-              <i class="bx bx-check"></i>
+              <i className="bx bx-check"></i>
               <div className="attendance-label">Present</div>
               <div className="attendance-amount">{attendanceData.presentClasses}</div>
             </li>
             <li className="absent">
-              <i class="material-icons-outlined">report_problem</i>
+              <i className="material-icons-outlined">report_problem</i>
               <div className="attendance-label">Absent</div>
               <div className="attendance-amount">{attendanceData.absentClasses}</div>
             </li>
             <li className="leave">
-              <i class="material-icons-outlined">beach_access</i>
+              <i className="material-icons-outlined">beach_access</i>
               <div className="attendance-label">On Leave</div>
               <div className="attendance-amount">{attendanceData.onLeave}</div>
             </li>
             <li className="holiday">
-              <i class="bx bx-calendar-event"></i>
+              <i className="bx bx-calendar-event"></i>
               <div className="attendance-label">Weekly Off</div>
               <div className="attendance-amount">{attendanceData.weekly}</div>
             </li>
             <li className="holiday">
-              <i class="fa-solid fa-gift"></i>{" "}
+              <i className="fa-solid fa-gift"></i>{" "}
               <div className="attendance-label">Holiday</div>
               <div className="attendance-amount">{attendanceData.holidays}</div>
             </li>
