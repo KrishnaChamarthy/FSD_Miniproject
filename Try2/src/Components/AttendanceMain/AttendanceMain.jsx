@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./AttendanceMain.css";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { StoreContext } from "../../context/StoreContext";
 
 const AttendanceMain = () => {
-
   const [semester, setSemester] = useState("5th Semester");
   const [openSemesterDropdown, setOpenSemesterDropdown] = useState(false);
+
+  const { attendanceData } = useContext(StoreContext);
 
   const handleOpenDropdown = () => {
     setOpenSemesterDropdown(!openSemesterDropdown);
@@ -49,8 +51,8 @@ const AttendanceMain = () => {
     datasets: [
       {
         label: "Attendance",
-        data: [2000, 590, 465, 157],
-        backgroundColor: ["#4a90e2", "#ff6867","#34c75a", "#9ea0a1"],
+        data: [attendanceData.presentClasses, attendanceData.absentClasses],
+        backgroundColor: ["#4a90e2", "#ff6867"],
         hoverOffset: 5,
       },
     ],
@@ -92,6 +94,51 @@ const AttendanceMain = () => {
     },
   };
 
+  const renderCourseAttendanceRows = () => {
+    const rows = [];
+
+    Object.entries(attendanceData["course-wise"]).forEach(
+      ([courseCode, data]) => {
+        const hasTheory = data.theory.totalClasses > 0;
+        const hasPractical = data.practical.totalClasses > 0;
+
+        console.log(courseCode, data);
+
+        if (hasTheory) {
+          rows.push(
+            <tr key={`${courseCode}-theory`}>
+              <td rowSpan={hasPractical ? 2 : 1}>{courseCode}</td>
+              <td rowSpan={hasPractical ? 2 : 1}>{data.courseName}</td>
+              <td>Theory</td>
+              <td>{data.theory.presentClasses}</td>
+              <td>{data.theory.totalClasses}</td>
+              <td>{data.theory.percentage}%</td>
+            </tr>
+          );
+        }
+
+        if (hasPractical) {
+          rows.push(
+            <tr key={`${courseCode}-practical`}>
+              {!hasTheory && (
+                <>
+                  <td>{courseCode}</td>
+                  <td>{data.courseName}</td>
+                </>
+              )}
+              <td>Practical</td>
+              <td>{data.practical.presentClasses}</td>
+              <td>{data.practical.totalClasses}</td>
+              <td>{data.practical.percentage}%</td>
+            </tr>
+          );
+        }
+      }
+    );
+
+    return rows;
+  };
+
   return (
     <div className="attendance-container">
       <header>
@@ -125,168 +172,109 @@ const AttendanceMain = () => {
             <li className="present">
               <i class="bx bx-check"></i>
               <div className="attendance-label">Present</div>
-              <div className="attendance-amount">4500</div>
+              <div className="attendance-amount">{attendanceData.presentClasses}</div>
             </li>
             <li className="absent">
               <i class="material-icons-outlined">report_problem</i>
               <div className="attendance-label">Absent</div>
-              <div className="attendance-amount">500</div>
+              <div className="attendance-amount">{attendanceData.absentClasses}</div>
             </li>
             <li className="leave">
               <i class="material-icons-outlined">beach_access</i>
               <div className="attendance-label">On Leave</div>
-              <div className="attendance-amount">465</div>
+              <div className="attendance-amount">{attendanceData.onLeave}</div>
             </li>
             <li className="holiday">
               <i class="bx bx-calendar-event"></i>
               <div className="attendance-label">Weekly Off</div>
-              <div className="attendance-amount">145</div>
+              <div className="attendance-amount">{attendanceData.weekly}</div>
             </li>
             <li className="holiday">
               <i class="fa-solid fa-gift"></i>{" "}
               <div className="attendance-label">Holiday</div>
-              <div className="attendance-amount">12</div>
+              <div className="attendance-amount">{attendanceData.holidays}</div>
             </li>
           </ul>
         </div>
         <div className="attendance-element sub-attendance-summary">
-        <div className="element-title-course">
-          Subject-Wise Attendance
-          <div className="semester-dropdown">
-            <div className="select" onClick={handleOpenDropdown}>
-              <span className="selected">{semester}</span>
-              <div
-                className={
-                  openSemesterDropdown ? "caret caret-rotate" : "caret"
-                }
-              ></div>
+          <div className="element-title-course">
+            Subject-Wise Attendance
+            <div className="semester-dropdown">
+              <div className="select" onClick={handleOpenDropdown}>
+                <span className="selected">{semester}</span>
+                <div
+                  className={
+                    openSemesterDropdown ? "caret caret-rotate" : "caret"
+                  }
+                ></div>
+              </div>
+              <ul className={openSemesterDropdown ? "menu menu-open" : "menu"}>
+                <li
+                  onClick={() => {
+                    handleClick("1st Semester");
+                  }}
+                >
+                  1st Semester
+                </li>
+                <li
+                  onClick={() => {
+                    handleClick("2nd Semester");
+                  }}
+                >
+                  2nd Semester
+                </li>
+                <li
+                  onClick={() => {
+                    handleClick("3rd Semester");
+                  }}
+                >
+                  3rd Semester
+                </li>
+                <li
+                  onClick={() => {
+                    handleClick("4th Semester");
+                  }}
+                >
+                  4th Semester
+                </li>
+                <li
+                  onClick={() => {
+                    handleClick("5th Semester");
+                  }}
+                >
+                  5th Semester
+                </li>
+              </ul>
             </div>
-            <ul className={openSemesterDropdown ? "menu menu-open" : "menu"}>
-              <li
-                onClick={() => {
-                  handleClick("1st Semester");
-                }}
-              >
-                1st Semester
-              </li>
-              <li
-                onClick={() => {
-                  handleClick("2nd Semester");
-                }}
-              >
-                2nd Semester
-              </li>
-              <li
-                onClick={() => {
-                  handleClick("3rd Semester");
-                }}
-              >
-                3rd Semester
-              </li>
-              <li
-                onClick={() => {
-                  handleClick("4th Semester");
-                }}
-              >
-                4th Semester
-              </li>
-              <li
-                onClick={() => {
-                  handleClick("5th Semester");
-                }}
-              >
-                5th Semester
-              </li>
-            </ul>
           </div>
-        </div>
-        <table className='attendance-table'>
-            <tr>
-              <th>Course Code</th>
-              <th>Course Name</th>
-              <th>Subject Type</th>
-              <th>Present</th>
-              <th>Total</th>
-              <th>Percentage</th>
-            </tr>
-            <tr>
-              <td rowSpan={2}>CET2007B</td>
-              <td rowSpan={2}>Artificial Intelligence and Expert Systems</td>
-              <td>Theory</td>
-              <td>10</td>
-              <td>20</td>
-              <td>50%</td>
-            </tr>
-            <tr>
-              <td>Practical</td>
-              <td>5</td>
-              <td>10</td>
-              <td>50%</td>
-            </tr>
-            <tr>
-              <td rowSpan={2}>CET3005B</td>
-              <td rowSpan={2}>Data Engineering</td>
-              <td>Theory</td>
-              <td>10</td>
-              <td>20</td>
-              <td>50%</td>
-            </tr>
-            <tr>
-            <td>Practical</td>
-              <td>5</td>
-              <td>10</td>
-              <td>50%</td>
-            </tr>
-            <tr>
-              <td>CET3003B</td>
-              <td >Full Stack Development</td>
-              <td>Practical</td>
-              <td>10</td>
-              <td>20</td>
-              <td>50%</td>
-            </tr>
-            <tr>
-              <td rowSpan={2}>CET4003B</td>
-              <td rowSpan={2}>Computer Graphics and 3D Modelling</td>
-              <td>Theory</td>
-              <td>10</td>
-              <td>20</td>
-              <td>50%</td>
-            </tr>
-            <tr>
-            <td>Practical</td>
-              <td>5</td>
-              <td>10</td>
-              <td>50%</td>
-            </tr>
-            <tr>
-              <td rowSpan={2}>CET3004B</td>
-              <td rowSpan={2}>Information and Cyber Security</td>
-              <td>Theory</td>
-              <td>10</td>
-              <td>20</td>
-              <td>50%</td>
-            </tr>
-            <tr>
-            <td>Practical</td>
-              <td>5</td>
-              <td>10</td>
-              <td>50%</td>
-            </tr>
-            <tr>
-              <th rowSpan={2}></th>
-              <th rowSpan={2}>Total</th>
-              <th>Theory</th>
-              <th>20</th>
-              <th>40</th>
-              <th>50%</th>
-            </tr>
-            <tr>
-              <th>Practical</th>
-              <th>20</th>
-              <th>40</th>
-              <th>50%</th>
-            </tr>
+          <table className="attendance-table">
+            <thead>
+              <tr>
+                <th>Course Code</th>
+                <th>Course Name</th>
+                <th>Subject Type</th>
+                <th>Present</th>
+                <th>Total</th>
+                <th>Percentage</th>
+              </tr>
+            </thead>
+            <tbody>
+              {attendanceData ? (
+                renderCourseAttendanceRows()
+              ) : (
+                <tr>
+                  <td colSpan="6">Loading...</td>
+                </tr>
+              )}
+            </tbody>
+            <tbody>
+              <tr>
+                <td colSpan={3}>Total</td>
+                <td>{attendanceData.presentClasses}</td>
+                <td>{attendanceData.totalClasses}</td>
+                <td>{attendanceData.percentage}%</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
