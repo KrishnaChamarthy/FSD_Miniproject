@@ -12,16 +12,22 @@ import Fees from "./Pages/Fees/Fees";
 import Requests from "./Pages/Requests/Requests";
 import Login from "./Pages/Login/Login";
 import { StoreContext } from "./context/StoreContext";
+import FacultySidebar from "./Faculty/Components/FacultySidebar/FacultySidebar";
+import FacultyDashboard from "./Faculty/Pages/FacultyDashboard/FacultyDashboard";
+import FacultyCourses from "./Faculty/Pages/FacultyCourses/FacultyCourses"
+import FacultyAttendance from "./Faculty/Pages/FacultyAttendance/FacultyAttendance"
+import FacultyGradebook from "./Faculty/Pages/FacultyGradebook/FacultyGradebook"
+import FacultyAssignments from "./Faculty/Pages/FacultyAssignments/FacultyAssignments";
 
 const App = () => {
   const [theme, setTheme] = useState("");
-  const { token } = useContext(StoreContext);
+  const { user } = useContext(StoreContext);
 
   return (
     <div className={theme === "dark" ? "app dark" : "app"}>
-      {token === "" ? (
+      {user === "" ? (
         <Login />
-      ) : (
+      ) : user === "student" ? (
         <>
           <Sidebar setTheme={setTheme} theme={theme} />
           <Routes>
@@ -34,6 +40,17 @@ const App = () => {
             <Route path="/lms/*" element={<LMS />} />
             <Route path="/fees/*" element={<Fees />} />
             <Route path="/requests/*" element={<Requests />} />
+          </Routes>
+        </>
+      ) : (
+        <>
+          <FacultySidebar setTheme={setTheme} theme={theme} />
+          <Routes>
+            <Route path="/" element={<FacultyDashboard />}/>
+            <Route path="/courses/*" element={<FacultyCourses />}/>
+            <Route path="/attendance/*" element={<FacultyAttendance />}/>
+            <Route path="/gradebook/*" element={<FacultyGradebook />}/>
+            <Route path="/assignments/*" element={<FacultyAssignments />}/>
           </Routes>
         </>
       )}

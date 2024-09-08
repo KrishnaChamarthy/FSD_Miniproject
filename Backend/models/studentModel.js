@@ -13,6 +13,7 @@ const studentSchema = new mongoose.Schema(
     gender: { type: String },
     address: { type: String },
     program_enrolled: { type: String },
+    department: {type:String},
     semester: {type:Number},
     courses_enrolled: [{ type: Object, default:{}}],
     profile_picture: { type: String },

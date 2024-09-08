@@ -10,7 +10,7 @@ import { Navigate } from 'react-router-dom';
 const LoginMain = () => {
 
   const [studentLogin, setStudentLogin] = useState(true);
-  const {url, setToken} = useContext(StoreContext);
+  const {url, setToken, user, setUser} = useContext(StoreContext);
   const [data, setData] = useState({
     email: "",
     password:""
@@ -45,6 +45,7 @@ const LoginMain = () => {
     if (response.data.success){
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
+      setUser(studentLogin ? "student" : "faculty");
       Navigate("/");
     }
     else{

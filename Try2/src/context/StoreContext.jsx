@@ -5,6 +5,9 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = ({ children }) => {
   const url = "http://localhost:4000";
+
+  const [user, setUser] = useState("");
+
   const [token, setToken] = useState("");
   const [studentData, setStudentData] = useState({});
   const [attendanceData, setAttendanceData] = useState({
@@ -198,6 +201,8 @@ const StoreContextProvider = ({ children }) => {
 
   const contextValue = {
     url,
+    user,
+    setUser,
     token,
     setToken,
     studentData,

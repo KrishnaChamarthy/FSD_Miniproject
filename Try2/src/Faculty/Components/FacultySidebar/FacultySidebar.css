@@ -51,7 +51,6 @@
 }
 
 .sidebar .image{
-    width: 60px;
     min-width: 60px;
     display: flex;
     align-items: center;
