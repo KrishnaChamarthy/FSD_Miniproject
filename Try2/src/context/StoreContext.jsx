@@ -18,6 +18,7 @@ const StoreContextProvider = ({ children }) => {
     "course-wise": {},
   });
   const [studentCourses, setStudentCourses] = useState([]);
+  const [circularsList, setCircularsList] = useState([]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -42,6 +43,7 @@ const StoreContextProvider = ({ children }) => {
     if (Object.keys(studentData).length > 0) {
       fetchCoursesData();
       fetchAttendanceData();
+      fetchCirculars();
     }
   }, [studentData]);
 
@@ -172,6 +174,28 @@ const StoreContextProvider = ({ children }) => {
     }
   };
 
+  const fetchCirculars = async () => {
+    try {
+      const response = await axios.get(`${url}/api/circulars/list`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const cList = response.data.data;
+      const studentPRN = studentData.student_PRN;
+      const updatedCircularsList = cList.map((circular) => {
+        return {
+          ...circular,
+          read: circular.read.includes(studentPRN), 
+        };
+      });
+  
+      setCircularsList(updatedCircularsList);
+      console.log(updatedCircularsList);
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const contextValue = {
     url,
     token,
@@ -182,6 +206,8 @@ const StoreContextProvider = ({ children }) => {
     setAttendanceData,
     studentCourses,
     setStudentCourses,
+    circularsList,
+    setCircularsList
   };
 
   return (

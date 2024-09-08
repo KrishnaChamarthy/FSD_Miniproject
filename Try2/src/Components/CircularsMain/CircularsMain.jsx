@@ -1,7 +1,60 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./CircularsMain.css";
+import { StoreContext } from "../../context/StoreContext";
 
 const CircularsMain = () => {
+  const { circularsList } = useContext(StoreContext);
+
+  // Compute counts for the categories and status
+  const computeCounts = () => {
+    const counts = {
+      important: 0,
+      unread: 0,
+      academic: 0,
+      administrative: 0,
+      events: 0,
+      holidays: 0,
+      exams: 0,
+    };
+
+    circularsList.forEach((circular) => {
+      const category = circular.category.toLowerCase();
+
+      // Count categories
+      if (category === "academic") counts.academic++;
+      else if (category === "administrative") counts.administrative++;
+      else if (category === "events") counts.events++;
+      else if (category === "holidays") counts.holidays++;
+      else if (category === "exams") counts.exams++;
+
+      // Determine if the circular is important
+      if (category === "academic" || category === "exams") counts.important++;
+
+      // Count unread circulars
+      if (!circular.read) counts.unread++;
+    });
+
+    return counts;
+  };
+
+  const counts = computeCounts();
+
+  const renderCircularsRows = () => {
+    return circularsList.map((circular) => (
+      <tr key={circular.circular_id}>
+        <td>{circular.circular_id}</td>
+        <td>{circular.subject}</td>
+        <td>
+          <div className={`${circular.category.toLowerCase()}-category`}>
+            {circular.category}
+          </div>
+        </td>
+        <td>{new Date(circular.dateIssued).toLocaleDateString()}</td>
+        <td>{circular.read ? "" : <div className="unread"></div>}</td>
+      </tr>
+    ));
+  };
+
   return (
     <div className="circulars-container">
       <header>
@@ -25,12 +78,12 @@ const CircularsMain = () => {
             <li className="important">
               <i className="material-icons-outlined">report_problem</i>
               <div className="circulars-label">Important</div>
-              <div className="circulars-amount">5</div>
+              <div className="circulars-amount">{counts.important}</div>
             </li>
             <li className="unread">
               <i className="material-icons-outlined">mark_email_unread</i>
               <div className="circulars-label">Unread</div>
-              <div className="circulars-amount">20</div>
+              <div className="circulars-amount">{counts.unread}</div>
             </li>
           </ul>
         </div>
@@ -40,27 +93,27 @@ const CircularsMain = () => {
             <li className="academic">
               <i className="material-icons-outlined">school</i>
               <div className="circulars-label">Academic</div>
-              <div className="circulars-amount">5</div>
+              <div className="circulars-amount">{counts.academic}</div>
             </li>
             <li className="administrative">
               <i className="material-icons-outlined">history_edu</i>
               <div className="circulars-label">Administrative</div>
-              <div className="circulars-amount">5</div>
+              <div className="circulars-amount">{counts.administrative}</div>
             </li>
             <li className="events">
               <i className="material-icons-outlined">emoji_events</i>
               <div className="circulars-label">Events</div>
-              <div className="circulars-amount">5</div>
+              <div className="circulars-amount">{counts.events}</div>
             </li>
             <li className="holidays">
               <i className="bx bx-calendar-event"></i>
               <div className="circulars-label">Holidays</div>
-              <div className="circulars-amount">5</div>
+              <div className="circulars-amount">{counts.holidays}</div>
             </li>
             <li className="exams">
               <i className="material-icons-outlined">quiz</i>
               <div className="circulars-label">Exams</div>
-              <div className="circulars-amount">5</div>
+              <div className="circulars-amount">{counts.exams}</div>
             </li>
           </ul>
         </div>
@@ -76,67 +129,7 @@ const CircularsMain = () => {
                 <th className="read"></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Notice_01</td>
-                <td>Academic</td>
-                <td>
-                  <div className="academic-category">Academic</div>
-                </td>
-                <td>26/08/24</td>
-                <td>
-                  <div className="unread"></div>
-                </td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td>Circular_01</td>
-                <td>Administrative</td>
-                <td>
-                  <div className="administrative-category">Administrative</div>
-                </td>
-                <td>26/08/24</td>
-                <td>
-                  <div className="unread"></div>
-                </td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td>Notice_02</td>
-                <td>Events</td>
-                <td>
-                  <div className="events-category">Events</div>
-                </td>
-                <td>26/08/24</td>
-                <td></td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td>Notice_03</td>
-                <td>Holidays</td>
-                <td>
-                  <div className="holidays-category">Holidays</div>
-                </td>
-                <td>26/08/24</td>
-                <td>
-                  <div className="unread"></div>
-                </td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td>Circular_02</td>
-                <td>Exams</td>
-                <td>
-                  <div className="exams-category">Exams</div>
-                </td>
-                <td>26/08/24</td>
-                <td></td>
-              </tr>
-            </tbody>
+            <tbody>{renderCircularsRows()}</tbody>
           </table>
         </div>
       </div>
