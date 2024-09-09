@@ -1,0 +1,137 @@
+.faculty-attendance-container {
+    width: 100%;
+    height: 100%;
+    padding: 40px 80px;
+  }
+  
+  .faculty-attendance-container header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .faculty-attendance-container .header-text {
+    font-size: 32px;
+    line-height: 30px;
+    flex: 7;
+    font-weight: 600;
+    color: var(--title-color);
+  }
+  
+  .faculty-attendance-container .header-text span {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-color);
+  }
+  
+  .faculty-attendance-container .header-search {
+    display: flex;
+    flex: 2;
+    align-items: center;
+    justify-content: center;
+    background: var(--body-color);
+    height: 50px;
+    border-radius: 6px;
+    padding: 10px 20px;
+    gap: 10px;
+    color: var(--text-color);
+    transition: var(--tran-05);
+  }
+  
+  .header-search i {
+    font-size: 25px;
+  }
+  
+  .header-search input {
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    background-color: transparent;
+    color: var(--text-color);
+  }
+  
+  .faculty-attendance-container .header-bell {
+    flex: 1;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .header-bell i {
+    font-size: 25px;
+    background: var(--body-color);
+    padding: 10px;
+    border-radius: 50%;
+    transition: var(--tran-05);
+  }
+
+  .faculty-attendance-body {
+    margin-top: 40px;
+    width: 100%;
+    padding: 50px 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 30px;
+    background: var(--body-color);
+    transition: var(--tran-05);
+    border-radius: 10px;
+  }
+  
+  .faculty-attendance-element {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-color-light);
+    padding: 20px;
+    border-radius: 10px;
+    transition: var(--tran-05);
+  }
+
+  .total-students{
+    grid-area: 1 / 1 / 2 / 2;
+    color: #3071d8;
+    transition: var(--tran-04);
+  }
+  .present-students{
+    grid-area: 1 / 2 / 2 / 3;
+    color: green;
+    transition: var(--tran-04);
+  }
+  .absent-students{
+    grid-area: 1 / 3 / 2 / 4;
+    color: red;
+    transition: var(--tran-04);
+  }
+  .precentage-students{
+    grid-area: 1 / 4 / 2 / 5;
+    color: var(--text-color);
+    transition: var(--tran-04);
+  }
+  .set-attendance{
+    grid-area: 2 / 1 / 3 / 5;
+  }
+
+.faculty-attendance-element .content{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px;
+  width: 100%;
+  padding: 30px;
+  font-size: 50px;
+  font-weight: 500;
+
+}
+
+.faculty-attendance-element .content i{
+  background-color: var(--body-color);
+  transition: var(--tran-05);
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 40px;
+}
+

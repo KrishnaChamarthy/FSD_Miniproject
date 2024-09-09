@@ -10,7 +10,7 @@ const DashboardMain = () => {
   const [semester, setSemester] = useState("5th Semester");
   const [openSemesterDropdown, setOpenSemesterDropdown] = useState(false);
 
-  const {attendanceData = {}} = useContext(StoreContext);
+  const {attendanceData = {}, studentCourses, circularsList} = useContext(StoreContext);
 
   const handleOpenDropdown = () => {
     setOpenSemesterDropdown(!openSemesterDropdown);
@@ -128,8 +128,8 @@ const DashboardMain = () => {
             <div className="content-body">
               <p className="title">Subject</p>
               <p className="amount">
-                <span>12</span> / 15
-                <span className="percentage">75%</span>
+                <span>{studentCourses.length}</span> / 7
+                <span className="percentage">{Math.round((studentCourses.length / 7) * 100)}%</span>
 
               </p>
               <p>You have taken 12 subjects this semester</p>
@@ -142,22 +142,16 @@ const DashboardMain = () => {
                   Circulars/Notices
                 </header>
                 <ul>
-                  <li>
+                  {circularsList.map((circular) => (
+                    <li>
                     <div className="circular-title">
-                      Guidelines for Independence Day - 2024
+                      {circular.subject}
                     </div>
                     <div className="circular-date">
-                      13-08-24
+                    {new Date(circular.dateIssued).toLocaleDateString()}
                     </div>
                   </li>
-                  <li>
-                    <div className="circular-title">
-                      Guidelines for Independence Day - 2024
-                    </div>
-                    <div className="circular-date">
-                      13-08-24
-                    </div>
-                  </li>
+                  ))}
                 </ul>
             </div> 
             <div className="gpa-container">

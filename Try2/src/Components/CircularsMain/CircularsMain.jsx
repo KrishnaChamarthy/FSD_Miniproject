@@ -20,17 +20,14 @@ const CircularsMain = () => {
     circularsList.forEach((circular) => {
       const category = circular.category.toLowerCase();
 
-      // Count categories
       if (category === "academic") counts.academic++;
       else if (category === "administrative") counts.administrative++;
       else if (category === "events") counts.events++;
       else if (category === "holidays") counts.holidays++;
       else if (category === "exams") counts.exams++;
 
-      // Determine if the circular is important
       if (category === "academic" || category === "exams") counts.important++;
 
-      // Count unread circulars
       if (!circular.read) counts.unread++;
     });
 

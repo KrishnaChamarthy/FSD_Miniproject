@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import Profile_icon from "../../assets/Dashboard/boy.png";
 import "./DashboardLeftbar.css";
 import Calendar from "../Calendar/Calendar"
+import { StoreContext } from "../../context/StoreContext";
 
 const DashboardLeftbar = () => {
+
+  const {studentData} = useContext(StoreContext);
+
   return (
     <div className="dashboard-leftbar">
       <div className="dashboard-profile">
         <img src={Profile_icon} alt="" />
-        <div className="name">Krishna Chamarthy</div>
-        <div className="info">Computer Science | 5th Semister</div>
-        <div className="prn">1032221617</div>
+        <div className="name">{studentData.first_name + " " + studentData.last_name}</div>
+        <div className="info">Computer Science | {studentData.semester}th Semister</div>
+        <div className="prn">{studentData.student_PRN}</div>
       </div>
       <Calendar />
       <div className="schedule">
