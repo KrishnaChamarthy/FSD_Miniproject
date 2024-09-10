@@ -5,11 +5,10 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = ({ children }) => {
   const url = "http://localhost:4000";
-
-  const [user, setUser] = useState("");
-
-  const [token, setToken] = useState("");
+  const [user, setUser] = useState(localStorage.getItem("user") || ""); // Initialize user state with value from local storage if available
+  const [token, setToken] = useState(localStorage.getItem("token") || ""); // Initialize token state with value from local storage if available
   const [studentData, setStudentData] = useState({});
+  const [facultyData, setFacultyData] = useState({}); // State for faculty data
   const [attendanceData, setAttendanceData] = useState({
     presentClasses: 0,
     totalClasses: 0,
@@ -22,33 +21,50 @@ const StoreContextProvider = ({ children }) => {
   });
   const [studentCourses, setStudentCourses] = useState([]);
   const [circularsList, setCircularsList] = useState([]);
+  const [timetable, setTimetable] = useState([]);
 
   useEffect(() => {
-    const loadData = async () => {
+    const loadToken = () => {
       const storedToken = localStorage.getItem("token");
+      const storedUser = localStorage.getItem("user");
       if (storedToken) {
         setToken(storedToken);
       }
+      if (storedUser) {
+        setUser(storedUser);
+      }
     };
-    loadData();
+    loadToken();
   }, []);
 
   useEffect(() => {
     const loadData = async () => {
       if (token) {
-        await fetchStudentData();
+        try {
+          if (user === "student") {
+            await fetchStudentData();
+          } else if (user === "faculty") {
+            await fetchFacultyData();
+          }
+        } catch (error) {
+          console.error("Error during fetching data:", error);
+          handleLogout();
+        }
       }
     };
     loadData();
-  }, [token]);
+  }, [token, user]);
 
   useEffect(() => {
-    if (Object.keys(studentData).length > 0) {
+    if (user === "student" && Object.keys(studentData).length > 0) {
       fetchCoursesData();
       fetchAttendanceData();
       fetchCirculars();
+      fetchTimetable();
+    } else if (user === "faculty" && Object.keys(facultyData).length > 0) {
+      fetchCoursesData();
     }
-  }, [studentData]);
+  }, [studentData, facultyData, user]);
 
   const fetchStudentData = async () => {
     try {
@@ -58,6 +74,52 @@ const StoreContextProvider = ({ children }) => {
       setStudentData(response.data.data);
     } catch (error) {
       console.error("Error fetching student data:", error);
+      handleLogout();
+    }
+  };
+
+  const fetchFacultyData = async () => {
+    // try {
+    //   const response = await axios.get(`${url}/api/faculty/info`, {
+    //     headers: { Authorization: `Bearer ${token}` },
+    //   });
+    //   setFacultyData(response.data.data);
+    // } catch (error) {
+    //   console.error("Error fetching faculty data:", error);
+    //   handleLogout();
+    // }
+    console.log("tt");
+    
+  };
+
+  const fetchCoursesData = async () => {
+    try {
+      const response = await axios.get(`${url}/api/course/list`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const allCourses = response.data.data;
+      let courses = [];
+
+      if (user === "student") {
+        const enrolledCourseCodes = studentData.courses_enrolled || [];
+        courses = allCourses.filter(course => enrolledCourseCodes.includes(course.course_code));
+      } else if (user === "faculty") {
+        const handledCourseCodes = facultyData.courses_handled || [];
+        courses = allCourses.filter(course => handledCourseCodes.includes(course.course_code));
+      }
+
+      setStudentCourses(courses);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchTimetable = async () => {
+    try {
+      const response = await axios.get(`${url}/api/timetable/get`);
+      setTimetable(response.data.data);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -65,9 +127,7 @@ const StoreContextProvider = ({ children }) => {
     try {
       const student_PRN = studentData.student_PRN;
       const response = await axios.get(`${url}/api/attendance/info`, {
-        params: {
-          student_PRN: student_PRN,
-        },
+        params: { student_PRN },
       });
 
       const attendanceRecords = response.data.data;
@@ -108,7 +168,7 @@ const StoreContextProvider = ({ children }) => {
           totalPracticalClasses > 0
             ? (presentPracticalClasses / totalPracticalClasses) * 100
             : 0;
-        
+
         courseAttendance[course] = {
           totalClasses: courseAttendanceRecords.length,
           presentClasses: courseAttendanceRecords.filter(
@@ -157,26 +217,6 @@ const StoreContextProvider = ({ children }) => {
     }
   };
 
-  const fetchCoursesData = async () => {
-    try {
-      const response = await axios.get(`${url}/api/course/list`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const allCourses = response.data.data;
-      const courses = [];
-      const enrolledCourseCodes = studentData.courses_enrolled || [];
-
-      allCourses.forEach((course) => {
-        if (enrolledCourseCodes.includes(course.course_code)) {
-          courses.push(course);
-        }
-      });
-      setStudentCourses(courses);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const fetchCirculars = async () => {
     try {
       const response = await axios.get(`${url}/api/circulars/list`, {
@@ -187,32 +227,49 @@ const StoreContextProvider = ({ children }) => {
       const updatedCircularsList = cList.map((circular) => {
         return {
           ...circular,
-          read: circular.read.includes(studentPRN), 
+          read: circular.read.includes(studentPRN),
         };
       });
-  
+
       setCircularsList(updatedCircularsList);
-      console.log(updatedCircularsList);
-      
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleLogout = () => {
+    setToken("");
+    setUser("");
+    setStudentData({});
+    setFacultyData({});
+    setAttendanceData({});
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  };
+
+  const updateUser = (newUser) => {
+    setUser(newUser);
+    localStorage.setItem("user", newUser);
+  };
+
   const contextValue = {
     url,
     user,
-    setUser,
+    setUser: updateUser,
     token,
     setToken,
     studentData,
     setStudentData,
+    facultyData, // Add faculty data to context
+    setFacultyData,
     attendanceData,
     setAttendanceData,
     studentCourses,
     setStudentCourses,
     circularsList,
-    setCircularsList
+    setCircularsList,
+    timetable,
+    setTimetable,
   };
 
   return (

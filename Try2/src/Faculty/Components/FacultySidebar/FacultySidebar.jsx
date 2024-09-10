@@ -1,14 +1,15 @@
 import React, { useContext, useState } from "react";
 import Logo from "../../../assets/Sidebar/logo2.png"
 import Toggle from "../../../assets/Sidebar/bx-chevron-right.svg";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../../context/StoreContext";
 
 const FacultySidebar = ({theme, setTheme}) => {
 
-    const {setToken} = useContext(StoreContext);
+    const {setToken, setUser} = useContext(StoreContext);
     const [close, setClose] = useState("close");
-  
+    const navigate = useNavigate(); 
+
     const handleTheme = () => {
       theme === "dark" ? setTheme("") : setTheme("dark");
     }
@@ -19,8 +20,10 @@ const FacultySidebar = ({theme, setTheme}) => {
   
     const handleLogOut = () => {
       setToken("");
-      localStorage.removeItem("token");
-      Navigate("/");
+    setUser("");
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    navigate("/");
     }
   
     return (

@@ -2,27 +2,29 @@ import React, { useContext, useState } from "react";
 import "./Sidebar.css";
 import Logo from "../../assets/Sidebar/logo2.png";
 import Toggle from "../../assets/Sidebar/bx-chevron-right.svg";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; 
 import { StoreContext } from "../../context/StoreContext";
 
-const Sidebar = ({theme, setTheme}) => {
-
-  const {setToken} = useContext(StoreContext);
+const Sidebar = ({ theme, setTheme }) => {
+  const { setToken, setUser } = useContext(StoreContext);
   const [close, setClose] = useState("close");
+  const navigate = useNavigate(); 
 
   const handleTheme = () => {
     theme === "dark" ? setTheme("") : setTheme("dark");
-  }
+  };
 
   const handleClose = () => {
     close === "close" ? setClose("") : setClose("close");
-  }
+  };
 
   const handleLogOut = () => {
     setToken("");
+    setUser("");
+    localStorage.removeItem("user");
     localStorage.removeItem("token");
-    Navigate("/");
-  }
+    navigate("/");
+  };
 
   return (
     <nav className={close==="close"? "sidebar close" : "sidebar"}>

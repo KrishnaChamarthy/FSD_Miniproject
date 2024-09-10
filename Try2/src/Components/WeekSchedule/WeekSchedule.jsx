@@ -1,21 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './WeekSchedule.css';
+import { StoreContext } from "../../context/StoreContext";
 
-// Component to render an individual schedule element
-const ScheduleElement = ({ title, time }) => {
+const ScheduleElement = ({ courseCode, time }) => {
   return (
     <div className="schedule-element-week">
-      <div className="schedule-element-title">{title}</div>
+      <div className="schedule-element-course-code">{courseCode}</div>
       <div className="schedule-element-time">{time}</div>
     </div>
   );
 };
 
-// Helper function to generate time slots at regular intervals (e.g., 30 minutes)
 const generateTimeSlots = (start, end, interval) => {
   const times = [];
   let current = start;
-
   while (current <= end) {
     const hours = Math.floor(current / 60);
     const minutes = current % 60;
@@ -27,33 +25,50 @@ const generateTimeSlots = (start, end, interval) => {
   return times;
 };
 
-// Array of schedule details for the week
-const weeklySchedule = {
-  Monday: [
-    { time: '9:00 AM', title: 'Data Engineering', scheduleTime: '9:00 AM - 10:00 AM', duration: 1 },
-    { time: '10:00 AM', title: 'Machine Learning', scheduleTime: '10:00 AM - 12:00 PM', duration: 2 },
-  ],
-  Tuesday: [
-    { time: '9:00 AM', title: 'Cloud Computing', scheduleTime: '9:00 AM - 10:00 AM', duration: 1 },
-    { time: '10:00 AM', title: 'Database Systems', scheduleTime: '10:00 AM - 12:00 PM', duration: 2 },
-  ],
-  Wednesday: [
-    { time: '9:00 AM', title: 'AI Ethics', scheduleTime: '9:00 AM - 10:00 AM', duration: 1 },
-    { time: '10:00 AM', title: 'Cybersecurity', scheduleTime: '10:00 AM - 12:00 PM', duration: 2 },
-  ],
-  Thursday: [
-    { time: '9:00 AM', title: 'Machine Learning', scheduleTime: '9:00 AM - 10:00 AM', duration: 1 },
-    { time: '10:00 AM', title: 'Data Engineering', scheduleTime: '10:00 AM - 12:00 PM', duration: 2 },
-  ],
-  Friday: [
-    { time: '9:00 AM', title: 'Cloud Computing', scheduleTime: '9:00 AM - 10:00 AM', duration: 1 },
-    { time: '10:00 AM', title: 'Database Systems', scheduleTime: '10:00 AM - 12:00 PM', duration: 2 },
-  ],
+const parseTime = (timeString) => {
+  const period = timeString.slice(-2);
+  const [hours, minutes] = timeString.slice(0, -2).split(':').map(Number);
+
+  let convertedHours = hours;
+  if (period === 'PM' && hours !== 12) {
+    convertedHours += 12;
+  } else if (period === 'AM' && hours === 12) {
+    convertedHours = 0;
+  }
+
+  return convertedHours * 60 + minutes;
 };
 
+const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
 const WeekSchedule = () => {
-  // Generate time slots at 30-minute intervals from 9:00 AM to 5:00 PM
-  const timeSlots = generateTimeSlots(9 * 60, 17 * 60, 30); // from 9:00 AM (9*60) to 5:00 PM (17*60)
+  const timeSlots = generateTimeSlots(9 * 60, 17 * 60, 30);
+  const { timetable } = useContext(StoreContext);
+  
+  // Create an object to store timetable events categorized by day
+  const timetableByDay = daysOfWeek.reduce((acc, day) => {
+    acc[day] = [];
+    return acc;
+  }, {});
+
+  // Process timetable events
+  timetable.forEach(event => {
+    const day = event.day_of_week;
+    if (timetableByDay[day]) {
+      timetableByDay[day].push({
+        start: parseTime(event.start_time),
+        end: parseTime(event.end_time),
+        courseCode: event.course_code,
+        formattedTime: `${event.start_time} - ${event.end_time}`
+      });
+    }
+  });
+
+  // Track covered rows
+  const coveredRows = daysOfWeek.reduce((acc, day) => {
+    acc[day] = Array(timeSlots.length).fill(false);
+    return acc;
+  }, {});
 
   return (
     <div className="week-schedule">
@@ -61,38 +76,40 @@ const WeekSchedule = () => {
         <thead>
           <tr>
             <th className="time-column">Time</th>
-            {Object.keys(weeklySchedule).map((day, index) => (
+            {daysOfWeek.map((day, index) => (
               <th key={index} className="day-column">{day}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {timeSlots.map((time, index) => (
-            <tr key={index}>
+          {timeSlots.map((time, rowIndex) => (
+            <tr key={rowIndex}>
               <td className="time-column">{time}</td>
-              {Object.keys(weeklySchedule).map((day, dayIndex) => {
-                const event = weeklySchedule[day].find(slot => slot.time === time);
+              {daysOfWeek.map((day, dayIndex) => {
+                // Check if the row is covered by a previous row's rowSpan
+                if (coveredRows[day][rowIndex]) {
+                  return <></>;
+                }
 
+                const events = timetableByDay[day];
+                const event = events.find(e => e.start <= parseTime(time) && e.end >= parseTime(time));
+                console.log(event);
+                
                 if (event) {
-                  // If there's an event, calculate the rowSpan based on the duration
-                  const rowSpan = event.duration * (60 / 30); // 60 minutes divided by the interval (30 minutes)
+                  const rowSpan = (event.end - event.start) / 30;
+
+                  // Mark the rows covered by this rowSpan
+                  for (let i = 0; i < rowSpan; i++) {
+                    coveredRows[day][rowIndex + i] = true;
+                  }
 
                   return (
                     <td key={dayIndex} rowSpan={rowSpan} className="day-column">
-                      <ScheduleElement title={event.title} time={event.scheduleTime} />
+                      <ScheduleElement courseCode={event.courseCode} time={event.formattedTime} />
                     </td>
                   );
                 } else {
-                  // Only render an empty cell if there is no event that spans into this slot
-                  const isCoveredBySpan = weeklySchedule[day].some(slot => {
-                    const slotStart = parseInt(slot.time.split(':')[0], 10) * 60 + parseInt(slot.time.split(':')[1], 10);
-                    const slotEnd = slotStart + slot.duration * 60;
-                    const currentTime = parseInt(time.split(':')[0], 10) * 60 + parseInt(time.split(':')[1], 10);
-
-                    return currentTime > slotStart && currentTime < slotEnd;
-                  });
-
-                  return !isCoveredBySpan ? <td key={dayIndex} className="day-column"></td> : null;
+                  return <td key={dayIndex} className="day-column"></td>;
                 }
               })}
             </tr>
@@ -102,5 +119,6 @@ const WeekSchedule = () => {
     </div>
   );
 };
+
 
 export default WeekSchedule;

@@ -1,63 +1,60 @@
-.week-schedule{
+/* WeekSchedule.css */
+.week-schedule {
     width: 100%;
-    padding: 10px 40px;
-}
-
-.week-table{
+    padding: 10px 20px;
+  }
+  
+  .week-table {
     margin: 20px;
     border-collapse: collapse;
     width: 100%;
-}
-
-.week-table tr{
+  }
+  
+  .week-table tr {
     border: 1px solid var(--body-color);
     transition: var(--tran-05);
     height: 60px;
-}
-
-.table-element {
-    width: 100%; /* Ensure the header columns take up full width */
-    height: 100%;
   }
-
-.week-table th{
+  
+  .week-table th, .week-table td {
+    border-right: 1px solid var(--body-color);
+    padding: 10px;
     font-size: 18px;
+    width: 200px;
+    height: 80px;
+  }
+  
+  .week-table th {
     color: var(--title-color);
-    padding: 20px;
     text-align: left;
-    transition: var(--tran-04);
-
-}
-
-.week-table td{
-    font-size: 18px;
+    background-color: #f4f4f4; /* Light background for better contrast */
+  }
+  
+  .week-table td {
     color: var(--text-color);
-    padding:  20px;
-    transition: var(--tran-04);
-
-}
-
-.week-table th,
-.week-table td {
-  border-right: 1px solid var(--body-color);
-}
-
-
-.schedule-element-week{
+  }
+  
+  .schedule-element-week {
     width: 100%;
-    height: 100%; /* Make the element fill the entire cell */
-    margin: 0; /* Remove margin to prevent spacing within the cell */
+    height: 100%;
+    margin: 0;
     padding: 10px 20px;
     background-color: var(--body-color);
     border-radius: 10px;
-    box-sizing: border-box; /* Ensure padding is included in the width and height */
-}
-
-.schedule-element-title{
+    box-sizing: border-box;
+  }
+  
+  .schedule-element-course-code {
     font-size: 20px;
     font-weight: 500;
-}
-
-.schedule-element-time{
+  }
+  
+  .schedule-element-time {
     font-size: 16px;
-}
+  }
+  
+  .table-element {
+    width: 100%;
+    height: 100%;
+  }
+  
