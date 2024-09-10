@@ -5,7 +5,7 @@ import WeekSchedule from "../WeekSchedule/WeekSchedule"
 
 const TimeTableMain = () => {
 
-  const [schedularType, setSchedularType] = useState("Day");
+  const [schedularType, setSchedularType] = useState("Week");
 
   const handleSchedularChange = (type) => {
     setSchedularType(type);

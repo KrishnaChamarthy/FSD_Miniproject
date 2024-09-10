@@ -42,7 +42,7 @@ const parseTime = (timeString) => {
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
 const WeekSchedule = () => {
-  const timeSlots = generateTimeSlots(9 * 60, 17 * 60, 30);
+  const timeSlots = generateTimeSlots(8 * 60, 17 * 60, 30);
   const { timetable } = useContext(StoreContext);
   
   // Create an object to store timetable events categorized by day
@@ -92,7 +92,7 @@ const WeekSchedule = () => {
                 }
 
                 const events = timetableByDay[day];
-                const event = events.find(e => e.start <= parseTime(time) && e.end >= parseTime(time));
+                const event = events.find(e => e.start <= parseTime(time) && e.end > parseTime(time));
                 console.log(event);
                 
                 if (event) {
