@@ -118,13 +118,12 @@
 .faculty-attendance-element .content{
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 30px;
   width: 100%;
-  padding: 30px;
+  padding: 30px 0;
   font-size: 50px;
   font-weight: 500;
-
 }
 
 .faculty-attendance-element .content i{
@@ -135,3 +134,35 @@
   font-size: 40px;
 }
 
+
+.faculty-attendance-table{
+  margin: 20px;
+  border-collapse: collapse;
+
+}
+
+.faculty-attendance-table tr{
+  border: 1px solid var(--body-color);
+  transition: var(--tran-05);
+}
+
+.faculty-attendance-table th{
+  font-size: 18px;
+  color: var(--title-color);
+  padding: 20px;
+  text-align: left;
+  transition: var(--tran-04);
+
+}
+
+.faculty-attendance-table td{
+  font-size: 18px;
+  color: var(--text-color);
+  padding:  20px;
+  transition: var(--tran-04);
+
+}
+
+.dropdowns{
+  display: flex;
+}
