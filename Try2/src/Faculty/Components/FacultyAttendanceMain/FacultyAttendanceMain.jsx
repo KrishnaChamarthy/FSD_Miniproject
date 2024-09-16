@@ -35,11 +35,11 @@ const FacultyAttendanceMain = () => {
   const { timetable, courseInfo, url } = useContext(StoreContext);
 
   const getDayFromDate = (dateStr) => {
-    const dateParts = dateStr.split(' | ');
+    const dateParts = dateStr.split(" | ");
     if (dateParts.length > 1) {
-      return dateParts[1].trim(); 
+      return dateParts[1].trim();
     }
-    return '';
+    return "";
   };
 
   const handleOpenDateDropdown = () => {
@@ -63,8 +63,6 @@ const FacultyAttendanceMain = () => {
     fetchStudents(selectedCourse);
     fetchAttendanceForDate(date); // Fetch attendance when course is selected
   };
-  
-  
 
   const handleAttendanceChange = (student_PRN, status) => {
     setAttendance((prevState) => ({
@@ -107,10 +105,13 @@ const FacultyAttendanceMain = () => {
 
   // Function to generate options for course dropdown
   const generateCourseOptions = () => {
-    const selectedDayFull = getDayFromDate(date); 
+    const selectedDayFull = getDayFromDate(date);
     const filteredCourses = [];
     for (const entry of timetable) {
-      if (entry.day_of_week === selectedDayFull && entry.course_code !== 'BREAK') {
+      if (
+        entry.day_of_week === selectedDayFull &&
+        entry.course_code !== "BREAK"
+      ) {
         filteredCourses.push(entry);
       }
     }
@@ -131,37 +132,40 @@ const FacultyAttendanceMain = () => {
 
   // Function to fetch students based on the selected course from courseInfo
   const fetchStudents = (selectedCourse) => {
-    const selectedCourseInfo = courseInfo.find((course) => course._id === selectedCourse);
-  
+    const selectedCourseInfo = courseInfo.find(
+      (course) => course._id === selectedCourse
+    );
+
     if (selectedCourseInfo) {
       setStudents(selectedCourseInfo.students);
     } else {
       setStudents([]);
     }
   };
-  
 
   const handleSubmit = async () => {
-    const selectedCourse = courseInfo.find((courseObj) => courseObj._id === course);
+    const selectedCourse = courseInfo.find(
+      (courseObj) => courseObj._id === course
+    );
     const type = "T"; // Determine if it's theory or practical
-  
+
     // Extract the date part (ignoring the weekday) and split it into day, month, year
     const dateParts = date.split(" | ")[0].split("/");
     const day = dateParts[0];
     const month = dateParts[1] - 1; // Month is 0-indexed in JavaScript Date
     const year = `20${dateParts[2]}`; // Convert 'YY' to '20YY' for the full year
-  
+
     // Create a date object using the correct day, month, and year
     // Set hours, minutes, seconds, and milliseconds to 0 to avoid time zone issues
     const localDate = new Date(year, month, day);
-  
+
     // Adjust for the local time zone if needed
     const offset = localDate.getTimezoneOffset(); // Get timezone offset in minutes
     const adjustedDate = new Date(localDate.getTime() - offset * 60 * 1000);
-  
+
     // Convert to a local date string or use as needed
     const formattedDate = adjustedDate.toISOString(); // Format as YYYY-MM-DD
-  
+
     for (const student_PRN in attendance) {
       const status = attendance[student_PRN]; // Get the attendance status (Present/Absent)
       try {
@@ -172,15 +176,14 @@ const FacultyAttendanceMain = () => {
           status,
           type,
         });
-        
       } catch (error) {
         console.error("Failed to submit attendance:", error);
       }
     }
-  
+
     alert("Attendance submitted successfully!");
   };
-  
+
   const calculateAttendanceCounts = () => {
     let presentCount = 0;
     let absentCount = 0;
@@ -197,9 +200,11 @@ const FacultyAttendanceMain = () => {
   };
 
   const fetchAttendanceForDate = async (selectedDate) => {
-    const formattedDate = new Date(selectedDate.split(" | ")[0]).toLocaleDateString("en-US");
+    const formattedDate = new Date(
+      selectedDate.split(" | ")[0]
+    ).toLocaleDateString("en-US");
     const updatedAttendance = {};
-  
+
     for (const student of students) {
       try {
         const response = await axios.get(`${url}/api/attendance/info`, {
@@ -207,28 +212,30 @@ const FacultyAttendanceMain = () => {
             student_PRN: student.student_PRN,
           },
         });
-        
+
         // Filter the response to get attendance for the specific course and date
         const attendanceData = response.data.data.find(
           (entry) =>
             entry.course_code === course &&
-            new Date(entry.date).toISOString().split('T')[0] === formattedDate
+            new Date(entry.date).toISOString().split("T")[0] === formattedDate
         );
-  
+
         // Update attendance state with fetched data
         if (attendanceData) {
           updatedAttendance[student.student_PRN] = attendanceData.status;
-
         } else {
           updatedAttendance[student.student_PRN] = "Absent"; // Default to Absent if no record found
         }
         console.log(updatedAttendance);
-        
       } catch (error) {
-        console.error("Failed to fetch attendance for student:", student.student_PRN, error);
+        console.error(
+          "Failed to fetch attendance for student:",
+          student.student_PRN,
+          error
+        );
       }
     }
-  
+
     setAttendance(updatedAttendance);
   };
 
@@ -276,7 +283,10 @@ const FacultyAttendanceMain = () => {
           <div className="element-title">Percentage</div>
           <div className="content">
             <i className="bx bx-objects-vertical-bottom"></i>
-            {students.length > 0 ? Math.round((presentCount / students.length) * 100) : 0}%
+            {students.length > 0
+              ? Math.round((presentCount / students.length) * 100)
+              : 0}
+            %
           </div>
         </div>
         <div className="faculty-attendance-element set-attendance">
@@ -292,9 +302,7 @@ const FacultyAttendanceMain = () => {
                     }
                   ></div>
                 </div>
-                <ul
-                  className={openCourseDropdown ? "menu menu-open" : "menu"}
-                >
+                <ul className={openCourseDropdown ? "menu menu-open" : "menu"}>
                   {generateCourseOptions()}
                 </ul>
               </div>
@@ -307,9 +315,7 @@ const FacultyAttendanceMain = () => {
                     }
                   ></div>
                 </div>
-                <ul
-                  className={openDateDropdown ? "menu menu-open" : "menu"}
-                >
+                <ul className={openDateDropdown ? "menu menu-open" : "menu"}>
                   {generateDateOptions()}
                 </ul>
               </div>
@@ -322,35 +328,45 @@ const FacultyAttendanceMain = () => {
                 <th>Student Name</th>
                 <th>Course</th>
                 <th>Type</th>
-                <th>Present</th>
+                <th>Attendance</th>
               </tr>
             </thead>
             <tbody>
               {students.length > 0 ? (
                 students.map((student) => (
-                  
                   <tr key={student.student_PRN}>
-
                     <td>{student.student_PRN}</td>
                     <td>{student.first_name + " " + student.last_name}</td>
                     <td>{course}</td>
                     <td>Theory</td>
                     <td>
-  <input
-    type="radio"
-    name={`attendance-${student.student_PRN}`}
-    onChange={() => handleAttendanceChange(student.student_PRN, "Present")}
-    checked={attendance[student.student_PRN] === "Present"} // Set checked state
-  />
-</td>
-<td>
-  <input
-    type="radio"
-    name={`attendance-${student.student_PRN}`}
-    onChange={() => handleAttendanceChange(student.student_PRN, "Absent")}
-    checked={attendance[student.student_PRN] === "Absent"} // Set checked state
-  />
-</td>
+                      <div className="attendance-options">
+                      <div
+                        className={`attendance-option present ${
+                          attendance[student.student_PRN] === "Present"
+                            ? "selected"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          handleAttendanceChange(student.student_PRN, "Present")
+                        }
+                      >
+                        P
+                      </div>
+                      <div
+                        className={`attendance-option absent ${
+                          attendance[student.student_PRN] === "Absent"
+                            ? "selected"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          handleAttendanceChange(student.student_PRN, "Absent")
+                        }
+                      >
+                        A
+                      </div>
+                      </div>
+                    </td>
                   </tr>
                 ))
               ) : (
@@ -361,7 +377,7 @@ const FacultyAttendanceMain = () => {
             </tbody>
           </table>
           <button onClick={handleSubmit} className="submit-button">
-            Submit Attendance
+            Submit
           </button>
         </div>
       </div>

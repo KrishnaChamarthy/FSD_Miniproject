@@ -166,3 +166,58 @@
 .dropdowns{
   display: flex;
 }
+
+.submit-button{
+  width: 200px;
+  height: 50px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  background-color: transparent;
+  outline: none;
+  font-size: 20px;
+  color: var(--title-color);
+  transition: var(--tran-04);
+  align-self: center;
+  cursor: pointer;
+}
+
+.submit-button:hover{
+  background-color: var(--primary-color);
+  color: var(--primary-color-light);
+}
+
+.attendance-options{
+display: flex;
+gap: 80px;
+align-items: center;
+}
+
+.attendance-option{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  transition: var(--tran-04);
+}
+
+.present{
+  border: 2px solid green;
+}
+
+.absent{
+  border: 2px solid red;
+}
+
+.present.selected{
+  background-color: green;
+  color: var(--primary-color-light);
+}
+
+.absent.selected{
+  background-color: red;
+  color: var(--primary-color-light);
+}
