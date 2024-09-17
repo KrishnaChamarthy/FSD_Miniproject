@@ -27,7 +27,6 @@
   .week-table th {
     color: var(--title-color);
     text-align: left;
-    background-color: #f4f4f4; /* Light background for better contrast */
   }
   
   .week-table td {

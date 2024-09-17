@@ -204,20 +204,20 @@ align-items: center;
   transition: var(--tran-04);
 }
 
-.present{
+.attendance-present{
   border: 2px solid green;
 }
 
-.absent{
+.attendance-absent{
   border: 2px solid red;
 }
 
-.present.selected{
+.attendance-present.selected{
   background-color: green;
   color: var(--primary-color-light);
 }
 
-.absent.selected{
+.attendance-absent.selected{
   background-color: red;
   color: var(--primary-color-light);
 }

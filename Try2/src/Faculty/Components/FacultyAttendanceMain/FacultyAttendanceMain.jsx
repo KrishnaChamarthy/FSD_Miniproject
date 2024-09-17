@@ -342,7 +342,7 @@ const FacultyAttendanceMain = () => {
                     <td>
                       <div className="attendance-options">
                       <div
-                        className={`attendance-option present ${
+                        className={`attendance-option attendance-present ${
                           attendance[student.student_PRN] === "Present"
                             ? "selected"
                             : ""
@@ -354,7 +354,7 @@ const FacultyAttendanceMain = () => {
                         P
                       </div>
                       <div
-                        className={`attendance-option absent ${
+                        className={`attendance-option attendance-absent ${
                           attendance[student.student_PRN] === "Absent"
                             ? "selected"
                             : ""
