@@ -1,0 +1,345 @@
+.faculty-dashboard-container{
+    width: 80%;
+    height: 100%;
+    padding: 40px 80px;
+}
+
+.faculty-dashboard-container header{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.faculty-dashboard-container .header-text{
+    font-size: 32px;
+    line-height: 30px;
+    flex: 4;
+    font-weight: 600;
+    color: var(--title-color);
+}
+
+
+.faculty-dashboard-container .header-text span{
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.faculty-dashboard-container .header-search{
+    display: flex;
+    flex: 2;
+    align-items: center;
+    justify-content: center;
+    background: var(--body-color);
+    height: 50px;
+    border-radius: 6px;
+    padding: 10px 20px;
+    gap: 10px;
+    color: var(--text-color);
+    transition: var(--tran-05);
+}
+
+
+.header-search i{
+    font-size: 25px;
+}
+
+.header-search input{
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    background-color: transparent;
+    color: var(--text-color);
+
+}
+
+.faculty-dashboard-container .header-bell{
+    flex: 1;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-bell i{
+    font-size: 25px;
+    background: var(--body-color);
+    padding: 10px;
+    border-radius: 50%;
+    transition: var(--tran-05);
+
+}
+
+.faculty-dashboard-body{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.faculty-dashboard-body header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.faculty-dashboard-body header p{
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--title-color);
+    transition: var(--tran-04);
+}
+
+.semester-dropdown{
+    min-width: 15em;
+    position: relative;
+    margin: 2em;
+}
+
+.semester-dropdown .select{
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid var(--body-color);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: var(--tran-03);
+    user-select: none;
+
+}
+
+.select:hover{
+    background: var(--body-color);
+}
+
+.caret{
+    height: 0;
+    width: 0;
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid transparent;
+    border-left: 6px solid var(--text-color);
+    transition: var(--tran-03);
+}
+
+.caret-rotate{
+    transform: rotate(90deg);
+}
+
+.semester-dropdown .menu{
+    list-style: none;
+    padding: 0px;
+    background: var(--body-color);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    color: var(--text-color);
+    position: absolute;
+    top: 3em;
+    left: 0;
+    width: 100%;
+    height: 0;
+    transition: 300ms cubic-bezier(0.77, 0, 0.18, 1);
+    z-index: 2;
+    overflow-y: scroll;
+    user-select: none;
+
+}
+
+.semester-dropdown .menu-open{
+    height: 180px;
+}
+
+.semester-dropdown .menu li{
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.semester-dropdown .menu li:hover{
+    background: var(--primary-color-light);
+}
+
+.text-fade-in{
+    animation: textFade 300ms ease-out;
+}
+
+.summary-content{
+    width: 100%;
+    padding: 50px 0px;
+    display: flex;
+    align-items: center;
+    background: var(--primary-color-gradient);
+    border-radius: 10px;
+
+}
+
+.content-part{
+    width: 33%;
+    display: flex;
+    align-items: center;    
+}
+
+.content-part .content-image{
+    width: 80px;
+    padding: 5px;
+    background: var(--body-color);
+    border-radius: 50%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:0px 30px;
+}
+.content-image img{
+    width: 40px;
+}
+
+.content-body{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 20px;
+
+}
+
+.content-body p{
+    font-size: 18px;
+    margin: 7px 0px;
+    color: rgb(230, 230, 230);
+}
+
+.content-body .title{
+    font-size: 20px;
+    color: white;
+    font-weight: 500;
+}
+
+.content-body span{
+    font-size: 32px;
+    color: white;
+    font-weight: 600;
+}
+
+.summary-divider{
+    width: 0.2%;
+    
+    height: 100px;
+    transition: var(--tran-05);
+    background-color: var(--body-color);
+}
+
+.content-body .percentage{
+    position: absolute;
+    top: -10px;
+    right: -50px;
+    background: white;
+    color: green;
+    padding: 5px 7px;
+    border-radius: 30px;
+    font-size: 14px;
+}
+
+.content-body .amount{
+    position: relative;
+}
+
+.dashboard-content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-top: 40px;
+    flex: auto;
+}
+
+.circular-container{
+    flex: 6.5;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--primary-color-light);
+    height: 400px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: var(--tran-05);
+}
+
+.circular-container header{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--title-color);
+    transition: var(--tran-04);
+}
+
+.circular-container ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: scroll;
+}
+
+.circular-container ul li{
+    padding: 20px;
+    border-bottom: 1px solid var(--body-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.circular-container .circular-title{
+    font-size: 20px;
+    color: var(--title-color);
+}
+
+.circular-container .circular-date{
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.gpa-container{
+    flex: 3.5;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    background: var(--primary-color-gradient);
+    border-radius: 10px;
+    position: relative;
+}
+
+.gpa-container p{
+    color: rgba(255, 255, 255, 0.7)
+}
+
+.gpa-container header p{
+    font-size: 32px;
+    line-height: 30px;
+    color: white;
+}
+
+.gpa-container header p span{
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.gpa{
+    font-size: 70px;
+    margin-top: 8%;
+    color: white;
+}
+
+.gpa-container img{
+    width: 70%;
+    position: absolute;
+    bottom: 0;
+    right: 10%;
+    opacity: 0.4;
+}
+
