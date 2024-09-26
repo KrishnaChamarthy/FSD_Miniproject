@@ -6,16 +6,16 @@ import Task_icon from "../../../assets/Dashboard/task.png";
 import Cloud_img from "../../../assets/Dashboard/cloud.png";
 
 const FacultyDashboardMain = () => {
-  const [semester, setSemester] = useState("5th Semester");
-  const [openSemesterDropdown, setOpenSemesterDropdown] = useState(false);
+  const [course, setCourse] = useState("5th Course");
+  const [openCourseDropdown, setOpenCourseDropdown] = useState(false);
 
   const handleOpenDropdown = () => {
-    setOpenSemesterDropdown(!openSemesterDropdown);
+    setOpenCourseDropdown(!openCourseDropdown);
   };
 
   const handleClick = (sem) => {
-    setSemester(sem);
-    setOpenSemesterDropdown(!openSemesterDropdown);
+    setCourse(sem);
+    setOpenCourseDropdown(!openCourseDropdown);
   };
 
   return (
@@ -39,48 +39,48 @@ const FacultyDashboardMain = () => {
           <p>Summary Report</p>
           <div className="semester-dropdown">
             <div className="select" onClick={handleOpenDropdown}>
-              <span className="selected">{semester}</span>
+              <span className="selected">{course}</span>
               <div
                 className={
-                  openSemesterDropdown ? "caret caret-rotate" : "caret"
+                  openCourseDropdown ? "caret caret-rotate" : "caret"
                 }
               ></div>
             </div>
-            <ul className={openSemesterDropdown ? "menu menu-open" : "menu"}>
+            <ul className={openCourseDropdown ? "menu menu-open" : "menu"}>
               <li
                 onClick={() => {
-                  handleClick("1st Semester");
+                  handleClick("1st Course");
                 }}
               >
-                1st Semester
+                1st Course
               </li>
               <li
                 onClick={() => {
-                  handleClick("2nd Semester");
+                  handleClick("2nd Course");
                 }}
               >
-                2nd Semester
+                2nd Course
               </li>
               <li
                 onClick={() => {
-                  handleClick("3rd Semester");
+                  handleClick("3rd Course");
                 }}
               >
-                3rd Semester
+                3rd Course
               </li>
               <li
                 onClick={() => {
-                  handleClick("4th Semester");
+                  handleClick("4th Course");
                 }}
               >
-                4th Semester
+                4th Course
               </li>
               <li
                 onClick={() => {
-                  handleClick("5th Semester");
+                  handleClick("5th Course");
                 }}
               >
-                5th Semester
+                5th Course
               </li>
             </ul>
           </div>
@@ -91,11 +91,11 @@ const FacultyDashboardMain = () => {
               <img src={Attendance_icon} alt="" />
             </div>
             <div className="content-body">
-              <p className="title">Attendance</p>
+              <p className="title">Students Present</p>
               <p className="amount">
-                <span>0</span> / 0<span className="percentage">0%</span>
+                <span>40</span> / 50<span className="percentage">80%</span>
               </p>
-              <p>Great, you always attend class, keep it up!</p>
+              <p>Students often attend your classes!</p>
             </div>
           </div>
           <div className="summary-divider"></div>
@@ -105,12 +105,12 @@ const FacultyDashboardMain = () => {
             </div>
 
             <div className="content-body">
-              <p className="title">Task</p>
+              <p className="title">Tasks Left</p>
               <p className="amount">
                 <span>134</span> / 140
                 <span className="percentage">80%</span>
               </p>
-              <p>Don't forget to turn in your work</p>
+              <p>Finish grading assignments</p>
             </div>
           </div>
           <div className="summary-divider"></div>
@@ -119,11 +119,11 @@ const FacultyDashboardMain = () => {
               <img src={Subject_icon} alt="" />
             </div>
             <div className="content-body">
-              <p className="title">Subject</p>
+              <p className="title">Courses</p>
               <p className="amount">
-                <span>0</span> / 7<span className="percentage">0%</span>
+                <span>3</span> / 7<span className="percentage">0%</span>
               </p>
-              <p>You have taken 12 subjects this semester</p>
+              <p>You teach a lot of courses!</p>
             </div>
           </div>
         </div>
