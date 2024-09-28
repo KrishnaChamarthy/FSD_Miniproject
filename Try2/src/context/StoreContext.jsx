@@ -20,6 +20,7 @@ const StoreContextProvider = ({ children }) => {
     "course-wise": {},
   });
   const [studentCourses, setStudentCourses] = useState([]);
+  const [facultyCourses, setFacultyCourses] = useState([]);
   const [circularsList, setCircularsList] = useState([]);
   const [timetable, setTimetable] = useState([]);
   const [courseInfo, setCourseInfo] = useState([]); 
@@ -59,16 +60,15 @@ const StoreContextProvider = ({ children }) => {
   useEffect(() => {
     if (user === "student" && Object.keys(studentData).length > 0) {
       fetchAttendanceData();
-      fetchCirculars();
       fetchCoursesData();
-       // Fetch course info when student data is available
     } else if (user === "faculty" && Object.keys(facultyData).length > 0) {
       // Fetch additional data for faculty if needed
       
     }
     fetchTimetable();
     fetchCourseInfo();
-    
+    fetchCirculars();
+
   }, [studentData, facultyData, user]);
 
   const fetchStudentData = async () => {
@@ -274,8 +274,10 @@ const StoreContextProvider = ({ children }) => {
     setCircularsList,
     timetable,
     setTimetable,
-    courseInfo, // Provide course info in context
-    fetchCourseInfo, // Expose fetchCourseInfo function in context
+    courseInfo, 
+    fetchCourseInfo, 
+    facultyCourses,
+    setFacultyCourses
   };
 
   return (

@@ -14,10 +14,10 @@ import Login from "./Pages/Login/Login";
 import { StoreContext } from "./context/StoreContext";
 import FacultySidebar from "./Faculty/Components/FacultySidebar/FacultySidebar";
 import FacultyDashboard from "./Faculty/Pages/FacultyDashboard/FacultyDashboard";
-import FacultyCourses from "./Faculty/Pages/FacultyCourses/FacultyCourses"
 import FacultyAttendance from "./Faculty/Pages/FacultyAttendance/FacultyAttendance"
 import FacultyGradebook from "./Faculty/Pages/FacultyGradebook/FacultyGradebook"
 import FacultyAssignments from "./Faculty/Pages/FacultyAssignments/FacultyAssignments";
+import FacultyProfile from "./Faculty/Pages/FacultyProfile/FacultyProfile";
 
 const App = () => {
   const [theme, setTheme] = useState("");
@@ -47,7 +47,7 @@ const App = () => {
           <FacultySidebar setTheme={setTheme} theme={theme} />
           <Routes>
             <Route path="/" element={<FacultyDashboard />}/>
-            <Route path="/courses/*" element={<FacultyCourses />}/>
+            <Route path="/profile/*" element={<FacultyProfile />}/>
             <Route path="/attendance/*" element={<FacultyAttendance />}/>
             <Route path="/gradebook/*" element={<FacultyGradebook />}/>
             <Route path="/assignments/*" element={<FacultyAssignments />}/>

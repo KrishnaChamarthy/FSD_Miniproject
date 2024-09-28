@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./FacultyDashboardMain.css";
 import Attendance_icon from "../../../assets/Dashboard/attendance.png";
 import Subject_icon from "../../../assets/Dashboard/subject.png";
 import Task_icon from "../../../assets/Dashboard/task.png";
 import Cloud_img from "../../../assets/Dashboard/cloud.png";
+import { StoreContext } from "../../../context/StoreContext";
 
 const FacultyDashboardMain = () => {
   const [course, setCourse] = useState("5th Course");
   const [openCourseDropdown, setOpenCourseDropdown] = useState(false);
+
+  const {circularsList} = useContext(StoreContext);
 
   const handleOpenDropdown = () => {
     setOpenCourseDropdown(!openCourseDropdown);
@@ -119,28 +122,40 @@ const FacultyDashboardMain = () => {
               <img src={Subject_icon} alt="" />
             </div>
             <div className="content-body">
-              <p className="title">Courses</p>
+              <p className="title">Course Progress</p>
               <p className="amount">
-                <span>3</span> / 7<span className="percentage">0%</span>
+                <span>5</span> / 12<span className="percentage">80%</span>
               </p>
-              <p>You teach a lot of courses!</p>
+              <p>You almost completed the coruse!</p>
             </div>
           </div>
         </div>
         <div className="dashboard-content">
           <div className="circular-container">
             <header>Circulars/Notices</header>
-            <ul></ul>
+            <ul>
+
+                  {circularsList.map((circular, index) => (
+                    <li key={index}>
+                    <div className="circular-title">
+                      {circular.subject}
+                    </div>
+                    <div className="circular-date">
+                    {new Date(circular.dateIssued).toLocaleDateString()}
+                    </div>
+                  </li>
+                  ))}
+                </ul>
           </div>
           <div className="gpa-container">
             <header>
               <p>
-                GPA <br />
-                <span>Grade Point Average</span>
+                Activities <br />
+                <span>Assignments/Exams</span>
               </p>
             </header>
-            <div className="gpa">3.93</div>
-            <p>Top 10 students in campus</p>
+            <div className="gpa">76%</div>
+            <p>57% - Assignments <br /> 19% - Exams</p>
             <img src={Cloud_img} alt="" />
           </div>
         </div>

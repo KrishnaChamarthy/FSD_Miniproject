@@ -56,7 +56,7 @@ const FacultySidebar = ({theme, setTheme}) => {
                 </Link>
               </li>
               <li className="nav-link">
-                <Link to="/courses">
+                <Link to="/profile">
                 <i className='bx bx-user icon'></i>
                   <span className="text nav-text">Profile</span>
                 </Link>
