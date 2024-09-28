@@ -84,7 +84,15 @@ const StoreContextProvider = ({ children }) => {
   };
 
   const fetchFacultyData = async () => {
-    console.log("tt");
+    try {
+      const response = await axios.get(`${url}/api/faculty/info`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setFacultyData(response.data.data);
+    } catch (error) {
+      console.error("Error fetching faculty data:", error);
+      handleLogout();
+    }
   };
 
   const fetchCoursesData = async () => {

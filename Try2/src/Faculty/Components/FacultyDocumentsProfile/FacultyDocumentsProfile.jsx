@@ -39,7 +39,7 @@ const FacultyDocumentsProfile = () => {
           </tr>
         </div>
       </div>
-    </div>
+    </div>  
   )
 }
 

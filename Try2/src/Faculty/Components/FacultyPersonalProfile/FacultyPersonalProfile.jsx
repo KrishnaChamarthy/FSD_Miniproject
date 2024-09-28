@@ -107,7 +107,7 @@ const FacultyPersonalProfile = () => {
                         {facultyData.faculty_PRN || "-"}  
                     </div>
                     <div className="element-field">
-                        Joining Date
+                        Department
                     </div>
                     <div className="element-value">
                         {facultyData.ad_date || "-"}
@@ -209,7 +209,7 @@ const FacultyPersonalProfile = () => {
             </ul>
         </div>
         <div className="personal-profile-element parent-info">
-            <div className="element-title">Parent Information</div>
+            <div className="element-title">Personal Information</div>
             <ul className="element-content">
                 <li>
                     <div className="element-field">
@@ -233,26 +233,13 @@ const FacultyPersonalProfile = () => {
                         {facultyData.interests || "-"}
                     </div>
                     <div className="element-field">
-                        Mother's Email
+                        Joining Date
                     </div>
                     <div className="element-value">
                     {facultyData.m_email || "-"}
                     </div>
                 </li>
-                <li>
-                    <div className="element-field">
-                        Father's Mobile No.
-                    </div>
-                    <div className="element-value">
-                    {facultyData.f_phone || "-"}
-                    </div>
-                    <div className="element-field">
-                        Mother's Mobile No.
-                    </div>
-                    <div className="element-value">
-                    {facultyData.m_phone || "-"}
-                    </div>
-                </li>
+                
             </ul>
         </div>
     </div>

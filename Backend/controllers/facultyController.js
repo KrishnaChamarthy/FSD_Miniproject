@@ -93,4 +93,55 @@ const registerFaculty = async (req, res) => {
     }
 }
 
-export  {loginFaculty, registerFaculty}
+const getFacultyInfo = async (req, res) => {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const facultyId = decodedToken.id;
+
+        const faculty = await facultyModel.findById(facultyId).select('-password'); // Exclude password from the response
+        if (!faculty) {
+            return res.status(404).json({
+                success: false,
+                message: "faculty not found"
+            });
+        }
+
+        res.json({
+            success: true,
+            data: faculty
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "Server error"
+        });
+    }
+}
+const updateFaculty = async (req, res) => {
+    try {
+        const { faculty_PRN, ...updateFields } = req.body; 
+
+        if (Object.keys(updateFields).length === 0) {
+            return res.status(400).json({ success: false, message: "No fields provided for update" });
+        }
+
+        const updatedFaculty = await facultyModel.findOneAndUpdate(
+            { faculty_PRN },           
+            { $set: updateFields },    
+            { new: true }               
+        );
+
+        if (!updatedFaculty) {
+            return res.status(404).json({ success: false, message: "faculty not found" });
+        }
+
+        res.json({ success: true, message: "faculty updated successfully", faculty: updateFaculty });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Error updating student" });
+    }
+};
+
+export  {loginFaculty, registerFaculty, getFacultyInfo, updateFaculty}
