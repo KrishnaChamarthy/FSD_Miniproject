@@ -5,7 +5,6 @@ import { StoreContext } from "../../context/StoreContext";
 const CircularsMain = () => {
   const { circularsList } = useContext(StoreContext);
 
-  // Compute counts for the categories and status
   const computeCounts = () => {
     const counts = {
       important: 0,

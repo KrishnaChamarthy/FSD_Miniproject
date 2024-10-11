@@ -1,7 +1,89 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./ResultMain.css"
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Ticks, Colors } from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
+
 
 const ResultMain = () => {
+
+  const [semester, setSemester] = useState("5th Semester");
+  const [openSemesterDropdown, setOpenSemesterDropdown] = useState(false);
+
+
+  const handleOpenDropdown = () => {
+    setOpenSemesterDropdown(!openSemesterDropdown);
+  };
+
+  const handleClick = (sem) => {
+    setSemester(sem);
+    setOpenSemesterDropdown(!openSemesterDropdown);
+  };
+
+  const rootStyles = getComputedStyle(document.documentElement);
+  const textColor = rootStyles.getPropertyValue('--text-color').trim();
+  const bodyColor = rootStyles.getPropertyValue('--body-color').trim();
+  const data = {
+    labels: ['Semester 1', 'Semester 2', 'Semester 3', 'Semester 4'],
+    datasets: [
+      {
+        label: 'CGPA',
+        data: [7.5, 7.8, 8.0, 8.2], 
+        borderColor: 'rgba(75,192,192,1)',
+        fill: false,
+        tension: 0.1,
+      },
+      {
+        label: 'GPA',
+        data: [7.6, 7.9, 8.1, 8.3],
+        borderColor: 'rgba(153,102,255,1)',
+        fill: false,
+        tension: 0.1,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    scales: {
+      y: {
+        offset: true,
+        min: 4,
+        max: 10,
+        ticks: {
+          color: textColor,
+        },
+        grid: {
+          color: bodyColor,  
+        },border: {
+          color: bodyColor,  
+        }
+      },x: {
+        offset: true,  
+        ticks: {
+          color: textColor,
+        },
+        grid: {
+          color: bodyColor,  
+        },
+      },
+
+    },
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          color: textColor,
+        },
+      },
+      title: {
+        display: false
+      },
+    },
+  };
+
   return (
     <div className='result-container'>
          <header>
@@ -18,6 +100,84 @@ const ResultMain = () => {
           <i class="bx bx-bell"></i>
         </div>
       </header>
+      <div className="result-body">
+        <div className="result-element result-summary">
+          <div className="element-title">Summary</div>
+          <Line data={data} options={options} className='result-graph'/>
+        </div>
+        <div className="result-element result-cgpa">
+          <div className="element-title">Current CGPA</div>
+          <div className="result-cgpa-content">
+          <p><span>8.71</span>
+            <br />Top 10 students in campus</p>
+          </div>
+        </div>
+        <div className="result-element sub-attendance-summary">
+          <div className="element-title-course">
+            Semester-Wise Result
+            <div className="semester-dropdown">
+              <div className="select" onClick={handleOpenDropdown}>
+                <span className="selected">{semester}</span>
+                <div
+                  className={
+                    openSemesterDropdown ? "caret caret-rotate" : "caret"
+                  }
+                ></div>
+              </div>
+              <ul className={openSemesterDropdown ? "menu menu-open" : "menu"}>
+                <li
+                  onClick={() => {
+                    handleClick("1st Semester");
+                  }}
+                >
+                  1st Semester
+                </li>
+                <li
+                  onClick={() => {
+                    handleClick("2nd Semester");
+                  }}
+                >
+                  2nd Semester
+                </li>
+                <li
+                  onClick={() => {
+                    handleClick("3rd Semester");
+                  }}
+                >
+                  3rd Semester
+                </li>
+                <li
+                  onClick={() => {
+                    handleClick("4th Semester");
+                  }}
+                >
+                  4th Semester
+                </li>
+                <li
+                  onClick={() => {
+                    handleClick("5th Semester");
+                  }}
+                >
+                  5th Semester
+                </li>
+              </ul>
+            </div>
+          </div>
+          <table className="result-table">
+            <thead>
+              <tr>
+                <th>Course Code</th>
+                <th>Course Name</th>
+                <th>Internal Marks</th>
+                <th>External Marks</th>
+                <th>Total Marks</th>
+                <th>Grade</th>
+              </tr>
+            </thead>
+            
+          </table>
+        </div>
+      </div>
     </div>
   )
 }
