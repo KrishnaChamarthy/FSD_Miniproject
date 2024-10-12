@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./ResultMain.css"
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Ticks, Colors } from 'chart.js';
@@ -12,13 +12,13 @@ const ResultMain = () => {
 
   const [semester, setSemester] = useState("5th Semester");
   const [openSemesterDropdown, setOpenSemesterDropdown] = useState(false);
-  const [gpas, setGpa] = useState([]);
-  const [cgpas, setCgpa] = useState([]);
+  const [gpas, setGpas] = useState([]);
+  const [cgpas, setCgpas] = useState([]);
 
-  const {studentMarks} = useContext(StoreContext);
+  const {studentMarks, studentData} = useContext(StoreContext);
 
   const getSemesterMarks = (sem) => {
-    return studentMarks.filter(mark => mark.semester === sem)
+        return studentMarks.filter(mark => mark.semester === sem)
   }
 
   const getCoursemarks = (course_code) => {
@@ -38,8 +38,28 @@ const ResultMain = () => {
   }
 
   const handleSemesterResult = (sem) => {
+    const marks = getSemesterMarks(sem);
+    console.log(marks);
+    
+    const calculatedGPA = calculateGPA(marks);
+    
+    const updatedGpas = [...gpas];
+    const semIndex = sem - 1;
+    updatedGpas[semIndex] = calculatedGPA;
 
-  }
+    setGpas(updatedGpas);
+
+    const calculatedCGPA = calculateCGPA(semIndex);
+    const updatedCgpas = [...cgpas];
+    updatedCgpas[semIndex] = calculatedCGPA;
+
+    setCgpas(updatedCgpas);
+    
+  };
+
+  useEffect(() => {
+    handleSemesterResult(studentData.semester-2);
+  }, []);
 
   const handleOpenDropdown = () => {
     setOpenSemesterDropdown(!openSemesterDropdown);
@@ -58,14 +78,14 @@ const ResultMain = () => {
     datasets: [
       {
         label: 'CGPA',
-        data: [7.5, 7.8, 8.0, 8.2], 
+        data: cgpas, 
         borderColor: 'rgba(75,192,192,1)',
         fill: false,
         tension: 0.1,
       },
       {
         label: 'GPA',
-        data: [7.6, 7.9, 8.1, 8.3],
+        data: gpas,
         borderColor: 'rgba(153,102,255,1)',
         fill: false,
         tension: 0.1,
