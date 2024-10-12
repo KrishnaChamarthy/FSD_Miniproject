@@ -1,5 +1,5 @@
 import express from "express";
-import { getMarks, addMarks } from "../controllers/marksController.js";
+import { getMarks, addMarks, } from "../controllers/marksController.js";
 
 const marksRouter = express.Router();
 

@@ -4,8 +4,9 @@ const addMarks = async (req, res) => {
     const marks = new marksModel({
         student_PRN: req.body.student_PRN,
         course_code: req.body.course_code,
-        exam_type: req.body.exam_type,
-        marks: req.body.marks
+        semester: req.body.semester,
+        externalMarks: req.body.externalMarks,
+        internalMarks: req.body.internalMarks
     });
 
     try {
@@ -24,10 +25,10 @@ const addMarks = async (req, res) => {
 }
 
 const getMarks = async (req, res) => {
-    const {student_PRN, course_code} = req.body;
+    const {student_PRN} = req.query;
 
     try {
-        const marksRecords = await marksModel.find({student_PRN, course_code});
+        const marksRecords = await marksModel.find({student_PRN});
 
         if (marksRecords.length > 0){
             res.json({
@@ -51,4 +52,5 @@ const getMarks = async (req, res) => {
     }
 }
 
-export {addMarks, getMarks}
+
+export {addMarks, getMarks, }

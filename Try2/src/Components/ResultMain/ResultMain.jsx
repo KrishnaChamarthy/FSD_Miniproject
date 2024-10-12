@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./ResultMain.css"
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Ticks, Colors } from 'chart.js';
+import { StoreContext } from '../../context/StoreContext';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -11,7 +12,34 @@ const ResultMain = () => {
 
   const [semester, setSemester] = useState("5th Semester");
   const [openSemesterDropdown, setOpenSemesterDropdown] = useState(false);
+  const [gpas, setGpa] = useState([]);
+  const [cgpas, setCgpa] = useState([]);
 
+  const {studentMarks} = useContext(StoreContext);
+
+  const getSemesterMarks = (sem) => {
+    return studentMarks.filter(mark => mark.semester === sem)
+  }
+
+  const getCoursemarks = (course_code) => {
+    return studentMarks.filter(mark => mark.course_code === course_code);
+  }
+
+  const calculateGPA = (marks) => {
+    if (marks.length === 0) return 0;
+    const totalMarks = marks.reduce((acc, mark) => acc + mark.totalMarks, 0);
+    return (totalMarks / marks.length) / 10; 
+  };
+
+  const calculateCGPA = (upToSemesterIndex) => {
+    const gpaSum = gpas.slice(0, upToSemesterIndex + 1).reduce((acc, gpa) => acc + gpa, 0);
+    const completedSemesters = gpas.slice(0, upToSemesterIndex + 1).length;
+    return completedSemesters > 0 ? gpaSum / completedSemesters : 0;
+  }
+
+  const handleSemesterResult = (sem) => {
+
+  }
 
   const handleOpenDropdown = () => {
     setOpenSemesterDropdown(!openSemesterDropdown);
