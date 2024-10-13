@@ -17,49 +17,54 @@ const ResultMain = () => {
 
   const {studentMarks, studentData} = useContext(StoreContext);
 
-  const getSemesterMarks = (sem) => {
-        return studentMarks.filter(mark => mark.semester === sem)
+  const getSemesterMarks = (sem) => {   
+    return studentMarks.filter(mark => mark.semester === sem.toString())
   }
 
   const getCoursemarks = (course_code) => {
     return studentMarks.filter(mark => mark.course_code === course_code);
   }
 
-  const calculateGPA = (marks) => {
-    if (marks.length === 0) return 0;
-    const totalMarks = marks.reduce((acc, mark) => acc + mark.totalMarks, 0);
-    return (totalMarks / marks.length) / 10; 
-  };
-
-  const calculateCGPA = (upToSemesterIndex) => {
-    const gpaSum = gpas.slice(0, upToSemesterIndex + 1).reduce((acc, gpa) => acc + gpa, 0);
-    const completedSemesters = gpas.slice(0, upToSemesterIndex + 1).length;
-    return completedSemesters > 0 ? gpaSum / completedSemesters : 0;
+  function calculateGPA(semesterMarks) {
+    let totalMarks = 0;
+    let totalSubjects = semesterMarks.length;
+  
+    semesterMarks.forEach((mark) => {
+      const subjectTotal = mark.internalMarks + mark.externalMarks;
+      totalMarks += subjectTotal;
+    });
+  
+    let averageMarks = totalMarks / totalSubjects;
+  
+    let gpa = (averageMarks / 100) * 10;
+  
+    return gpa.toFixed(2);  
   }
 
-  const handleSemesterResult = (sem) => {
-    const marks = getSemesterMarks(sem);
-    console.log(marks);
-    
-    const calculatedGPA = calculateGPA(marks);
-    
-    const updatedGpas = [...gpas];
-    const semIndex = sem - 1;
-    updatedGpas[semIndex] = calculatedGPA;
+  const handleSemesterResult = (sem) => {      
+    let temp_gpas = [];
+    let temp_cgpas = [];
+    let totalGPA = 0;
 
-    setGpas(updatedGpas);
+    for (let i = 1; i <= sem; i++) {
+      let g = calculateGPA(getSemesterMarks(i));
+      temp_gpas.push(g);
+      totalGPA += parseFloat(g);
 
-    const calculatedCGPA = calculateCGPA(semIndex);
-    const updatedCgpas = [...cgpas];
-    updatedCgpas[semIndex] = calculatedCGPA;
+      let cgpa = totalGPA / i;
+      temp_cgpas.push(cgpa.toFixed(2)); 
+    }
 
-    setCgpas(updatedCgpas);
+    setGpas(temp_gpas);
+    setCgpas(temp_cgpas);
     
   };
 
   useEffect(() => {
-    handleSemesterResult(studentData.semester-2);
-  }, []);
+    if (studentMarks && studentMarks.length > 0) {
+      handleSemesterResult(studentData.semester);
+    }
+  }, [studentMarks, studentData.semester]);
 
   const handleOpenDropdown = () => {
     setOpenSemesterDropdown(!openSemesterDropdown);
@@ -74,7 +79,7 @@ const ResultMain = () => {
   const textColor = rootStyles.getPropertyValue('--text-color').trim();
   const bodyColor = rootStyles.getPropertyValue('--body-color').trim();
   const data = {
-    labels: ['Semester 1', 'Semester 2', 'Semester 3', 'Semester 4'],
+    labels: gpas.map((_, index) => `Semester ${index + 1}`),
     datasets: [
       {
         label: 'CGPA',
@@ -156,7 +161,7 @@ const ResultMain = () => {
         <div className="result-element result-cgpa">
           <div className="element-title">Current CGPA</div>
           <div className="result-cgpa-content">
-          <p><span>8.71</span>
+          <p><span>{cgpas[cgpas.length - 1]}</span>
             <br />Top 10 students in campus</p>
           </div>
         </div>
