@@ -105,25 +105,6 @@
     grid-area: 1 / 3 / 2 / 4;
 }
 
-.result-cgpa-content{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.result-cgpa-content p{
-    font-size: 20px;
-    color: var(--text-color);
-    padding-left: 20px;
-}
-
-.result-cgpa-content p span{
-    font-size: 70px;
-    margin-bottom: 10px;
-    color: var(--title-color);
-}
 
 .result-graph{
     margin-top: 20px;
