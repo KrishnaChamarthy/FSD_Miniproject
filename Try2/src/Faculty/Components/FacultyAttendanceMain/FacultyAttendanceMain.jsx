@@ -1,9 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./FacultyAttendanceMain.css";
-import studentLogo from "../../../assets/Faculty/graduated.png";
-import presentLogo from "../../../assets/Faculty/import.png";
-import absentLogo from "../../../assets/Faculty/sad-face.png";
-import percentageLogo from "../../../assets/Faculty/discount.png";
 import { StoreContext } from "../../../context/StoreContext";
 import axios from "axios";
 
@@ -341,30 +337,36 @@ const FacultyAttendanceMain = () => {
                     <td>Theory</td>
                     <td>
                       <div className="attendance-options">
-                      <div
-                        className={`attendance-option attendance-present ${
-                          attendance[student.student_PRN] === "Present"
-                            ? "selected"
-                            : ""
-                        }`}
-                        onClick={() =>
-                          handleAttendanceChange(student.student_PRN, "Present")
-                        }
-                      >
-                        P
-                      </div>
-                      <div
-                        className={`attendance-option attendance-absent ${
-                          attendance[student.student_PRN] === "Absent"
-                            ? "selected"
-                            : ""
-                        }`}
-                        onClick={() =>
-                          handleAttendanceChange(student.student_PRN, "Absent")
-                        }
-                      >
-                        A
-                      </div>
+                        <div
+                          className={`attendance-option attendance-present ${
+                            attendance[student.student_PRN] === "Present"
+                              ? "selected"
+                              : ""
+                          }`}
+                          onClick={() =>
+                            handleAttendanceChange(
+                              student.student_PRN,
+                              "Present"
+                            )
+                          }
+                        >
+                          P
+                        </div>
+                        <div
+                          className={`attendance-option attendance-absent ${
+                            attendance[student.student_PRN] === "Absent"
+                              ? "selected"
+                              : ""
+                          }`}
+                          onClick={() =>
+                            handleAttendanceChange(
+                              student.student_PRN,
+                              "Absent"
+                            )
+                          }
+                        >
+                          A
+                        </div>
                       </div>
                     </td>
                   </tr>

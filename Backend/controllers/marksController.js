@@ -50,7 +50,7 @@ const getMarks = async (req, res) => {
             message:"Error"
         });
     }
-}
+} 
 
 
 export {addMarks, getMarks, }
