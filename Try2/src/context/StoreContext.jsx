@@ -127,12 +127,28 @@ const StoreContextProvider = ({ children }) => {
         const handledCourseCodes = facultyData.courses_handled || [];
         courses = allCourses.filter(course => handledCourseCodes.includes(course.course_code));
       }
-
+    
       setStudentCourses(courses);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const fetchSemesterCourses = async (sem) => {
+    try {
+      const response = await axios.get(`${url}/api/course/list`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const allCourses = response.data.data;
+      const filteredCourses = allCourses.filter((course) => (
+        course.semester === sem
+      ))
+      return filteredCourses;
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
 
   // New function to fetch course information
   const fetchCourseInfo = async () => {
@@ -295,6 +311,7 @@ const StoreContextProvider = ({ children }) => {
     setAttendanceData,
     studentCourses,
     setStudentCourses,
+    fetchSemesterCourses,
     circularsList,
     setCircularsList,
     timetable,

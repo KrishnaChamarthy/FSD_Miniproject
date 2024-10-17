@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./FacultyGradebookMain.css";
+import { StoreContext } from "../../../context/StoreContext";
 
 const FacultyGradebookMain = () => {
   const [openCourseDropdown, setOpenCourseDropdown] = useState(false);
@@ -7,11 +8,28 @@ const FacultyGradebookMain = () => {
   const [openSemesterDropdown, setOpenSemesterDropdown] = useState(false);
   const [semester, setSemester] = useState("Select Semester");
 
+  const {courseInfo, url, fetchSemesterCourses} = useContext(StoreContext);
+
+
   const handleOpenCourseDropdown = () => {
     setOpenCourseDropdown(!openCourseDropdown);
+    console.log(fetchSemesterCourses("5"));
+    
   };
   const handleOpenSemesterDropdown = () => {
     setOpenSemesterDropdown(!openSemesterDropdown);
+  };
+
+  const fetchStudents = (selectedCourse) => {
+    const selectedCourseInfo = courseInfo.find(
+      (course) => course._id === selectedCourse
+    );
+
+    if (selectedCourseInfo) {
+      setStudents(selectedCourseInfo.students);
+    } else {
+      setStudents([]);
+    }
   };
 
   return (

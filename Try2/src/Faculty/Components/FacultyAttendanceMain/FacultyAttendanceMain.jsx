@@ -26,7 +26,7 @@ const FacultyAttendanceMain = () => {
   const [openDateDropdown, setOpenDateDropdown] = useState(false);
   const [course, setCourse] = useState("Select Course");
   const [openCourseDropdown, setOpenCourseDropdown] = useState(false);
-  const [students, setStudents] = useState([]); // State to store students for selected course
+  const [students, setStudents] = useState([]); 
   const [attendance, setAttendance] = useState({});
   const { timetable, courseInfo, url } = useContext(StoreContext);
 
