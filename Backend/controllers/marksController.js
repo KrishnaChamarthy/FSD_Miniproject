@@ -1,28 +1,42 @@
 import marksModel from "../models/marksModel.js";
 
 const addMarks = async (req, res) => {
-    const marks = new marksModel({
-        student_PRN: req.body.student_PRN,
-        course_code: req.body.course_code,
-        semester: req.body.semester,
-        externalMarks: req.body.externalMarks,
-        internalMarks: req.body.internalMarks
-    });
+    const marksList = req.body; 
 
     try {
-        await marks.save();
+        const bulkOps = marksList.map((mark) => ({
+            updateOne: {
+                filter: {
+                    student_PRN: mark.student_PRN,
+                    course_code: mark.course_code,
+                    semester: mark.semester,
+                },
+                update: {
+                    $set: {
+                        externalMarks: mark.externalMarks,
+                        internalMarks: mark.internalMarks,
+                    },
+                },
+                upsert: true,
+            },
+        }));
+
+        const result = await marksModel.bulkWrite(bulkOps);
+
         res.json({
-            success:true,
-            message:"Marks saved successfully"
+            success: true,
+            message: "Marks saved successfully",
+            data: result,
         });
     } catch (error) {
-        console.log(error);
-        res.json({
-            success:false,
-            message: "Error"
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: "Error saving marks",
         });
     }
-}
+};
+
 
 const getMarks = async (req, res) => {
     const {student_PRN} = req.query;

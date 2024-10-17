@@ -136,7 +136,7 @@ header .see-all:hover{
 .info-header .time{
     text-wrap: nowrap;
     color: var(--title-color) ;
-    font-size: 18px;
+    font-size: 16px;
     transition: var(--tran-04);
 
 }

@@ -25,6 +25,7 @@ const StoreContextProvider = ({ children }) => {
   const [timetable, setTimetable] = useState([]);
   const [courseInfo, setCourseInfo] = useState([]); 
   const [studentMarks, setStudentMarks] = useState([]);
+  const [allCourses, setAllCourses] = useState([]);
 
   useEffect(() => {
     const loadToken = () => {
@@ -65,7 +66,7 @@ const StoreContextProvider = ({ children }) => {
       fetchStudentMarks();
     } else if (user === "faculty" && Object.keys(facultyData).length > 0) {
       // Fetch additional data for faculty if needed
-      
+      fetchAllCourses();
     }
     fetchTimetable();
     fetchCourseInfo();
@@ -134,19 +135,17 @@ const StoreContextProvider = ({ children }) => {
     }
   };
 
-  const fetchSemesterCourses = async (sem) => {
+  const fetchAllCourses = async () => {
     try {
       const response = await axios.get(`${url}/api/course/list`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const allCourses = response.data.data;
-      const filteredCourses = allCourses.filter((course) => (
-        course.semester === sem
-      ))
-      return filteredCourses;
+      console.log(allCourses);
+      
+      setAllCourses(allCourses);
     } catch (error) {
       console.log(error);
-      
     }
   }
 
@@ -311,7 +310,6 @@ const StoreContextProvider = ({ children }) => {
     setAttendanceData,
     studentCourses,
     setStudentCourses,
-    fetchSemesterCourses,
     circularsList,
     setCircularsList,
     timetable,
@@ -321,7 +319,9 @@ const StoreContextProvider = ({ children }) => {
     facultyCourses,
     setFacultyCourses,
     studentMarks,
-    setStudentMarks
+    setStudentMarks,
+    allCourses,
+    setAllCourses
   };
 
   return (
