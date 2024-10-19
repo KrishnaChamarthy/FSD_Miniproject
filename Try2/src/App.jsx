@@ -19,12 +19,14 @@ import FacultyGradebook from "./Faculty/Pages/FacultyGradebook/FacultyGradebook"
 import FacultyAssignments from "./Faculty/Pages/FacultyAssignments/FacultyAssignments";
 import FacultyProfile from "./Faculty/Pages/FacultyProfile/FacultyProfile";
 
+
 const App = () => {
   const [theme, setTheme] = useState("");
   const { user } = useContext(StoreContext);
 
   return (
     <div className={theme === "dark" ? "app dark" : "app"}>
+
       {user === "" ? (
         <Login />
       ) : user === "student" ? (

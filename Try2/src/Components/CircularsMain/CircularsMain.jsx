@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./CircularsMain.css";
 import { StoreContext } from "../../context/StoreContext";
+import CircularDisplay from "../CircularDisplay/CircularDisplay";
+import axios from "axios";
 
 const CircularsMain = () => {
-  const { circularsList } = useContext(StoreContext);
+  const { circularsList, showCirculer, setShowCircular, url, studentData } =
+    useContext(StoreContext);
+
+  const [selectedCircular, setSelectedCircular] = useState(null); // Store the clicked circular
 
   const computeCounts = () => {
     const counts = {
@@ -35,9 +40,28 @@ const CircularsMain = () => {
 
   const counts = computeCounts();
 
+  const handleClick = async (circular) => {
+    try {
+      if (!circular.read) {
+        // Send API request to mark as read
+        await axios.post(`${url}/api/circulars/addToRead`, {
+          student_PRN: studentData.student_PRN,
+          circular_id: circular.circular_id,
+        });
+
+        circular.read = true; // Update status locally
+      }
+
+      setSelectedCircular(circular); // Store selected circular
+      setShowCircular(true); // Show the CircularDisplay
+    } catch (error) {
+      console.error("Error marking circular as read:", error);
+    }
+  };
+
   const renderCircularsRows = () => {
     return circularsList.map((circular) => (
-      <tr key={circular.circular_id}>
+      <tr key={circular.circular_id} onClick={() => handleClick(circular)}>
         <td>{circular.circular_id}</td>
         <td>{circular.subject}</td>
         <td>
@@ -114,6 +138,20 @@ const CircularsMain = () => {
           </ul>
         </div>
         <div className="circulars-element circulars-list">
+          {showCirculer && selectedCircular && (
+            <div
+              className="circular-display-overlay"
+              onClick={() => setShowCircular(false)}
+            >
+              <div
+                className="circular-display-content"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <CircularDisplay circular={selectedCircular} />
+              </div>
+            </div>
+          )}
+
           <div className="element-title">Circulars</div>
           <table className="circulars-table">
             <thead>

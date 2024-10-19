@@ -26,6 +26,9 @@ const StoreContextProvider = ({ children }) => {
   const [courseInfo, setCourseInfo] = useState([]); 
   const [studentMarks, setStudentMarks] = useState([]);
   const [allCourses, setAllCourses] = useState([]);
+  const [showCirculer, setShowCircular] = useState(false);
+
+
 
   useEffect(() => {
     const loadToken = () => {
@@ -321,7 +324,9 @@ const StoreContextProvider = ({ children }) => {
     studentMarks,
     setStudentMarks,
     allCourses,
-    setAllCourses
+    setAllCourses,
+    showCirculer,
+    setShowCircular
   };
 
   return (

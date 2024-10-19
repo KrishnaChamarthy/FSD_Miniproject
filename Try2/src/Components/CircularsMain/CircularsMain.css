@@ -251,6 +251,11 @@
 .circulars-table tr{
     border: 1px solid var(--body-color);
     transition: var(--tran-05);
+    cursor: pointer;
+}
+
+.circulars-table tr:hover{
+  background-color: var(--body-color);
 }
 
 .circulars-table th{
@@ -341,4 +346,26 @@
     height: 20px;
     background-color: #4a90e2;
     border-radius: 50%;
+}
+
+.circular-display-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; 
+}
+.circular-display-content {
+  padding: 20px;
+  width: 80%;
+  height: 80%;
+  overflow-y: auto;
+  background-color: var(--body-color);
+
+  border-radius: 10px;
 }
