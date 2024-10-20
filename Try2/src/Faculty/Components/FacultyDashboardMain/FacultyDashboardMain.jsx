@@ -131,16 +131,16 @@ const FacultyDashboardMain = () => {
           </div>
         </div>
         <div className="dashboard-content">
-          <div className="circular-container">
+          <div className="circular-container-dashboard">
             <header>Circulars/Notices</header>
             <ul>
 
                   {circularsList.map((circular, index) => (
                     <li key={index}>
-                    <div className="circular-title">
+                    <div className="circular-title-dashboard">
                       {circular.subject}
                     </div>
-                    <div className="circular-date">
+                    <div className="circular-date-dashboard">
                     {new Date(circular.dateIssued).toLocaleDateString()}
                     </div>
                   </li>

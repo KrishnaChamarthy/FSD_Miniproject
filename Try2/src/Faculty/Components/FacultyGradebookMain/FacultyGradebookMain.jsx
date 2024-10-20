@@ -160,6 +160,7 @@ const FacultyGradebookMain = () => {
                         setSemester(sem);
                         setCourse("Select Course");
                         setStudents([]);
+                        handleOpenSemesterDropdown();
                       }}
                     >
                       Semester {sem}
@@ -186,7 +187,7 @@ const FacultyGradebookMain = () => {
                         setCourse(course.course_code);
                         fetchStudents(course.course_code);
                         console.log(students);
-                        
+                        handleOpenCourseDropdown();
                       }}
                     >
                       {course.course_code}
