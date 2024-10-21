@@ -197,3 +197,76 @@
     justify-content: center;
 }
 
+.lms-assignments{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 20px;
+  height: 100%;
+  gap: 20px;
+}
+
+.lms-assignment{
+  background-color: var(--body-color);
+  padding: 40px;
+  flex: 1;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  transition: var(--tran-05);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 250px;
+  gap: 20px;
+  cursor: pointer;
+}
+
+
+.assignment-course{
+  width: 100%;
+  text-align: left;
+  font-size: 20px;
+  color: var(--title-color);
+}
+
+.assignment-title{
+  width: 100%;
+  font-size: 18px;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.assignment-status{
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.assignment-completed{
+  border: 2px solid #34c75a;
+}
+
+.assignment-completed-text{
+  color: #34c75a;
+}
+
+.assignment-pending{
+  border: 2px solid #7d922f98;
+}
+
+.assignment-pending-text{
+  color: #7d922f98;
+}
+
+.assignment-overdue{
+  border: 2px solid #ff6867;
+}
+
+.assignment-overdue-text{
+  color: #ff6867;
+}

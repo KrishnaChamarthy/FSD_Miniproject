@@ -97,6 +97,45 @@ const LMSMain = () => {
         </div>
         <div className="lms-element lms-assignments-list">
             <div className="element-title">Assignments</div>
+            <div className="lms-assignments">
+              <div className="lms-assignment assignment-completed">
+                <div className="assignment-course">
+                  <p>CET3004B - Information and Cyber Security</p>
+                </div>
+                <div className="assignment-title">
+                  <p>Lab Assignment 1</p>
+                  <p>Due: 23-10-24</p>
+                </div>
+                <div className="assignment-status assignment-completed-text">
+                  Completed
+                </div>
+              </div>
+              <div className="lms-assignment assignment-pending">
+                <div className="assignment-course">
+                  <p>CET3004B - Information and Cyber Security</p>
+                </div>
+                <div className="assignment-title">
+                  <p>Lab Assignment 1</p>
+                  <p>Due: 23-10-24</p>
+                </div>
+                <div className="assignment-status assignment-pending-text">
+                  Pending
+                </div>
+              </div>
+              <div className="lms-assignment assignment-overdue">
+                <div className="assignment-course">
+                  <p>CET3004B - Information and Cyber Security</p>
+                </div>
+                <div className="assignment-title">
+                  <p>Lab Assignment 1</p>
+                  <p>Due: 23-10-24</p>
+                </div>
+                <div className="assignment-status assignment-overdue-text">
+                  Overdue
+                </div>
+              </div>
+              
+            </div>
         </div>
       </div>
     </div>
