@@ -91,12 +91,6 @@ const Sidebar = ({ theme, setTheme }) => {
                 <span className="text nav-text">LMS</span>
               </Link>
             </li>
-            <li className="nav-link">
-              <Link to="/fees" >
-                <i className="bx bx-wallet icon"></i>
-                <span className="text nav-text">Fees</span>
-              </Link>
-            </li>
           </ul>
         </div>
         <div className="bottom-content">

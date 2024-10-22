@@ -8,8 +8,6 @@ import TimeTable from "./Pages/TimeTable/TimeTable";
 import Circulars from "./Pages/Circulars/Circulars";
 import Result from "./Pages/Result/Result";
 import LMS from "./Pages/LMS/LMS";
-import Fees from "./Pages/Fees/Fees";
-import Requests from "./Pages/Requests/Requests";
 import Login from "./Pages/Login/Login";
 import { StoreContext } from "./context/StoreContext";
 import FacultySidebar from "./Faculty/Components/FacultySidebar/FacultySidebar";
@@ -40,8 +38,6 @@ const App = () => {
             <Route path="/circulars/*" element={<Circulars />} />
             <Route path="/result/*" element={<Result />} />
             <Route path="/lms/*" element={<LMS />} />
-            <Route path="/fees/*" element={<Fees />} />
-            <Route path="/requests/*" element={<Requests />} />
           </Routes>
         </>
       ) : (
