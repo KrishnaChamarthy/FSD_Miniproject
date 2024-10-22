@@ -3,10 +3,17 @@ import Profile_icon from "../../assets/Dashboard/boy.png";
 import "./DashboardLeftbar.css";
 import Calendar from "../Calendar/Calendar"
 import { StoreContext } from "../../context/StoreContext";
+import { useNavigate } from "react-router-dom";
 
 const DashboardLeftbar = () => {
 
+  const naviage = useNavigate();
+
   const {studentData} = useContext(StoreContext);
+
+  const onScheduleClick = () => {
+    naviage('/timetable');
+  }
 
   return (
     <div className="dashboard-leftbar">
@@ -20,7 +27,7 @@ const DashboardLeftbar = () => {
       <div className="schedule">
         <header>
           <p className="schedule-title">Schedule</p>
-          <p className="see-all">See All</p>
+          <p className="see-all" onClick={onScheduleClick}>See All</p>
         </header>
         <div className="schedule-item">
           <div className="schedule-date">
