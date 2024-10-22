@@ -1,14 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./CircularsMain.css";
 import { StoreContext } from "../../context/StoreContext";
 import CircularDisplay from "../CircularDisplay/CircularDisplay";
 import axios from "axios";
 
 const CircularsMain = () => {
-  const { circularsList, showCirculer, setShowCircular, url, studentData } =
-    useContext(StoreContext);
-
-  const [selectedCircular, setSelectedCircular] = useState(null); // Store the clicked circular
+  const { circularsList, showCirculer, setShowCircular, url, studentData } = useContext(StoreContext);
+  const [selectedCircular, setSelectedCircular] = useState(null);
 
   const computeCounts = () => {
     const counts = {
@@ -23,15 +21,12 @@ const CircularsMain = () => {
 
     circularsList.forEach((circular) => {
       const category = circular.category.toLowerCase();
-
       if (category === "academic") counts.academic++;
       else if (category === "administrative") counts.administrative++;
       else if (category === "events") counts.events++;
       else if (category === "holidays") counts.holidays++;
       else if (category === "exams") counts.exams++;
-
       if (category === "academic" || category === "exams") counts.important++;
-
       if (!circular.read) counts.unread++;
     });
 
@@ -43,17 +38,14 @@ const CircularsMain = () => {
   const handleClick = async (circular) => {
     try {
       if (!circular.read) {
-        // Send API request to mark as read
         await axios.post(`${url}/api/circulars/addToRead`, {
           student_PRN: studentData.student_PRN,
           circular_id: circular.circular_id,
         });
-
-        circular.read = true; // Update status locally
+        circular.read = true;
       }
-
-      setSelectedCircular(circular); // Store selected circular
-      setShowCircular(true); // Show the CircularDisplay
+      setSelectedCircular(circular);
+      setShowCircular(true);
     } catch (error) {
       console.error("Error marking circular as read:", error);
     }
@@ -74,6 +66,19 @@ const CircularsMain = () => {
       </tr>
     ));
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setShowCircular(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <div className="circulars-container">
@@ -151,7 +156,6 @@ const CircularsMain = () => {
               </div>
             </div>
           )}
-
           <div className="element-title">Circulars</div>
           <table className="circulars-table">
             <thead>

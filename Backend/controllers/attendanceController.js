@@ -1,85 +1,85 @@
-import attendanceModel from "../models/attendanceModel.js"
+import attendanceModel from "../models/attendanceModel.js";
 
 const addAttendance = async (req, res) => {
-    const attendance = new attendanceModel({
-        student_PRN: req.body.student_PRN,
-        course_code: req.body.course_code,
-        date: req.body.date,
-        status: req.body.status,
-        type: req.body.type
-    });
+  const attendance = new attendanceModel({
+    student_PRN: req.body.student_PRN,
+    course_code: req.body.course_code,
+    date: req.body.date,
+    status: req.body.status,
+    type: req.body.type,
+  });
 
-    try {
-        await attendance.save();
-        res.json({
-            success:true,
-            message:"Attendance Saved"
-        });
-    } catch (error) {
-        console.log(error);
-        res.json({
-            success:false,
-            message:"Error"
-        });
-    }
-}
+  try {
+    await attendance.save();
+    res.json({
+      success: true,
+      message: "Attendance Saved",
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: "Error",
+    });
+  }
+};
 
 const updateAttendance = async (req, res) => {
-    const { student_PRN, course_code, date, status, type } = req.body;
+  const { student_PRN, course_code, date, status, type } = req.body;
 
-    try {
-        const attendance = await attendanceModel.findOneAndUpdate(
-            { student_PRN, course_code, date }, 
-            { status, type }, 
-            { new: true } 
-        );
+  try {
+    const attendance = await attendanceModel.findOneAndUpdate(
+      { student_PRN, course_code, date },
+      { status, type },
+      { new: true }
+    );
 
-        if (attendance) {
-            res.json({
-                success: true,
-                message: "Attendance Updated",
-                data: attendance
-            });
-        } else {
-            res.json({
-                success: false,
-                message: "Attendance not found"
-            });
-        }
-    } catch (error) {
-        console.log(error);
-        res.json({
-            success: false,
-            message: "Error updating attendance"
-        });
+    if (attendance) {
+      res.json({
+        success: true,
+        message: "Attendance Updated",
+        data: attendance,
+      });
+    } else {
+      res.json({
+        success: false,
+        message: "Attendance not found",
+      });
     }
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: "Error updating attendance",
+    });
+  }
 };
 
 const getAttendance = async (req, res) => {
-    const { student_PRN } = req.query;
+  const { student_PRN } = req.query;
 
-    try {
-        const attendanceRecords = await attendanceModel.find({ student_PRN });
+  try {
+    const attendanceRecords = await attendanceModel.find({ student_PRN });
 
-        if (attendanceRecords.length > 0) {
-            res.json({
-                success: true,
-                message: "Attendance records retrieved successfully",
-                data: attendanceRecords
-            });
-        } else {
-            res.json({
-                success: false,
-                message: "No attendance records found for this student"
-            });
-        }
-    } catch (error) {
-        console.log(error);
-        res.json({
-            success: false,
-            message: "Error retrieving attendance records"
-        });
+    if (attendanceRecords.length > 0) {
+      res.json({
+        success: true,
+        message: "Attendance records retrieved successfully",
+        data: attendanceRecords,
+      });
+    } else {
+      res.json({
+        success: false,
+        message: "No attendance records found for this student",
+      });
     }
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: "Error retrieving attendance records",
+    });
+  }
 };
 
-export {addAttendance, updateAttendance, getAttendance}
+export { addAttendance, updateAttendance, getAttendance };

@@ -46,7 +46,7 @@ const FacultyAttendanceMain = () => {
     setDate(selectedDate);
     setOpenDateDropdown(false);
     setCourse("Select Course");
-    setAttendance({}); // Reset the attendance state
+    setAttendance({}); 
   };
 
   const handleOpenCourseDropdown = () => {
@@ -55,19 +55,18 @@ const FacultyAttendanceMain = () => {
   const handleCourseClick = (selectedCourse) => {
     setCourse(selectedCourse);
     setOpenCourseDropdown(false);
-    setAttendance({}); // Reset the attendance state
+    setAttendance({});
     fetchStudents(selectedCourse);
-    fetchAttendanceForDate(date); // Fetch attendance when course is selected
+    fetchAttendanceForDate(date); 
   };
 
   const handleAttendanceChange = (student_PRN, status) => {
     setAttendance((prevState) => ({
       ...prevState,
-      [student_PRN]: status, // Update attendance for the student
+      [student_PRN]: status, 
     }));
   };
 
-  // Function to generate options for date dropdown
   const generateDateOptions = () => {
     const options = [];
     let currentDate = new Date();
@@ -99,7 +98,6 @@ const FacultyAttendanceMain = () => {
     return options;
   };
 
-  // Function to generate options for course dropdown
   const generateCourseOptions = () => {
     const selectedDayFull = getDayFromDate(date);
     const filteredCourses = [];
@@ -126,7 +124,6 @@ const FacultyAttendanceMain = () => {
     );
   };
 
-  // Function to fetch students based on the selected course from courseInfo
   const fetchStudents = (selectedCourse) => {
     const selectedCourseInfo = courseInfo.find(
       (course) => course._id === selectedCourse
@@ -143,32 +140,27 @@ const FacultyAttendanceMain = () => {
     const selectedCourse = courseInfo.find(
       (courseObj) => courseObj._id === course
     );
-    const type = "T"; // Determine if it's theory or practical
+    const type = "T"; 
 
-    // Extract the date part (ignoring the weekday) and split it into day, month, year
     const dateParts = date.split(" | ")[0].split("/");
     const day = dateParts[0];
-    const month = dateParts[1] - 1; // Month is 0-indexed in JavaScript Date
-    const year = `20${dateParts[2]}`; // Convert 'YY' to '20YY' for the full year
+    const month = dateParts[1] - 1; 
+    const year = `20${dateParts[2]}`; 
 
-    // Create a date object using the correct day, month, and year
-    // Set hours, minutes, seconds, and milliseconds to 0 to avoid time zone issues
     const localDate = new Date(year, month, day);
 
-    // Adjust for the local time zone if needed
-    const offset = localDate.getTimezoneOffset(); // Get timezone offset in minutes
+    const offset = localDate.getTimezoneOffset(); 
     const adjustedDate = new Date(localDate.getTime() - offset * 60 * 1000);
 
-    // Convert to a local date string or use as needed
-    const formattedDate = adjustedDate.toISOString(); // Format as YYYY-MM-DD
+    const formattedDate = adjustedDate.toISOString();
 
     for (const student_PRN in attendance) {
-      const status = attendance[student_PRN]; // Get the attendance status (Present/Absent)
+      const status = attendance[student_PRN]; 
       try {
         await axios.post(`${url}/api/attendance/add`, {
           student_PRN,
           course_code: course,
-          date: formattedDate, // Send the adjusted date
+          date: formattedDate, 
           status,
           type,
         });
@@ -209,18 +201,16 @@ const FacultyAttendanceMain = () => {
           },
         });
 
-        // Filter the response to get attendance for the specific course and date
         const attendanceData = response.data.data.find(
           (entry) =>
             entry.course_code === course &&
             new Date(entry.date).toISOString().split("T")[0] === formattedDate
         );
 
-        // Update attendance state with fetched data
         if (attendanceData) {
           updatedAttendance[student.student_PRN] = attendanceData.status;
         } else {
-          updatedAttendance[student.student_PRN] = "Absent"; // Default to Absent if no record found
+          updatedAttendance[student.student_PRN] = "Absent"; 
         }
         console.log(updatedAttendance);
       } catch (error) {

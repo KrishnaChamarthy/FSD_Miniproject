@@ -5,8 +5,8 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = ({ children }) => {
   const url = "http://localhost:4000";
-  const [user, setUser] = useState(localStorage.getItem("user") || ""); // Initialize user state with value from local storage if available
-  const [token, setToken] = useState(localStorage.getItem("token") || ""); // Initialize token state with value from local storage if available
+  const [user, setUser] = useState(localStorage.getItem("user") || ""); 
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [studentData, setStudentData] = useState({});
   const [facultyData, setFacultyData] = useState({});
   const [attendanceData, setAttendanceData] = useState({
@@ -27,7 +27,7 @@ const StoreContextProvider = ({ children }) => {
   const [studentMarks, setStudentMarks] = useState([]);
   const [allCourses, setAllCourses] = useState([]);
   const [showCirculer, setShowCircular] = useState(false);
-
+  const [assignments, setAssignments] = useState([]);
 
 
   useEffect(() => {
@@ -68,13 +68,12 @@ const StoreContextProvider = ({ children }) => {
       fetchCoursesData();
       fetchStudentMarks();
     } else if (user === "faculty" && Object.keys(facultyData).length > 0) {
-      // Fetch additional data for faculty if needed
       fetchAllCourses();
     }
     fetchTimetable();
     fetchCourseInfo();
     fetchCirculars();
-
+    fetchAssignments();
   }, [studentData, facultyData, user]);
 
   const fetchStudentData = async () => {
@@ -116,6 +115,18 @@ const StoreContextProvider = ({ children }) => {
     }
   };
 
+  const fetchAssignments = async () => {
+    try {
+      const response = await axios.get(`${url}/api/assignment/list`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setAssignments(response.data.data);
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const fetchCoursesData = async () => {
     try {
       const response = await axios.get(`${url}/api/course/list`, {
@@ -144,7 +155,6 @@ const StoreContextProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const allCourses = response.data.data;
-      console.log(allCourses);
       
       setAllCourses(allCourses);
     } catch (error) {
@@ -152,11 +162,10 @@ const StoreContextProvider = ({ children }) => {
     }
   }
 
-  // New function to fetch course information
   const fetchCourseInfo = async () => {
     try {
       const response = await axios.get(`${url}/api/student/course_info`);
-      setCourseInfo(response.data.data); // Store course info in state
+      setCourseInfo(response.data.data);
       
     } catch (error) {
       console.error("Error fetching course info:", error);
@@ -326,7 +335,9 @@ const StoreContextProvider = ({ children }) => {
     allCourses,
     setAllCourses,
     showCirculer,
-    setShowCircular
+    setShowCircular,
+    assignments,
+    setAssignments
   };
 
   return (
