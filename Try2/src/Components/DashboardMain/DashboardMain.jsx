@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./DashboardMain.css";
 import Attendance_icon from "../../assets/Dashboard/attendance.png";
 import Subject_icon from "../../assets/Dashboard/subject.png";
@@ -9,8 +9,9 @@ import { StoreContext } from "../../context/StoreContext";
 const DashboardMain = () => {
   const [semester, setSemester] = useState("5th Semester");
   const [openSemesterDropdown, setOpenSemesterDropdown] = useState(false);
+  const [cgpa, setCgpa] = useState(0);
 
-  const {attendanceData = {}, studentCourses, circularsList} = useContext(StoreContext);
+  const {attendanceData = {}, studentCourses, circularsList, studentMarks, studentData} = useContext(StoreContext);
 
   const handleOpenDropdown = () => {
     setOpenSemesterDropdown(!openSemesterDropdown);
@@ -19,6 +20,48 @@ const DashboardMain = () => {
   const handleClick = (sem) => {
     setSemester(sem);
     setOpenSemesterDropdown(!openSemesterDropdown);
+  };
+
+  const getSemesterMarks = (sem) => { 
+    const semNumber = String(sem).replace(/\D/g, "");
+   
+    return studentMarks.filter((mark) => mark.semester === semNumber);
+  };
+
+  const calculateGPA = (semesterMarks) => {
+    let totalMarks = 0;
+    let totalSubjects = semesterMarks.length;
+
+    semesterMarks.forEach((mark) => {
+      const subjectTotal = mark.internalMarks + mark.externalMarks;
+      totalMarks += subjectTotal;
+    });
+
+    let averageMarks = totalMarks / totalSubjects;
+
+    let gpa = (averageMarks / 100) * 10;
+
+    return gpa.toFixed(2);
+  }
+
+  useEffect(() => {
+    calculateCGPA();
+  }, [semester])
+
+  const calculateCGPA = () => {
+    const semNumber = parseInt(semester.replace(/\D/g, ""), 10);
+    
+    let CGPA = 0;
+  
+    for (let i = 1; i <= semNumber; i++) {
+      const g = calculateGPA(getSemesterMarks(i));
+      
+      if (!isNaN(parseFloat(g))) {
+        CGPA += parseFloat(g);
+      }
+    }
+  
+    setCgpa((CGPA / semNumber).toFixed(2));
   };
 
   return (
@@ -159,7 +202,7 @@ const DashboardMain = () => {
                   <p>GPA <br />
                   <span>Grade Point Average</span></p> 
                 </header>
-                <div className="gpa">3.93</div>
+                <div className="gpa">{cgpa}</div>
                 <p>Top 10 students in campus</p>
                 <img src={Cloud_img} alt="" />
             </div>
