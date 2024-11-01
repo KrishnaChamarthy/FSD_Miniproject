@@ -3,10 +3,12 @@ import "./FacultyAssignmentsMain.css";
 import { StoreContext } from "../../../context/StoreContext";
 import FacultyAssignmnetsList from "../FacultyAssignmentsList/FacultyAssignmnetsList";
 import FacultyAssignmentsCreate from "../FacultyAssignmentsCreate/FacultyAssignmentsCreate";
+import FacultyAssignmentsView from "../FacultyAssignmentsView/FacultyAssignmentsView";
 
 const FacultyAssignmentsMain = () => {
   const { assignments, facultyCourses } = useContext(StoreContext);
 
+  const [assignment, setAssignment] = useState(null);
   const [activePage, setActivePage] = useState("list");
 
   const handlePageRender = () => {
@@ -16,10 +18,12 @@ const FacultyAssignmentsMain = () => {
           setActivePage={setActivePage}
           filteredAssignments={filteredAssignments}
           findCourseNameByCode={findCourseNameByCode}
+          setAssignment={setAssignment}
         />
       );
     else if (activePage === "create")
       return <FacultyAssignmentsCreate setActivePage={setActivePage} />;
+    else if (activePage === 'view') return <FacultyAssignmentsView assignment={assignment} setActivePage={setActivePage}/>
   };
 
   const facultyCourseCodes = new Set(

@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
 import { connectDB } from "./config/db.js";
 import studentRouter from "./routes/studentRoute.js";
 import "dotenv/config.js"
@@ -19,6 +20,8 @@ app.use(cors());
 
 connectDB();
 
+const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/api/student", studentRouter);
 app.use("/api/course", courseRouter);
 app.use("/api/attendance", attendanceRouter);

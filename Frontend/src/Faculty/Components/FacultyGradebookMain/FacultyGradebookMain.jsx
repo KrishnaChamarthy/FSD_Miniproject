@@ -9,9 +9,10 @@ const FacultyGradebookMain = () => {
   const [openSemesterDropdown, setOpenSemesterDropdown] = useState(false);
   const [semester, setSemester] = useState("Select Semester");
   const [students, setStudents] = useState([]);
-  const [marks, setMarks] = useState({}); 
+  const [marks, setMarks] = useState({});
 
-  const { courseInfo, url, allCourses, facultyCourses } = useContext(StoreContext);
+  const { courseInfo, url, allCourses, facultyCourses } =
+    useContext(StoreContext);
 
   const [totalStudents, setTotalStudents] = useState(0);
   const [marksAssigned, setMarksAssigned] = useState(0);
@@ -82,17 +83,16 @@ const FacultyGradebookMain = () => {
       const payload = students.map((student) => ({
         student_PRN: student.student_PRN,
         course_code: course,
-        semester: String(semester), 
+        semester: String(semester),
         internalMarks: parseFloat(marks[student.student_PRN]?.internal) || 0,
         externalMarks: parseFloat(marks[student.student_PRN]?.external) || 0,
       }));
-  
+
       await axios.post(`${url}/api/marks/add`, payload);
     } catch (error) {
       console.error("Error submitting marks:", error);
     }
   };
-  
 
   return (
     <div className="faculty-gradebook-container">
@@ -149,9 +149,7 @@ const FacultyGradebookMain = () => {
                   ></div>
                 </div>
                 <ul
-                  className={
-                    openSemesterDropdown ? "menu menu-open" : "menu"
-                  }
+                  className={openSemesterDropdown ? "menu menu-open" : "menu"}
                 >
                   {[1, 2, 3, 4, 5, 6, 7, 8].map((sem) => (
                     <li
@@ -177,9 +175,7 @@ const FacultyGradebookMain = () => {
                     }
                   ></div>
                 </div>
-                <ul
-                  className={openCourseDropdown ? "menu menu-open" : "menu"}
-                >
+                <ul className={openCourseDropdown ? "menu menu-open" : "menu"}>
                   {getSemesterCourses(semester).map((course) => (
                     <li
                       key={course._id}
@@ -208,39 +204,45 @@ const FacultyGradebookMain = () => {
               </tr>
             </thead>
             <tbody>
-              {students.map((student) => (
-                <tr key={student.student_PRN}>
-                  <td>{student.student_PRN}</td>
-                  <td>{student.first_name + " " + student.last_name}</td>
-                  <td>{course}</td>
-                  <td>
-                    <input
-                      type="number"
-                      value={marks[student.student_PRN]?.internal || ""}
-                      onChange={(e) =>
-                        handleMarksChange(
-                          student.student_PRN,
-                          "internal",
-                          e.target.value
-                        )
-                      }
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      value={marks[student.student_PRN]?.external || ""}
-                      onChange={(e) =>
-                        handleMarksChange(
-                          student.student_PRN,
-                          "external",
-                          e.target.value
-                        )
-                      }
-                    />
-                  </td>
+              {students.length > 0 ? (
+                students.map((student) => (
+                  <tr key={student.student_PRN}>
+                    <td>{student.student_PRN}</td>
+                    <td>{student.first_name + " " + student.last_name}</td>
+                    <td>{course}</td>
+                    <td>
+                      <input
+                        type="number"
+                        value={marks[student.student_PRN]?.internal || ""}
+                        onChange={(e) =>
+                          handleMarksChange(
+                            student.student_PRN,
+                            "internal",
+                            e.target.value
+                          )
+                        }
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value={marks[student.student_PRN]?.external || ""}
+                        onChange={(e) =>
+                          handleMarksChange(
+                            student.student_PRN,
+                            "external",
+                            e.target.value
+                          )
+                        }
+                      />
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td>No students available for this course</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
           <button className="submit-button" onClick={handleSubmit}>

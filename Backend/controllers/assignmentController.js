@@ -1,4 +1,18 @@
 import assignmentModel from "../models/assignmentModel.js";
+import multer from "multer";
+import path from "path";
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); 
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); 
+  },
+});
+
+const upload = multer({ storage });
+
 
 const createAssignment = async (req, res) => {
   try {
@@ -42,38 +56,54 @@ const listAssignments = async (req, res) => {
 };
 
 const submitAssignment = async (req, res) => {
-  try {
-    const { course_code, assignment_title, student_PRN, submission, submission_date } = req.body;
-
-    const updatedAssignment = await assignmentModel.findOneAndUpdate(
-      { course_code, assignment_title },
-      {
-        $push: {
-          submissions: { student_PRN, submission, submission_date },
-        },
-      },
-      { new: true }
-    );
-
-    if (!updatedAssignment) {
-      res.json({
+  upload.single("submission")(req, res, async (err) => {
+    if (err) {
+      console.error("File upload error:", err);
+      return res.json({
         success: false,
-        message: "Assignment Not Found",
+        message: "File upload error",
       });
     }
 
-    res.json({
-      success: true,
-      message: "Submission Saved",
-    });
-  } catch (error) {
-    console.log(error);
-    res.json({
-      success: false,
-      message: "Error",
-    });
-  }
+    try {
+      const { course_code, assignment_title, student_PRN, submission_date } = req.body;
+      const filePath = req.file ? req.file.path : null; 
+
+      const updatedAssignment = await assignmentModel.findOneAndUpdate(
+        { course_code, assignment_title },
+        {
+          $push: {
+            submissions: {
+              student_PRN,
+              submission: filePath,
+              submission_date,
+            },
+          },
+        },
+        { new: true }
+      );
+
+      if (!updatedAssignment) {
+        return res.json({
+          success: false,
+          message: "Assignment Not Found",
+        });
+      }
+
+      return res.json({
+        success: true,
+        message: "Submission Saved",
+      });
+    } catch (error) {
+      console.error("Error submitting assignment:", error);
+      return res.json({
+        success: false,
+        message: "Error",
+      });
+    }
+  });
 };
+
 
 const deleteAssignment = async (req, res) => {
   try {

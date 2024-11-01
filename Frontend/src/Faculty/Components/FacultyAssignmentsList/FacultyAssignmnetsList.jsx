@@ -4,6 +4,7 @@ const FacultyAssignmnetsList = ({
   filteredAssignments,
   findCourseNameByCode,
   setActivePage,
+  setAssignment
 }) => {
   return (
     <div className="faculty-assignments-element">
@@ -15,7 +16,7 @@ const FacultyAssignmnetsList = ({
             setActivePage("create");
           }}
         >
-          <i class="bx bxs-file-plus"></i>
+          <i className="bx bxs-file-plus"></i>
           Add Assignment
         </div>
       </div>
@@ -23,7 +24,7 @@ const FacultyAssignmnetsList = ({
         {filteredAssignments.map((assignment, index) => {
           const courseName = findCourseNameByCode(assignment.course_code);
           return (
-            <div className="faculty-assignment" key={index}>
+            <div className="faculty-assignment" key={index} onClick={() => {setActivePage('view');setAssignment(assignment)}}>
               <div className="assignment-course">
                 <p>
                   {assignment.course_code}: {courseName}

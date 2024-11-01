@@ -36,7 +36,7 @@ const FacultyAssignmentsCreate = ({setActivePage}) => {
       <div className="element-title-course">
       Create New Assignment
       <div className="add-assignment" onClick={() => {setActivePage('list')}}>
-      <i class='bx bx-arrow-back'></i>
+      <i className='bx bx-arrow-back'></i>
       Go Back
       </div>
       </div>
