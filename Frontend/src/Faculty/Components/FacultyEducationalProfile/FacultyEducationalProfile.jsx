@@ -4,13 +4,14 @@ import { StoreContext } from '../../../context/StoreContext'
 
 const FacultyEducationalProfile = () => {
 
-  const [year, setYear] = useState("2023");
+  const [year, setYear] = useState("2024");
   const [openYearDropdown, setOpenYearDropdown] = useState(false);
 
   const {facultyData, facultyCourses} = useContext(StoreContext);
   const handleOpenDropdown = () => {
     setOpenYearDropdown(!openYearDropdown);
   };
+  
 
   const handleClick = (sem) => {
     setYear(sem);
@@ -92,7 +93,7 @@ const FacultyEducationalProfile = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredCourses.map((course, index) => (
+          {facultyCourses.map((course, index) => (
             <tr key={index}>
               <td>{course.course_code}</td>
               <td>{course.course_name}</td>

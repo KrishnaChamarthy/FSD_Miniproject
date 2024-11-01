@@ -1,0 +1,242 @@
+.faculty-assignments-container {
+  width: 100%;
+  height: 100%;
+  padding: 40px 80px;
+  min-height: 100vh;
+}
+
+.faculty-assignments-container header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.faculty-assignments-container .header-text {
+  font-size: 32px;
+  line-height: 30px;
+  flex: 7;
+  font-weight: 600;
+  color: var(--title-color);
+}
+
+.faculty-assignments-container .header-text span {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-color);
+}
+
+.faculty-assignments-container .header-search {
+  display: flex;
+  flex: 2;
+  align-items: center;
+  justify-content: center;
+  background: var(--body-color);
+  height: 50px;
+  border-radius: 6px;
+  padding: 10px 20px;
+  gap: 10px;
+  color: var(--text-color);
+  transition: var(--tran-05);
+}
+
+.header-search i {
+  font-size: 25px;
+}
+
+.header-search input {
+  height: 100%;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.faculty-assignments-container .header-bell {
+  flex: 1;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-bell i {
+  font-size: 25px;
+  background: var(--body-color);
+  padding: 10px;
+  border-radius: 50%;
+  transition: var(--tran-05);
+}
+.faculty-assignments-body {
+  margin-top: 40px;
+  width: 100%;
+  padding: 50px 5%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  background: var(--body-color);
+  transition: var(--tran-05);
+  border-radius: 10px;
+}
+
+.faculty-assignments-element {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-color-light);
+  padding: 20px;
+  border-radius: 10px;
+  transition: var(--tran-05);
+}
+
+
+.faculty-assignments-list{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px;
+    height: 100%;
+    gap: 20px;
+  }
+  
+  .faculty-assignment{
+    background-color: var(--body-color);
+    padding: 40px;
+    flex: 1;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    transition: var(--tran-05);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 250px;
+    gap: 20px;
+    cursor: pointer;
+    border: 2px solid var(--primary-color);
+  }
+  
+  
+  .assignment-course{
+    width: 100%;
+    text-align: left;
+    font-size: 20px;
+    color: var(--title-color);
+  }
+  
+  .assignment-title{
+    width: 100%;
+    font-size: 18px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .assignment-status{
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--primary-color);
+  }
+
+  .add-assignment{
+    color: var(--text-color);
+    font-size: 20px;
+    padding: 8px 16px;
+    border: 2px solid var(--text-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--tran-04);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .add-assignment:hover{
+    background-color: var(--text-color);
+    color: var(--body-color);
+  }
+  .assignment-create{
+    min-height: 70vh;
+  }
+
+  .assignment-create-form{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+
+  .assignment-create-form .form-group{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 20px;
+    color: var(--text-color);
+  }
+
+  .course-code select{
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+  }
+  .assignment-date input{
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+  }
+  .title{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .title input{
+    width: 50%;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+  }
+
+  .desc{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    height: 60%;
+    margin-bottom: 10px;
+  }
+  .desc label{
+    width: 15%;
+  }
+  .desc textarea{
+    width: 100%;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    height: 100%;
+  }
+
+  .assignment-create-form .top{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }

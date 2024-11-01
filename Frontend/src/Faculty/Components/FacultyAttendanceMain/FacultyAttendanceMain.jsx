@@ -26,9 +26,10 @@ const FacultyAttendanceMain = () => {
   const [openDateDropdown, setOpenDateDropdown] = useState(false);
   const [course, setCourse] = useState("Select Course");
   const [openCourseDropdown, setOpenCourseDropdown] = useState(false);
-  const [students, setStudents] = useState([]); 
+  const [students, setStudents] = useState([]);
   const [attendance, setAttendance] = useState({});
-  const { timetable, courseInfo, url } = useContext(StoreContext);
+  const { timetable, courseInfo, url, facultyCourses } =
+    useContext(StoreContext);
 
   const getDayFromDate = (dateStr) => {
     const dateParts = dateStr.split(" | ");
@@ -46,7 +47,7 @@ const FacultyAttendanceMain = () => {
     setDate(selectedDate);
     setOpenDateDropdown(false);
     setCourse("Select Course");
-    setAttendance({}); 
+    setAttendance({});
   };
 
   const handleOpenCourseDropdown = () => {
@@ -57,13 +58,13 @@ const FacultyAttendanceMain = () => {
     setOpenCourseDropdown(false);
     setAttendance({});
     fetchStudents(selectedCourse);
-    fetchAttendanceForDate(date); 
+    fetchAttendanceForDate(date);
   };
 
   const handleAttendanceChange = (student_PRN, status) => {
     setAttendance((prevState) => ({
       ...prevState,
-      [student_PRN]: status, 
+      [student_PRN]: status,
     }));
   };
 
@@ -100,15 +101,15 @@ const FacultyAttendanceMain = () => {
 
   const generateCourseOptions = () => {
     const selectedDayFull = getDayFromDate(date);
-    const filteredCourses = [];
-    for (const entry of timetable) {
-      if (
+
+    const filteredCourses = timetable.filter(
+      (entry) =>
         entry.day_of_week === selectedDayFull &&
-        entry.course_code !== "BREAK"
-      ) {
-        filteredCourses.push(entry);
-      }
-    }
+        entry.course_code !== "BREAK" &&
+        facultyCourses.some(
+          (course) => course.course_code === entry.course_code
+        )
+    );
 
     return filteredCourses.length > 0 ? (
       filteredCourses.map((entry) => (
@@ -123,7 +124,6 @@ const FacultyAttendanceMain = () => {
       <li>No courses available</li>
     );
   };
-
   const fetchStudents = (selectedCourse) => {
     const selectedCourseInfo = courseInfo.find(
       (course) => course._id === selectedCourse
@@ -140,27 +140,27 @@ const FacultyAttendanceMain = () => {
     const selectedCourse = courseInfo.find(
       (courseObj) => courseObj._id === course
     );
-    const type = "T"; 
+    const type = "T";
 
     const dateParts = date.split(" | ")[0].split("/");
     const day = dateParts[0];
-    const month = dateParts[1] - 1; 
-    const year = `20${dateParts[2]}`; 
+    const month = dateParts[1] - 1;
+    const year = `20${dateParts[2]}`;
 
     const localDate = new Date(year, month, day);
 
-    const offset = localDate.getTimezoneOffset(); 
+    const offset = localDate.getTimezoneOffset();
     const adjustedDate = new Date(localDate.getTime() - offset * 60 * 1000);
 
     const formattedDate = adjustedDate.toISOString();
 
     for (const student_PRN in attendance) {
-      const status = attendance[student_PRN]; 
+      const status = attendance[student_PRN];
       try {
         await axios.post(`${url}/api/attendance/add`, {
           student_PRN,
           course_code: course,
-          date: formattedDate, 
+          date: formattedDate,
           status,
           type,
         });
@@ -210,7 +210,7 @@ const FacultyAttendanceMain = () => {
         if (attendanceData) {
           updatedAttendance[student.student_PRN] = attendanceData.status;
         } else {
-          updatedAttendance[student.student_PRN] = "Absent"; 
+          updatedAttendance[student.student_PRN] = "Absent";
         }
         console.log(updatedAttendance);
       } catch (error) {

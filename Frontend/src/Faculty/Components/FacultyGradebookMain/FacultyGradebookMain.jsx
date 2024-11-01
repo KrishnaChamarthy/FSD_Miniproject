@@ -11,7 +11,7 @@ const FacultyGradebookMain = () => {
   const [students, setStudents] = useState([]);
   const [marks, setMarks] = useState({}); 
 
-  const { courseInfo, url, allCourses } = useContext(StoreContext);
+  const { courseInfo, url, allCourses, facultyCourses } = useContext(StoreContext);
 
   const [totalStudents, setTotalStudents] = useState(0);
   const [marksAssigned, setMarksAssigned] = useState(0);

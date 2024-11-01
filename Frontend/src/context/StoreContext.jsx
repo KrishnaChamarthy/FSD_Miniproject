@@ -5,7 +5,7 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = ({ children }) => {
   const url = "http://localhost:4000";
-  const [user, setUser] = useState(localStorage.getItem("user") || ""); 
+  const [user, setUser] = useState(localStorage.getItem("user") || "");
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [studentData, setStudentData] = useState({});
   const [facultyData, setFacultyData] = useState({});
@@ -23,12 +23,11 @@ const StoreContextProvider = ({ children }) => {
   const [facultyCourses, setFacultyCourses] = useState([]);
   const [circularsList, setCircularsList] = useState([]);
   const [timetable, setTimetable] = useState([]);
-  const [courseInfo, setCourseInfo] = useState([]); 
+  const [courseInfo, setCourseInfo] = useState([]);
   const [studentMarks, setStudentMarks] = useState([]);
   const [allCourses, setAllCourses] = useState([]);
   const [showCirculer, setShowCircular] = useState(false);
   const [assignments, setAssignments] = useState([]);
-
 
   useEffect(() => {
     const loadToken = () => {
@@ -69,6 +68,9 @@ const StoreContextProvider = ({ children }) => {
       fetchStudentMarks();
     } else if (user === "faculty" && Object.keys(facultyData).length > 0) {
       fetchAllCourses();
+      if (Object.keys(facultyData).length > 0) {
+        fetchFacultyCourses();
+      }      
     }
     fetchTimetable();
     fetchCourseInfo();
@@ -89,19 +91,18 @@ const StoreContextProvider = ({ children }) => {
   };
 
   const fetchStudentMarks = async () => {
-    try{
+    try {
       const student_PRN = studentData.student_PRN;
       const response = await axios.get(`${url}/api/marks/get`, {
         params: { student_PRN },
       });
 
-      const marksData = response.data.data;      
+      const marksData = response.data.data;
       setStudentMarks(marksData);
-    }catch(error){
+    } catch (error) {
       console.log(error);
-      
     }
-  }
+  };
 
   const fetchFacultyData = async () => {
     try {
@@ -121,11 +122,28 @@ const StoreContextProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAssignments(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchFacultyCourses = async () => {
+    try {
+      const response = await axios.get(`${url}/api/course/list`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const allCourses = response.data.data;
+  
+      const courses = allCourses.filter((course) =>
+        facultyData.courses_handled?.includes(course.course_code)
+      );
+  
+      setFacultyCourses(courses);
       
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const fetchCoursesData = async () => {
     try {
@@ -135,14 +153,11 @@ const StoreContextProvider = ({ children }) => {
       const allCourses = response.data.data;
       let courses = [];
 
-      if (user === "student") {
-        const enrolledCourseCodes = studentData.courses_enrolled || [];
-        courses = allCourses.filter(course => enrolledCourseCodes.includes(course.course_code));
-      } else if (user === "faculty") {
-        const handledCourseCodes = facultyData.courses_handled || [];
-        courses = allCourses.filter(course => handledCourseCodes.includes(course.course_code));
-      }
-    
+      const enrolledCourseCodes = studentData.courses_enrolled || [];
+      courses = allCourses.filter((course) =>
+        enrolledCourseCodes.includes(course.course_code)
+      );
+
       setStudentCourses(courses);
     } catch (error) {
       console.log(error);
@@ -155,18 +170,17 @@ const StoreContextProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const allCourses = response.data.data;
-      
+
       setAllCourses(allCourses);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const fetchCourseInfo = async () => {
     try {
       const response = await axios.get(`${url}/api/student/course_info`);
       setCourseInfo(response.data.data);
-      
     } catch (error) {
       console.error("Error fetching course info:", error);
     }
@@ -316,7 +330,7 @@ const StoreContextProvider = ({ children }) => {
     setToken,
     studentData,
     setStudentData,
-    facultyData, 
+    facultyData,
     setFacultyData,
     attendanceData,
     setAttendanceData,
@@ -326,8 +340,8 @@ const StoreContextProvider = ({ children }) => {
     setCircularsList,
     timetable,
     setTimetable,
-    courseInfo, 
-    fetchCourseInfo, 
+    courseInfo,
+    fetchCourseInfo,
     facultyCourses,
     setFacultyCourses,
     studentMarks,
@@ -337,7 +351,8 @@ const StoreContextProvider = ({ children }) => {
     showCirculer,
     setShowCircular,
     assignments,
-    setAssignments
+    setAssignments,
+    fetchAssignments
   };
 
   return (

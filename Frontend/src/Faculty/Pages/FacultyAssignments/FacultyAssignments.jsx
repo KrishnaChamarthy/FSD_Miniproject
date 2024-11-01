@@ -1,9 +1,12 @@
 import React from 'react'
 import "./FacultyAssignments.css"
+import FacultyAssignmentsMain from '../../Components/FacultyAssignmentsMain/FacultyAssignmentsMain'
 
 const FacultyAssignments = () => {
   return (
-    <div>FacultyAssignments</div>
+    <div className='faculty-assignments'>
+      <FacultyAssignmentsMain />
+    </div>
   )
 }
 
