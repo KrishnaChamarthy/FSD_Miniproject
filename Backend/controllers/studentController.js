@@ -170,26 +170,22 @@ const updateStudent = async (req, res) => {
 const getStudentsByCourses = async (req, res) => {
     try {
         const studentsByCourses = await studentModel.aggregate([
-            // Match documents where enrolled_courses exists and is not an empty array
             { $match: { courses_enrolled: { $exists: true, $ne: [] } } },
             
-            // Unwind the enrolled_courses array
             { $unwind: "$courses_enrolled" },
             
-            // Group by course code
             {
                 $group: {
-                    _id: "$courses_enrolled", // Group by course code from enrolled_courses
+                    _id: "$courses_enrolled", 
                     students: { $push: {
-                        student_PRN: "$student_PRN",  // Collect student PRN
-                        first_name: "$first_name",    // Collect first name
-                        last_name: "$last_name"       // Collect last name
-                    } } // Collect student PRNs for each course
+                        student_PRN: "$student_PRN",  
+                        first_name: "$first_name",    
+                        last_name: "$last_name"       
+                    } } 
                 }
             },
             
-            // Optionally sort the results by course code
-            { $sort: { "_id": 1 } } // Sort by course code (ascending)
+            { $sort: { "_id": 1 } } 
         ]);
 
         res.json({

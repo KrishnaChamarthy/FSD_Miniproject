@@ -90,6 +90,7 @@
     padding: 20px;
     border-radius: 10px;
     transition: var(--tran-05);
+    position: relative;
   }
 
   .circular-create{
