@@ -4,7 +4,7 @@ import { createContext, useState, useEffect } from "react";
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = ({ children }) => {
-  const url = "http://localhost:4000";
+  const url = "https://erp-system-app.onrender.com";
   const [user, setUser] = useState(localStorage.getItem("user") || "");
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [studentData, setStudentData] = useState({});
