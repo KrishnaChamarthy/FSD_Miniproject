@@ -1,9 +1,12 @@
 import React from 'react'
 import "./AdminCirculars.css"
+import AdminCircularsMain from "../../Components/AdminCircularsMain/AdminCircularsMain"
 
 const AdminCirculars = () => {
   return (
-    <div>AdminCirculars</div>
+    <div className='admin-circulars'>
+      <AdminCircularsMain />
+    </div>
   )
 }
 

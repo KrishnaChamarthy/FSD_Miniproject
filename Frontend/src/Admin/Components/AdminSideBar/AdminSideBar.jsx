@@ -62,7 +62,7 @@ const AdminSideBar = ({theme, setTheme}) => {
               </li>
               <li className="nav-link">
                 <Link to="/fauclty">
-                  <i class='bx bx-book-reader icon' ></i>
+                  <i className='bx bx-book-reader icon' ></i>
                   <span className="text nav-text">Faculty</span>
                 </Link>
               </li>

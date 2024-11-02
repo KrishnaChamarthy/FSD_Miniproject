@@ -371,7 +371,8 @@ const StoreContextProvider = ({ children }) => {
     setShowCircular,
     assignments,
     setAssignments,
-    fetchAssignments
+    fetchAssignments,
+    fetchCirculars
   };
 
   return (

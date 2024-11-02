@@ -44,7 +44,7 @@ const App = () => {
             <Route path="/lms/*" element={<LMS />} />
           </Routes>
         </>
-      ) : user === "Faculty" ? (
+      ) : user === "faculty" ? (
         <>
           <FacultySidebar setTheme={setTheme} theme={theme} />
           <Routes>
