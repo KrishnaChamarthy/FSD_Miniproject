@@ -92,6 +92,6 @@ Provides administrators with tools to manage the entire system and perform admin
 ## Technologies Used
 - **Frontend**: React, HTML, CSS, JavaScript
 - **Backend**: Node.js, Express.js
-- **Database**: MySQL or MongoDB
+- **Database**: MongoDB
 - **Version Control**: Git, GitHub
 - **Tools**: Visual Studio Code, Postman
