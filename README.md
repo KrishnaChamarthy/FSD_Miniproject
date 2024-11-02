@@ -1,6 +1,8 @@
 # College Management System
 
 A comprehensive web-based system designed to streamline and automate the management of a college, encompassing various administrative and academic functions. This system integrates modules for user management, course tracking, grading, and more, providing an efficient solution for faculty, students, and administrators.
+<br />
+View the project here: https://erpsystem-krishna.netlify.app
 
 ## Table of Contents
 - [Features](#features)
