@@ -16,7 +16,11 @@ import FacultyAttendance from "./Faculty/Pages/FacultyAttendance/FacultyAttendan
 import FacultyGradebook from "./Faculty/Pages/FacultyGradebook/FacultyGradebook"
 import FacultyAssignments from "./Faculty/Pages/FacultyAssignments/FacultyAssignments";
 import FacultyProfile from "./Faculty/Pages/FacultyProfile/FacultyProfile";
-
+import AdminSideBar from "./Admin/Components/AdminSideBar/AdminSideBar";
+import AdminCirculars from "./Admin/Pages/AdminCirculars/AdminCirculars"
+import AdminAddStudents from "./Admin/Pages/AdminAddStudents/AdminAddStudents";
+import AdminAddFaculty from "./Admin/Pages/AdminAddFaculty/AdminAddFaculty";
+import AdminCourses from "./Admin/Pages/AdminCourses/AdminCourses";
 
 const App = () => {
   const [theme, setTheme] = useState("");
@@ -40,7 +44,7 @@ const App = () => {
             <Route path="/lms/*" element={<LMS />} />
           </Routes>
         </>
-      ) : (
+      ) : user === "Faculty" ? (
         <>
           <FacultySidebar setTheme={setTheme} theme={theme} />
           <Routes>
@@ -50,6 +54,16 @@ const App = () => {
             <Route path="/gradebook/*" element={<FacultyGradebook />}/>
             <Route path="/assignments/*" element={<FacultyAssignments />}/>
           </Routes>
+        </>
+      ): (
+        <>
+        <AdminSideBar setTheme={setTheme} theme={theme} />
+        <Routes>
+          <Route path="/" element={<AdminCirculars />}/>
+          <Route path="/students/*" element={<AdminAddStudents />}/>
+          <Route path="/faculty/*" element={<AdminAddFaculty />}/>
+          <Route path="/courses/*" element={<AdminCourses />}/>
+        </Routes>
         </>
       )}
     </div>

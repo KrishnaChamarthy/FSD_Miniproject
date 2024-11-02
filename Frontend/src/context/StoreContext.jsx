@@ -9,6 +9,7 @@ const StoreContextProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [studentData, setStudentData] = useState({});
   const [facultyData, setFacultyData] = useState({});
+  const [adminData, setAdminData] = useState({});
   const [attendanceData, setAttendanceData] = useState({
     presentClasses: 0,
     totalClasses: 0,
@@ -51,6 +52,8 @@ const StoreContextProvider = ({ children }) => {
             await fetchStudentData();
           } else if (user === "faculty") {
             await fetchFacultyData();
+          } else if (user === 'admin'){
+            await fetchAdminData();
           }
         } catch (error) {
           console.error("Error during fetching data:", error);
@@ -110,6 +113,20 @@ const StoreContextProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setFacultyData(response.data.data);
+    } catch (error) {
+      console.error("Error fetching faculty data:", error);
+      handleLogout();
+    }
+  };
+
+  const fetchAdminData = async () => {
+    try {
+      const response = await axios.get(`${url}/api/admin/info`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log(response.data.data);
+      
+      setAdminData(response.data.data);
     } catch (error) {
       console.error("Error fetching faculty data:", error);
       handleLogout();
@@ -332,6 +349,8 @@ const StoreContextProvider = ({ children }) => {
     setStudentData,
     facultyData,
     setFacultyData,
+    adminData,
+    setAdminData,
     attendanceData,
     setAttendanceData,
     studentCourses,

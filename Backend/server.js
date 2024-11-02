@@ -11,6 +11,7 @@ import circularsRouter from "./routes/circularsRoute.js"
 import facultyRouter from "./routes/facultyRoute.js";
 import timetableRouter from "./routes/timetableRoute.js";
 import assignmentRouter from "./routes/assignmentRoute.js";
+import adminRouter from "./routes/adminRoute.js"
 
 const app = express();
 const port = 4000;
@@ -30,6 +31,7 @@ app.use("/api/circulars", circularsRouter);
 app.use("/api/faculty", facultyRouter);
 app.use("/api/timetable", timetableRouter);
 app.use("/api/assignment", assignmentRouter);
+app.use("/api/admin", adminRouter);
 
 app.get("/", (req, res) => {
     res.send("API Working");

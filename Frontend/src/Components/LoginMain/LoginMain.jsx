@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginMain = () => {
   const [studentLogin, setStudentLogin] = useState(true);
-  const { url, setToken, setUser } = useContext(StoreContext); // Use setUser from context
+  const { url, setToken, setUser } = useContext(StoreContext);
   const [data, setData] = useState({
     email: "",
     password: ""
@@ -35,7 +35,11 @@ const LoginMain = () => {
     if (studentLogin) {
       newUrl += "/api/student/login";
     } else {
-      newUrl += "/api/faculty/login";
+      if (data.email === 'admin@gmail.com'){
+        newUrl += "/api/admin/login"
+      }else{
+        newUrl += "/api/faculty/login";
+      }
     }
 
     try {
@@ -43,7 +47,7 @@ const LoginMain = () => {
       if (response.data.success) {
         setToken(response.data.token);
         localStorage.setItem("token", response.data.token);
-        setUser(studentLogin ? "student" : "faculty");
+        setUser(studentLogin ? "student" : data.email === 'admin@gmail.com' ? "admin":"faculty");
         navigate("/"); 
       } else {
         alert(response.data.message);
