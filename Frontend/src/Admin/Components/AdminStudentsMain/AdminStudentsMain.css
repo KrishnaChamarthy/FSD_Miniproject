@@ -1,84 +1,129 @@
 .admin-students-container {
-    width: 100%;
-    height: 100%;
-    padding: 40px 80px;
-    min-height: 100vh;
-  }
-  
-  .admin-students-container header {
-    display: flex;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .admin-students-container .header-text {
-    font-size: 32px;
-    line-height: 30px;
-    flex: 7;
-    font-weight: 600;
-    color: var(--title-color);
-  }
-  
-  .admin-students-container .header-text span {
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--text-color);
-  }
-  
-  .admin-students-container .header-search {
-    display: flex;
-    flex: 2;
-    align-items: center;
-    justify-content: center;
-    background: var(--body-color);
-    height: 50px;
-    border-radius: 6px;
-    padding: 10px 20px;
-    gap: 10px;
-    color: var(--text-color);
-    transition: var(--tran-05);
-  }
-  
-  .header-search i {
-    font-size: 25px;
-  }
-  
-  .header-search input {
-    height: 100%;
-    width: 100%;
-    font-size: 16px;
-    font-weight: 500;
-    outline: none;
-    border: none;
-    border-radius: 6px;
-    background-color: transparent;
-    color: var(--text-color);
-  }
-  
-  .admin-students-container .header-bell {
-    flex: 1;
-    color: var(--text-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .header-bell i {
-    font-size: 25px;
-    background: var(--body-color);
-    padding: 10px;
-    border-radius: 50%;
-    transition: var(--tran-05);
-  }
+  width: 100%;
+  height: 100%;
+  padding: 40px 80px;
+  min-height: 100vh;
+}
 
-  .admin-students-body{
-    margin-top: 40px;
-    width: 100%;
-    padding: 50px 5%;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-    background: var(--body-color);
-    transition: var(--tran-05);
-    border-radius: 10px;
-  }
+.admin-students-container header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.admin-students-container .header-text {
+  font-size: 32px;
+  line-height: 30px;
+  flex: 7;
+  font-weight: 600;
+  color: var(--title-color);
+}
+
+.admin-students-container .header-text span {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-color);
+}
+
+.admin-students-container .header-search {
+  display: flex;
+  flex: 2;
+  align-items: center;
+  justify-content: center;
+  background: var(--body-color);
+  height: 50px;
+  border-radius: 6px;
+  padding: 10px 20px;
+  gap: 10px;
+  color: var(--text-color);
+  transition: var(--tran-05);
+}
+
+.header-search i {
+  font-size: 25px;
+}
+
+.header-search input {
+  height: 100%;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.admin-students-container .header-bell {
+  flex: 1;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-bell i {
+  font-size: 25px;
+  background: var(--body-color);
+  padding: 10px;
+  border-radius: 50%;
+  transition: var(--tran-05);
+}
+
+.admin-students-body {
+  margin-top: 40px;
+  width: 100%;
+  padding: 50px 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 30px;
+  background: var(--body-color);
+  transition: var(--tran-05);
+  border-radius: 10px;
+}
+
+.admin-students-element {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-color-light);
+  padding: 20px;
+  border-radius: 10px;
+  transition: var(--tran-05);
+}
+
+.login-info {
+  grid-column: 1 / 4;
+}
+
+.student-input {
+  grid-column: 1 / 3;
+}
+
+.contact-input {
+  grid-column: 3 / 4;
+  grid-row: 2 / 4;
+}
+
+.parent-input {
+  grid-column: 1 / 3;
+}
+
+.submit-info {
+  grid-column: 1 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.element-input {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  margin-right: 10px;
+  transition: var(--tran-04);
+  flex: 1;
+}

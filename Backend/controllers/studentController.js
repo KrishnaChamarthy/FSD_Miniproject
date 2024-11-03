@@ -43,7 +43,7 @@ const createToken = (id) => {
 }
 
 const registerStudent = async (req, res) => {
-    const { student_PRN, password, first_name, last_name, email, phone, dob } = req.body;
+    const { student_PRN, password, first_name, last_name, email, phone, dob, semester } = req.body;
 
     if (!student_PRN || !password || !first_name || !last_name || !email || !phone || !dob) {
         return res.json({
@@ -96,7 +96,8 @@ const registerStudent = async (req, res) => {
             last_name,
             email,
             phone,
-            dob: dobDate  
+            dob: dobDate,
+            semester 
         });
 
         const student = await newStudent.save();
