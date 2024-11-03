@@ -38,7 +38,7 @@ const CircularsMain = () => {
   const handleClick = async (circular) => {
     try {
       if (!circular.read) {
-        await axios.post(`${url}/api/circulars/addToRead`, {
+        await axios.post(`${url}/api/circulars/read`, {
           student_PRN: studentData.student_PRN,
           circular_id: circular.circular_id,
         });
