@@ -4,7 +4,7 @@ import axios from "axios";
 import { StoreContext } from "../../../context/StoreContext";
 
 const AdminStudentsMain = () => {
-  const { url } = useContext(StoreContext);
+  const { url, allCourses } = useContext(StoreContext);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -38,6 +38,7 @@ const AdminStudentsMain = () => {
     motherEmail: "",
     fatherMobile: "",
     motherMobile: "",
+    enrolled_courses: []
   });
 
   const handleChange = (e) => {
@@ -49,18 +50,24 @@ const AdminStudentsMain = () => {
   };
 
   const handleSubmit = async () => {
+    const enrolledCourses = allCourses
+        .filter((course) => course.semester === formData.semester)
+        .map((course) => course.course_code); 
+      const updatedFormData = {
+        ...formData,
+        enrolled_courses: enrolledCourses,
+      };
     try {
       const response = await axios.post(
         `${url}/api/student/register`,
-        formData,
+        updatedFormData,
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-
-      console.log("Form Data Submitted Successfully:", response.data);
+      alert("Student Registered")
 
       setFormData({
         email: "",
@@ -94,6 +101,8 @@ const AdminStudentsMain = () => {
         motherEmail: "",
         fatherMobile: "",
         motherMobile: "",
+        enrolled_courses: []
+
       });
     } catch (error) {
       console.error(

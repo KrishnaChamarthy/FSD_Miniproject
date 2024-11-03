@@ -19,8 +19,7 @@ import FacultyProfile from "./Faculty/Pages/FacultyProfile/FacultyProfile";
 import AdminSideBar from "./Admin/Components/AdminSideBar/AdminSideBar";
 import AdminCirculars from "./Admin/Pages/AdminCirculars/AdminCirculars"
 import AdminAddStudents from "./Admin/Pages/AdminAddStudents/AdminAddStudents";
-import AdminAddFaculty from "./Admin/Pages/AdminAddFaculty/AdminAddFaculty";
-import AdminCourses from "./Admin/Pages/AdminCourses/AdminCourses";
+
 
 const App = () => {
   const [theme, setTheme] = useState("");
@@ -61,8 +60,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={<AdminCirculars />}/>
           <Route path="/students/*" element={<AdminAddStudents />}/>
-          <Route path="/faculty/*" element={<AdminAddFaculty />}/>
-          <Route path="/courses/*" element={<AdminCourses />}/>
         </Routes>
         </>
       )}
