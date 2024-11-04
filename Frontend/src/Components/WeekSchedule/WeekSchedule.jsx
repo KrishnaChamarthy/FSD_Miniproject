@@ -45,13 +45,11 @@ const WeekSchedule = () => {
   const timeSlots = generateTimeSlots(8 * 60, 17 * 60, 30);
   const { timetable } = useContext(StoreContext);
   
-  // Create an object to store timetable events categorized by day
   const timetableByDay = daysOfWeek.reduce((acc, day) => {
     acc[day] = [];
     return acc;
   }, {});
 
-  // Process timetable events
   timetable.forEach(event => {
     const day = event.day_of_week;
     if (timetableByDay[day]) {
@@ -64,7 +62,6 @@ const WeekSchedule = () => {
     }
   });
 
-  // Track covered rows
   const coveredRows = daysOfWeek.reduce((acc, day) => {
     acc[day] = Array(timeSlots.length).fill(false);
     return acc;
@@ -86,7 +83,6 @@ const WeekSchedule = () => {
             <tr key={rowIndex}>
               <td className="time-column">{time}</td>
               {daysOfWeek.map((day, dayIndex) => {
-                // Check if the row is covered by a previous row's rowSpan
                 if (coveredRows[day][rowIndex]) {
                   return <></>;
                 }
@@ -98,7 +94,6 @@ const WeekSchedule = () => {
                 if (event) {
                   const rowSpan = (event.end - event.start) / 30;
 
-                  // Mark the rows covered by this rowSpan
                   for (let i = 0; i < rowSpan; i++) {
                     coveredRows[day][rowIndex + i] = true;
                   }

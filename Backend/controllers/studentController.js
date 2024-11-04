@@ -125,7 +125,7 @@ const getStudentInfo = async (req, res) => {
 
         const student = await studentModel.findById(studentId).select('-password'); // Exclude password from the response
         if (!student) {
-            return res.status(404).json({
+            return res.json({
                 success: false,
                 message: "student not found"
             });
@@ -137,7 +137,7 @@ const getStudentInfo = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({
+        res.json({
             success: false,
             message: "Server error"
         });
@@ -148,7 +148,7 @@ const updateStudent = async (req, res) => {
         const { student_PRN, ...updateFields } = req.body; 
 
         if (Object.keys(updateFields).length === 0) {
-            return res.status(400).json({ success: false, message: "No fields provided for update" });
+            return res.json({ success: false, message: "No fields provided for update" });
         }
 
         const updatedStudent = await studentModel.findOneAndUpdate(
@@ -158,13 +158,13 @@ const updateStudent = async (req, res) => {
         );
 
         if (!updatedStudent) {
-            return res.status(404).json({ success: false, message: "Student not found" });
+            return res.json({ success: false, message: "Student not found" });
         }
 
         res.json({ success: true, message: "Student updated successfully", student: updatedStudent });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ success: false, message: "Error updating student" });
+        res.json({ success: false, message: "Error updating student" });
     }
 };
 
@@ -195,7 +195,7 @@ const getStudentsByCourses = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        res.status(500).json({
+        res.json({
             success: false,
             message: "Server error"
         });
