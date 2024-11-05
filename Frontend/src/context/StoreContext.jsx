@@ -70,11 +70,12 @@ const StoreContextProvider = ({ children }) => {
       fetchCoursesData();
       fetchStudentMarks();
     } else if (user === "faculty" && Object.keys(facultyData).length > 0) {
-      fetchAllCourses();
+
       if (Object.keys(facultyData).length > 0) {
         fetchFacultyCourses();
       }      
     }
+    fetchAllCourses();
     fetchTimetable();
     fetchCourseInfo();
     fetchCirculars();

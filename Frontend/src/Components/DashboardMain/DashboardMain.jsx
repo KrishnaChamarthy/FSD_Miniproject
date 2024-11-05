@@ -68,7 +68,7 @@ const DashboardMain = () => {
     <div className="dashboard-container">
       <header>
         <div className="header-text">
-          Hello Krishna👋
+          Hello {studentData.first_name}👋
           <br />
           <span>Let's do some productive activities today.</span>
         </div>

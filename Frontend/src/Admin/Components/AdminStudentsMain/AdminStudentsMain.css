@@ -117,6 +117,10 @@
   justify-content: center;
 }
 
+.admin-students-element .element-field{
+  width: 40%;
+}
+
 .element-input {
   font-size: 16px;
   padding: 5px 10px;
@@ -125,5 +129,5 @@
   border: 1px solid var(--text-color);
   margin-right: 10px;
   transition: var(--tran-04);
-  flex: 1;
+  width: 30%;
 }
