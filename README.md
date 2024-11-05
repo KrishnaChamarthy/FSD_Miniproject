@@ -3,6 +3,12 @@
 A comprehensive web-based system designed to streamline and automate the management of a college, encompassing various administrative and academic functions. This system integrates modules for user management, course tracking, grading, and more, providing an efficient solution for faculty, students, and administrators.
 <br />
 View the project here: https://erpsystem-krishna.netlify.app
+<br />
+<br />
+Trial Accounts: 
+- Student: 1032221617@mitwpu.edu.in | password
+- Faculty: 12345@mitwpu.edu.in | password
+- Admin: admin@gmail.com | admin
 
 ## Table of Contents
 - [Features](#features)
