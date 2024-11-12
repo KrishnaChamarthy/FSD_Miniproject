@@ -50,13 +50,12 @@ const AdminStudentsMain = () => {
   };
 
   const handleSubmit = async () => {
-    const enrolledCourses = allCourses
-        .filter((course) => course.semester === formData.semester)
-        .map((course) => course.course_code); 
+    const enrolledCourses = allCourses.filter((course) => course.semester === parseInt(formData.semester)).map((course) => course.course_code);
       const updatedFormData = {
         ...formData,
         enrolled_courses: enrolledCourses,
       };
+    
     try {
       const response = await axios.post(
         `${url}/api/student/register`,
@@ -132,29 +131,32 @@ const AdminStudentsMain = () => {
         <div className="admin-students-element login-info">
           <ul className="element-content">
             <li>
-              <div className="element-field">Email</div>
+              <div className="element-field">Email*</div>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 className="element-input"
+                required
               />
-              <div className="element-field">Password</div>
+              <div className="element-field">Password*</div>
               <input
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 className="element-input"
+                required
               />
-              <div className="element-field">Semester</div>
+              <div className="element-field">Semester*</div>
               <input
                 type="text"
                 name="semester"
                 value={formData.semester}
                 onChange={handleChange}
                 className="element-input"
+                required
               />
             </li>
           </ul>
@@ -164,21 +166,23 @@ const AdminStudentsMain = () => {
           <div className="element-title">Student Information</div>
           <ul className="element-content">
             <li>
-              <div className="element-field">PRN</div>
+              <div className="element-field">PRN*</div>
               <input
                 type="text"
                 name="student_PRN"
                 value={formData.student_PRN}
                 onChange={handleChange}
                 className="element-input"
+                required
               />
-              <div className="element-field">First Name</div>
+              <div className="element-field">First Name*</div>
               <input
                 type="text"
                 name="first_name"
                 value={formData.first_name}
                 onChange={handleChange}
                 className="element-input"
+                required
               />
             </li>
             <li>
@@ -190,23 +194,25 @@ const AdminStudentsMain = () => {
                 onChange={handleChange}
                 className="element-input"
               />
-              <div className="element-field">Last Name</div>
+              <div className="element-field">Last Name*</div>
               <input
                 type="text"
                 name="last_name"
                 value={formData.last_name}
                 onChange={handleChange}
                 className="element-input"
+                required
               />
             </li>
             <li>
-              <div className="element-field">DOB</div>
+              <div className="element-field">DOB*</div>
               <input
                 type="date"
                 name="dob"
                 value={formData.dob}
                 onChange={handleChange}
                 className="element-input"
+                required
               />
               <div className="element-field">Gender</div>
               <input
@@ -288,13 +294,14 @@ const AdminStudentsMain = () => {
               />
             </li>
             <li>
-              <div className="element-field">Mobile No.</div>
+              <div className="element-field">Mobile No.*</div>
               <input
                 type="text"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
                 className="element-input"
+                required
               />
             </li>
             <li>
